@@ -11,6 +11,7 @@
     align-items: flex-end;
     margin-right: 5%;
     font-size: 1.2em;
+    cursor: pointer;
 }
 
 .navbar-brand{
