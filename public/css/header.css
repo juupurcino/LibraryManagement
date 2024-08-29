@@ -9,6 +9,12 @@
     color: white;
     display: flex;
     align-items: flex-end;
+    margin-right: 5%;
+    font-size: 1.2em;
+}
+
+.navbar-brand{
+    font-size: 1.6em !important;
 }
 
 .navbar{
@@ -25,4 +31,13 @@
 .navbar a:visited {
     color: #ffffff; /* mesma cor do link padrão */
     text-decoration: underline; 
+}
+
+.navbar-brand img{
+    width: 100px;
+    height: auto;
+}
+
+#navbarNavAltMarkup{
+    width: 45%;
 }
