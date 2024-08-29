@@ -1,0 +1,123 @@
+
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    border: 1px solid #46220F;
+    outline: none;
+    margin-bottom: 6%;
+    width: 300px;
+    font-size: 13px;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.icon {
+    background-color: #704214;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star {
+    color: #dec716;
+    display: flex;
+    cursor: pointer;
+    font-size: 2.3em;
+    margin-top: 7%;
+}
+
+.pesquisar {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+.pesquisas {
+    margin-left: 2%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 6%;
+    justify-content: space-between;
+    margin-right: 2%;
+}
+
+select {
+    border: 1px solid #46220F;
+    outline: none;
+    margin-bottom: 6%;
+    width: 200px;
+    font-size: 13px;
+    border-radius: 6px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.p {
+    display: flex;
+    flex-direction: row;
+}
+
+.seletores-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2%; 
+}
+
+button{
+
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    background-color: #46220F;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    font-size: large;
+    padding: 1%;
+    margin-top: 7%;
+
+}
+
+.col {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    border: none;
+    margin-bottom: 1.5rem; 
+    width: 70%;
+}
+.card img {
+    width: 100%;
+    object-fit: cover;
+}
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.livros {
+    margin-left: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 98%;
+}
+
+
+
