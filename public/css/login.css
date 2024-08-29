@@ -136,3 +136,8 @@ h6{
     justify-content: center;
 }
 
+#prev, #next{
+
+    cursor: pointer;
+}
+
