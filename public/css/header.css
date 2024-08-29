@@ -1,0 +1,28 @@
+.container-fluid{
+    background-color: #704214;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container-fluid a{
+    color: white;
+    display: flex;
+    align-items: flex-end;
+}
+
+.navbar{
+    padding: 0 !important;
+}
+
+.navbar-nav a:hover {
+    text-decoration: underline; 
+    color: white !important;
+}
+
+.navbar a:focus,
+.navbar a:active,
+.navbar a:visited {
+    color: #ffffff; /* mesma cor do link padrão */
+    text-decoration: underline; 
+}

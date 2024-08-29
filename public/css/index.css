@@ -1,0 +1,28 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main h4{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.carousel{
+    margin-top: 1%;
+    width: 100%;
+}
+
+.carousel-caption a{
+    text-decoration: none;
+    background-color: #704214;
+    padding: 0.5%;
+    color: white;
+    border-radius: 10px;
+}
+
+.carousel-caption{
+    margin-bottom: 2%;
+}
+
