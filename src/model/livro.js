@@ -1,59 +1,44 @@
 const Sequelize = require('sequelize');
 const database = require('../config/db');
 
-const usuario = database.define('Usuario', {
+const livro = database.define('Livro', {
     
-    IDUsuario: {
+    IDLivro: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
 
-    Nome: {
+    Titulo: {
         type: Sequelize.STRING(255),
         allowNull: false
     },
 
-    CPF: {
-        type: Sequelize.STRING(15),
-        allowNull: false
-    },
-
-    DataNascimento: {
-        type: Sequelize.DATEONLY,
-        allowNull: false
-    },
-
-    Telefone: {
-        type: Sequelize.STRING(15),
-        allowNull: false
-    },
-
-    Email: {
+    Autor: {
         type: Sequelize.STRING(255),
         allowNull: false
     },
 
-    Genero: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-    },
-
-    Senha: {
-        type: Sequelize.STRING(255),
-        allowNull: false
-    },
-
-    Ativo: {
+    Ano: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
 
-    Admin: {
+    Descricao: {
+        type: Sequelize.STRING(999),
+        allowNull: false
+    },
+    
+    Disponibilidade: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+
+    Qtd_emprestimo: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 })
 
-module.exports = usuario;
+module.exports = livro;
