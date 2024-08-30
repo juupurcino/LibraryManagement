@@ -78,7 +78,9 @@ select {
     flex-direction: row;
     gap: 2%; 
 }
-
+.seletores{
+    width: 30%;
+}
 .card-body button{
     display: flex;
     justify-content: center;
@@ -90,6 +92,18 @@ select {
     width: 10%;
     font-size: large;
     padding: 1%;
+    margin-top: 1%;
+}
+
+.seletores button{
+    border-radius: 10px;
+    color: white;
+    background-color: #704214;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    padding-right: 2%;
+    padding-left: 2%;
     margin-top: 1%;
 }
 
