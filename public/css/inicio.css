@@ -1,3 +1,8 @@
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -68,25 +73,7 @@ main h5{
 .card-header span{
     color: #ffae00;
     font-size: 2.3em;
+    cursor: pointer;
 }
 
-
-.mb-3 input{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid #46220F;
-    outline: none;
-    border-radius: 0px;
-}
-
-.mb-3 input:hover{
-    border-bottom: 2px solid #46220F;
-}
-
-.mb-3 input:focus {
-    border-bottom: 2px solid #46220F;
-    outline: none; 
-    font-size: small;
-}
 
