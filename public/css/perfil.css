@@ -12,7 +12,36 @@
 }
 
 .mb-3 input:focus {
-    border-bottom: 2px solid #46220F;
+    border-bottom: 2px solid #915636;
     outline: none; 
     font-size: small;
+    box-shadow: none;
+}
+
+.form-select{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #46220F;
+    outline: none;
+    border-radius: 0px;
+}
+
+.form-select:hover{
+    border-bottom: 2px solid #46220F;
+}
+
+.form-select:focus {
+    border-bottom: 2px solid #915636;
+    outline: none; 
+    font-size: small;
+    box-shadow: none;
+}
+
+.modal-footer button{
+    background-color: #46220F;
+}
+
+.modal-footer button:hover{
+    background-color: #643c26;
 }

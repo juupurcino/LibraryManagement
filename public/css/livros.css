@@ -70,7 +70,7 @@ select {
     gap: 2%; 
 }
 
-button{
+.card-body button{
     display: flex;
     justify-content: center;
     border-radius: 10px;
