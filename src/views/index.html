@@ -52,12 +52,12 @@
                     <input type="text" placeholder="Digite seu email">
                 </div>
                 <div class="logos">
-                    <span class="material-symbols-outlined"> call </span>
-                    <input type="text" placeholder="Digite seu telefone">
+                    <span class="material-symbols-outlined" > call </span>
+                    <input type="text" placeholder="Digite seu telefone" data-mask="(00) 0000-0000" data-mask-selectonfocus="true">
                 </div>
                 <div class="logos">
                     <span class="material-symbols-outlined"> lock </span>
-                    <input type="text" placeholder="Digite sua data de nascimento">
+                    <input type="date" placeholder="Digite sua data de nascimento">
                 </div>
                 <div class="logos">
                     <span class="material-symbols-outlined"> male </span>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="logos">
                     <span class="material-symbols-outlined"> lock </span>
-                    <input type="text" placeholder="Digite sua senha">
+                    <input type="password" placeholder="Digite sua senha" id="senha">
                 </div>
                 <div class="logos">
                     <button> Registar </button>
@@ -81,5 +81,7 @@
             </div>
         </div>
     </div>
+
+    <script src="/public/js/login.js"></script>
 </body>
 </html>
