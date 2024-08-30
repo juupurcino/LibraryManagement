@@ -43,6 +43,43 @@
         </div>
     </header>
 
+    <!-- Modal Adicionar emprestimo-->
+    <div class="modal fade" id="modalAddEmp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Empréstimo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nome do livro</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">CPF do usuário</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Data de empréstimo</label>
+                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Data de devolução</label>
+                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Emprestar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
 
         <!-- Barra de pesquisa  -->
@@ -65,7 +102,9 @@
                     <option value="genre1">Gênero 1</option>
                     <option value="genre2">Gênero 2</option>
                 </select>
-                <button>Adicionar empréstimo</button>
+
+                <!-- Botão adicionar empréstimo  -->
+                <button data-bs-toggle="modal" data-bs-target="#modalAddEmp">Adicionar empréstimo</button>
             </div>
         </div>
 
