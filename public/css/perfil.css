@@ -40,8 +40,26 @@
 
 .modal-footer button{
     background-color: #46220F;
+    display: flex;
+    align-items: center;
 }
 
 .modal-footer button:hover{
     background-color: #643c26;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+
+}
+
+#delUser{
+
+    background-color: rgb(165, 27, 27);
 }
