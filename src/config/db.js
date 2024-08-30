@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
  
-const database = new sequelize('PlotPit', 'PlotPit', 'etsps2024401',
+const database = new sequelize('PlotPlit', 'PlotPlit', 'etsps2024401',
 {
     dialect: 'mssql', host:'localhost', port: 1433
 });

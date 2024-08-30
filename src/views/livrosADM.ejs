@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/livrosADM.css" />
+    <link rel="stylesheet" href="../../css/footer.css" />
+    <link rel="stylesheet" href="../../css/headerADM.css" />
+    <link rel="stylesheet" href="../../css/perfil.css" />
+    <title>Livros ADM</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
+                        class="d-inline-block align-text-top">
+                    PlotPlit Library
+                </a>
+                <div id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/livrosADM">Livros</a>
+                        <a class="nav-link" href="/emprestimosADM">Empréstimos</a>
+                        <a class="nav-link" href="/usuariosADM">Usuarios</a>
+                        <a class="nav-link" href="/">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="adm">
+            <h3>Painel Administrativo</h3>
+        </div>
+    </header>
+
+    <!-- Modal de adicionar livro  -->
+    <div class="modal fade" id="modalAddLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar livro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3 livro">
+                            <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
+                            <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nome</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <label for="exampleInputEmail1" class="form-label">Gênero</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Selecione o gênero</option>
+                            <option value="1">Romance</option>
+                            <option value="2">Suspense</option>
+                            <option value="3">Outro</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de editar livro  -->
+    <div class="modal fade" id="modalEdtLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar livro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
+                            <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nome</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de excluir livro  -->
+    <div class="modal fade" id="modalDelLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir livro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir esse livro?
+                    </h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="delUser">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <main>
+
+        <!-- Barra de pesquisa  -->
+        <div class="pesquisas">
+            <div class="pesquisar">
+                <h6>Pesquise</h6>
+                <div class="p">
+                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
+                    <div class="icon">
+                        <span class="material-symbols-outlined"> search </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção de adcionar livro  -->
+            <div class="seletores-container">
+                <button data-bs-toggle="modal" data-bs-target="#modalAddLivro">Adicionar Livro</button>
+            </div>
+        </div>
+
+        <!-- Cards de livro  -->
+        <div class="carde row g-0">
+            <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">É ASSIM QUE COMEÇA</h3>
+                    <h6 class="card-text">Descrição: : Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</h6>
+                    <h6 class="card-text">Autor: Collen Hover</h6>
+                    <div class="botao">
+                        <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer1">
+            <img src="/img/Logo branca.png" alt="">
+            <div class="imgzinha">
+                <p><img src="/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
+                <p><img src="/img/Logo branca.png" alt="">@plotplit</p>
+                <p><img src="/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
+            </div>
+        </div>
+        <p>Todos os direitos reservados a Plot Pit Livrarias.</p>
+    </footer>
+
+    <script src="/js/cadastroLivro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

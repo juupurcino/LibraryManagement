@@ -12,30 +12,30 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="/public/css/livros.css" />
-    <link rel="stylesheet" href="/public/css/footer.css" />
-    <link rel="stylesheet" href="/public/css/header.css" />
-    <link rel="stylesheet" href="/public/css/perfil.css" />
-    <title>Livros</title>
+    <link rel="stylesheet" href="/css/livros.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/perfil.css" />
+    <title>Favoritos</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <img src="/public/img/Logo branca.png" alt="Logo" width="50" height="50"
+                <a class="navbar-brand" href="/">
+                    <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
                     PlotPlit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="inicio.html">Início</a>
-                        <a class="nav-link" href="livros.html">Livros</a>
-                        <a class="nav-link" href="favoritos.html">Favoritos</a>
-                        <a class="nav-link" href="emprestimos.html">Meus Empréstimos</a>
+                        <a class="nav-link" href="/inicio">Início</a>
+                        <a class="nav-link" href="/livros">Livros</a>
+                        <a class="nav-link" href="/favoritos">Favoritos</a>
+                        <a class="nav-link" href="/emprestimos">Meus Empréstimos</a>
                         <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Perfil</a>
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="/">Logout</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
     </div>
 
     <main>
-
+         
         <!-- Barra de pesquisa  -->
         <div class="pesquisas">
             <div class="pesquisar">
@@ -103,7 +103,7 @@
                 </div>
             </div>
 
-            <!-- Barra de pesquisa por genêro, autor-->
+            <!-- Barra de gênero -->
             <div class="seletores-container">
                 <div class="seletores">
                     <h6>Gênero</h6>
@@ -113,6 +113,8 @@
                         <option value="genre2">Gênero 2</option>
                     </select>
                 </div>
+
+                <!-- Barra de autor  -->
                 <div class="seletores">
                     <h6>Autor</h6>
                     <select name="autor">
@@ -128,10 +130,10 @@
         <div class="livros row row-cols-1 row-cols-md-2 row-cols-lg-5 g-15">
             <div class="col">
                 <div class="card">
-                    <img src="/public/img/comeca.jpg" class="card-img-top" alt="...">
+                    <img src="/img/comeca.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <button>Detalhes</button>
-                        <img src="/public/img/starv.png" alt="">
+                        <img src="/img/star.png" alt="">
                     </div>
                 </div>
             </div>
@@ -140,11 +142,11 @@
 
     <footer>
         <div class="footer1">
-            <img src="/public/img/Logo branca.png" alt="">
+            <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
-                <p><img src="/public/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/public/img/instagram.png" alt="">@plotplit</p>
-                <p><img src="/public/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
+                <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
+                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>

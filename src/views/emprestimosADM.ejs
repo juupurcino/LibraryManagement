@@ -12,78 +12,69 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="/public/css/emprestimos.css" />
-    <link rel="stylesheet" href="/public/css/footer.css" />
-    <link rel="stylesheet" href="/public/css/header.css" />
-    <link rel="stylesheet" href="/public/css/perfil.css" />
-    <title>Meus Emprestimos</title>
+    <link rel="stylesheet" href="/css/emprestimos.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/headerADM.css" />
+    <link rel="stylesheet" href="/css/perfil.css" />
+    <title>Emprestimos ADM</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <img src="/public/img/Logo branca.png" alt="Logo" width="50" height="50"
+                <a class="navbar-brand" href="/">
+                    <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
                     PlotPlit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="inicio.html">Início</a>
-                        <a class="nav-link" href="livros.html">Livros</a>
-                        <a class="nav-link" href="favoritos.html">Favoritos</a>
-                        <a class="nav-link" href="emprestimos.html">Meus Empréstimos</a>
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Perfil</a>
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="/livrosADM">Livros</a>
+                        <a class="nav-link" href="/emprestimosADM">Empréstimos</a>
+                        <a class="nav-link" href="/usuariosADM">Usuarios</a>
+                        <a class="nav-link" href="/">Logout</a>
                     </div>
                 </div>
             </div>
         </nav>
+        <div class="adm">
+            <h3>Painel Administrativo</h3>
+        </div>
     </header>
 
-    <!-- Modal Perfil-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Adicionar emprestimo-->
+    <div class="modal fade" id="modalAddEmp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Meus Dados</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Empréstimo</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
+                            <label for="exampleInputEmail1" class="form-label">Nome do livro</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">CPF</label>
+                            <label for="exampleInputEmail1" class="form-label">CPF do usuário</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+                            <label for="exampleInputEmail1" class="form-label">Data de empréstimo</label>
                             <input type="date" class="form-control" aria-describedby="emailHelp">
                         </div>
-                        <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected value="1">Feminino</option>
-                            <option value="2">Masculino</option>
-                            <option value="3">Outro</option>
-                        </select>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Data de devolução</label>
+                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                        </div>
                     </form>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Atualizar</button>
+                    <button type="button" class="btn btn-primary">Emprestar</button>
                 </div>
             </div>
         </div>
@@ -111,36 +102,41 @@
                     <option value="genre1">Gênero 1</option>
                     <option value="genre2">Gênero 2</option>
                 </select>
+
+                <!-- Botão adicionar empréstimo  -->
+                <button data-bs-toggle="modal" data-bs-target="#modalAddEmp">Adicionar empréstimo</button>
             </div>
         </div>
 
-        <!-- Cards de livros  -->
+        <!-- Card de livro  -->
         <div class="card mb-3">
             <div class="carde row g-0">
-                <img src="/public/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
+                <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
                 <div class="col-md-8">
                     <div class="card-body">
                         <h3 class="card-title">É ASSIM QUE COMEÇA</h3>
+                        <h4 class="card-text">Usuario: 127.991.879-02</h4>
                         <h6 class="card-text">Data de empréstimo: 28/05/2024</h6>
                         <h6 class="card-text">Data de devolução: 05/06/2024</h6>
                         <p class="card-text"><small class="text-body-secondary">Quantidade de dias restantes: 06</small>
                         </p>
-                        <button>Ver mais</button>
+                        <div class="buttons">
+                            <button>Realizar devolução</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
-        </div>
-        
+
     </main>
 
     <footer>
         <div class="footer1">
-            <img src="/public/img/Logo branca.png" alt="">
+            <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
-                <p><img src="/public/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/public/img/instagram.png" alt="">@plotplit</p>
-                <p><img src="/public/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
+                <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
+                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>

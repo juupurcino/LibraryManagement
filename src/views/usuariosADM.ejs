@@ -12,10 +12,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="../../public/css/livrosADM.css" />
-    <link rel="stylesheet" href="../../public/css/footer.css" />
-    <link rel="stylesheet" href="../../public/css/headerADM.css" />
-    <link rel="stylesheet" href="../../public/css/perfil.css" />
+    <link rel="stylesheet" href="/css/usuarios.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/perfil.css" />
+    <link rel="stylesheet" href="/css/headerADM.css" />
     <title>Livros ADM</title>
 </head>
 
@@ -23,17 +23,17 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <img src="/public/img/Logo branca.png" alt="Logo" width="50" height="50"
+                <a class="navbar-brand" href="/">
+                    <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
                     PlotPlit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="livrosADM.html">Livros</a>
-                        <a class="nav-link" href="emprestimosADM.html">Empréstimos</a>
-                        <a class="nav-link" href="usuariosADM.html">Usuarios</a>
-                        <a class="nav-link" href="index.html">Logout</a>
+                        <a class="nav-link" href="/livrosADM">Livros</a>
+                        <a class="nav-link" href="/emprestimosADM">Empréstimos</a>
+                        <a class="nav-link" href="/usuariosADM">Usuarios</a>
+                        <a class="nav-link" href="/">Logout</a>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@
         </div>
     </header>
 
-    <!-- Modal de adicionar livro  -->
-    <div class="modal fade" id="modalAddLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de Adicionar novo usuário -->
+    <div class="modal fade" id="modalAddUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar livro</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar novo usuário</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -58,18 +58,26 @@
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                            <label for="exampleInputEmail1" class="form-label">CPF</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input type="email" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
                         <select class="form-select" aria-label="Default select example">
                             <option value="" disabled selected>Selecione o gênero</option>
-                            <option value="1">Romance</option>
-                            <option value="2">Suspense</option>
+                            <option value="1">Feminino</option>
+                            <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
                     </form>
@@ -82,12 +90,12 @@
         </div>
     </div>
 
-    <!-- Modal de editar livro  -->
-    <div class="modal fade" id="modalEdtLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de editar usuário -->
+    <div class="modal fade" id="modalEdtUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar livro</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar usuário</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -97,13 +105,28 @@
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                            <label for="exampleInputEmail1" class="form-label">CPF</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input type="email" class="form-control" aria-describedby="emailHelp">
                         </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                        </div>
+                        <label for="exampleInputEmail1" class="form-label">Gênero</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="" disabled selected>Selecione o gênero</option>
+                            <option value="1">Feminino</option>
+                            <option value="2">Masculino</option>
+                            <option value="3">Outro</option>
+                        </select>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -114,16 +137,16 @@
         </div>
     </div>
 
-    <!-- Modal de excluir livro  -->
-    <div class="modal fade" id="modalDelLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de Deletar usuário -->
+    <div class="modal fade" id="modalDelUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir livro</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir usuário</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div>
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir esse livro?
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir esse usuário?
                     </h1>
                 </div>
                 <div class="modal-footer">
@@ -134,9 +157,7 @@
         </div>
     </div>
 
-
     <main>
-
         <!-- Barra de pesquisa  -->
         <div class="pesquisas">
             <div class="pesquisar">
@@ -149,40 +170,55 @@
                 </div>
             </div>
 
-            <!-- Opção de adcionar livro  -->
+            <!-- Opção deletar usuário  -->
             <div class="seletores-container">
-                <button data-bs-toggle="modal" data-bs-target="#modalAddLivro">Adicionar Livro</button>
+                <button data-bs-toggle="modal" data-bs-target="#modalAddUser">Adicionar Usuário</button>
             </div>
         </div>
 
-        <!-- Cards de livro  -->
-        <div class="carde row g-0">
-            <img src="/public/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title">É ASSIM QUE COMEÇA</h3>
-                    <h6 class="card-text">Descrição: : Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</h6>
-                    <h6 class="card-text">Autor: Collen Hover</h6>
-                    <div class="botao">
-                        <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
-                        <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
+        <!-- Cards de usuário  -->
+        <div class="usuarios">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Nome:<small class="text-body-secondary"> Juliana</small></h5>
+                            <h5 class="card-title">CPF:<small class="text-body-secondary"> 562.834.784-32 </small></h5>
+                            <h5 class="card-title">Telefone:<small class="text-body-secondary"> (41) 98850-3023</small>
+                            </h5>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Email:<small class="text-body-secondary">
+                                    jdiaspurcino@gmail.com</small></h5>
+                            <h5 class="card-title">Gênero:<small class="text-body-secondary"> Feminino </small></h5>
+                            <h5 class="card-title">Data ne nascimento:<small class="text-body-secondary">
+                                    01/07/2003</small></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botao">
+                <button data-bs-toggle="modal" data-bs-target="#modalEdtUser">Editar</button>
+                <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
+            </div>
         </div>
         <hr>
-        </div>
 
     </main>
 
     <footer>
         <div class="footer1">
-            <img src="/public/img/Logo branca.png" alt="">
+            <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
-                <p><img src="/public/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/public/img/Logo branca.png" alt="">@plotplit</p>
-                <p><img src="/public/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
+                <p><img src="/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
+                <p><img src="/img/Logo branca.png" alt="">@plotplit</p>
+                <p><img src="/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>

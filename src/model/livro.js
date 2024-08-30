@@ -30,6 +30,11 @@ const livro = database.define('Livro', {
         allowNull: false
     },
     
+    Foto: {
+        type: Sequelize.STRING(500),
+        allowNull: false
+    },
+    
     Disponibilidade: {
         type: Sequelize.INTEGER,
         allowNull: false

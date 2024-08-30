@@ -149,6 +149,21 @@ select {
     display: flex;
 }
 
+.livro {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.livro img {
+
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 2%;
+}
+
 
 
 
