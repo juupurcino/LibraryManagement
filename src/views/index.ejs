@@ -22,7 +22,18 @@
         <img src="/img/LogoMarrom.png">
     </div>
 
+    <main>
     <!-- Formulário de login  -->
+     <div class="cont">
+        <input type="checkbox" id="flip">
+        <div class="cover">
+            <div class="front">
+                <img src="img/login.png" alt="">
+            </div>
+            <div class="back">
+                <img class="backImg" src="img/login.png" alt="">
+            </div>
+        </div>
     <div class="formulario">
         <div class="cardLogin card" id="login">
             <div>
@@ -36,10 +47,10 @@
                     <input type="text" placeholder="Digite sua senha">
                 </div>
                 <div class="logos">
-                    <a href="/inicio"><button> Logar </button></a>
+                    <a href="/emprestimosADM"> Logar </a>
                 </div>
                 <div>
-                    <h6>Não possui conta? <a id="next">Registar.</a></h6>
+                    <h6>Não possui conta?<label for="flip" class="link">Registrar</label></h6>
                 </div>
             </div>
         </div>
@@ -83,14 +94,16 @@
                     <input type="password" placeholder="Digite sua senha" id="senha">
                 </div>
                 <div class="logos">
-                    <button> Registar </button>
+                    <a href="#"> Registrar </a>
                 </div>
                 <div>
-                    <h6>Já possui conta?<a id="prev">Logar.</a></h6>
+                    <h6>Já possui conta? <label for="flip" class="link"> Logar.</label></h6>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+</main>
 </body>
 
 </html>

@@ -28,12 +28,12 @@ const emprestimo = database.define('Emprestimo', {
     }
 });
 
-favorito.belongsTo(usuario, {
+emprestimo.belongsTo(usuario, {
     constraint: true, 
     foreignKey: 'IDUsuario'
 });
 
-favorito.belongsTo(livro, {
+emprestimo.belongsTo(livro, {
     constraint: true, 
     foreignKey: 'IDLivro'
 });

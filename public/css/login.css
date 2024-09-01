@@ -9,6 +9,7 @@
 
 }
 
+
 .cardLogin{
 
     display: flex;
@@ -18,8 +19,6 @@
     border: 0px 2px 2px 2px solid #e0e0e0; 
     border-left: none; 
     background-color: #fff; 
-    border-radius: 5%;
-    border-radius: 30px 0px 0px 30px;
     width: 400px;
     height: 600px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -35,7 +34,6 @@
     border-right: none; 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: #fff; 
-    border-radius: 0px 30px 30px 0px;
     width: 400px;
     height: 600px;
 }
@@ -118,18 +116,17 @@ input:focus {
     justify-content: center;
 }
 
-button{
+.logos a{
 
     display: flex;
     justify-content: center;
     border-radius: 10px;
     color: white;
     background-color: #46220F;
-    border: none;
+    text-decoration: none;
     cursor: pointer;
-    width: 50%;
     font-size: large;
-    padding: 1%;
+    padding: 2%;
     margin: 7%;
 
 }
@@ -153,4 +150,90 @@ h6{
     cursor: pointer;
 }
 
+.link{
+    cursor: pointer;
+}
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+.cont{
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    perspective: 2700px;
+  }
+  
+  .cont .cover{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    z-index: 98;
+    transition: all 1s ease;
+    transform-origin: left;
+    transform-style: preserve-3d;
+  }
+  .cont #flip:checked ~ .cover{
+    transform: rotateY(-180deg);
+  }
+   .cont .cover .front,
+   .cont .cover .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .cover .back{
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+  .cont .cover::before,
+  .cont .cover::after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #7C573E;
+    opacity: 0.5;
+    z-index: 12;
+  }
+  .cont .cover::after{
+    opacity: 0.3;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+  .cont .cover img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 10;
+  }
+  .cont .cover .text{
+    position: absolute;
+    z-index: 130;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cover .text .text-2{
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .cont #flip{
+    display: none;
+  }

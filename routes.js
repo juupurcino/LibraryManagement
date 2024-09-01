@@ -12,6 +12,9 @@ route.get('/inicio', home.pagInicialGet);
 route.get('/livros', home.pagLivrosGet);
 route.get('/favoritos', home.pagFavoritosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);
+route.get('/livrosADM', home.pagLivrosADMGet);
+route.get('/usuariosADM', home.pagUsuariosADMGet);
+route.get('/emprestimosADM', home.pagEmprestimosADMGet);
 
 module.exports = route;
 

@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const database = require('../config/db');
 
 const usuario = database.define('Usuario', {
-    
     IDUsuario: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -54,6 +53,8 @@ const usuario = database.define('Usuario', {
         type: Sequelize.INTEGER,
         allowNull: false
     }
-})
+}, {
+    freezeTableName: true // Evita a pluralização automática
+  })
 
 module.exports = usuario;

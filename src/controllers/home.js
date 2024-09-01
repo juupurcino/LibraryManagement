@@ -1,3 +1,11 @@
+const Usuario = require("../model/usuario");
+const Genero = require("../model/genero");
+const Livro = require("../model/livro");
+const Favorito = require("../model/favorito");
+const Emprestimo = require("../model/emprestimo");
+const Generolivro = require("../model/generolivro");
+const db = require("../config/db");
+
 module.exports = {
    
     async pagIndexGet(req, res){
@@ -9,6 +17,7 @@ module.exports = {
     },
     
     async pagLivrosGet(req, res){
+
         res.render('../views/livros');
     },
 
@@ -18,5 +27,17 @@ module.exports = {
     
     async pagEmprestimosGet(req, res){
         res.render('../views/emprestimos');
+    },
+
+    async pagUsuariosADMGet(req, res){
+        res.render('../views/usuariosADM');
+    },
+
+    async pagEmprestimosADMGet(req, res){
+        res.render('../views/emprestimosADM');
+    },
+
+    async pagLivrosADMGet(req, res){
+        res.render('../views/livrosADM');
     }
 }
