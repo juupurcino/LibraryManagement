@@ -23,87 +23,91 @@
     </div>
 
     <main>
-    <!-- Formulário de login  -->
-     <div class="cont">
-        <input type="checkbox" id="flip">
-        <div class="cover">
-            <div class="front">
-                <img src="img/login.png" alt="">
-            </div>
-            <div class="back">
-                <img class="backImg" src="img/login.png" alt="">
-            </div>
-        </div>
-    <div class="formulario">
-        <div class="cardLogin card" id="login">
-            <div>
-                <h4>Logar</h4>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> mail </span>
-                    <input type="text" placeholder="Digite seu email">
+        <!-- Formulário de login  -->
+        <div class="cont">
+            <input type="checkbox" id="flip">
+            <div class="cover">
+                <div class="front">
+                    <img src="img/login.png" alt="">
                 </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> lock </span>
-                    <input type="text" placeholder="Digite sua senha">
-                </div>
-                <div class="logos">
-                    <a href="/emprestimosADM"> Logar </a>
-                </div>
-                <div>
-                    <h6>Não possui conta?<label for="flip" class="link">Registrar</label></h6>
+                <div class="back">
+                    <img class="backImg" src="img/login.png" alt="">
                 </div>
             </div>
-        </div>
+            <div class="formulario">
+                <form action="/login" method="POST">
+                    <div class="cardLogin card" id="login">
+                        <div>
+                            <h4>Logar</h4>
+                            <div class="logos">
+                                <span class="material-symbols-outlined"> mail </span>
+                                <input type="text" name="email_login" placeholder="Digite seu email">
+                            </div>
+                            <div class="logos">
+                                <span class="material-symbols-outlined"> lock </span>
+                                <input type="text" name="senha_login" placeholder="Digite sua senha">
+                            </div>
+                            <div class="logos">
+                                <input type="submit" name="" id="" value="Logar">
+                            </div>
+                            <div>
+                                <h6>Não possui conta?<label for="flip" class="link">Registrar</label></h6>
+                            </div>
+                        </div>
+                </form>
+            </div>
 
-        <!-- Formulário de registro -->
-        <div class="cardRegistrar card" id="register">
-            <div>
-                <h4>Registrar</h4>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> person </span>
-                    <input type="text" placeholder="Digite seu nome">
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> clarify </span>
-                    <input type="text" placeholder="Digite seu cpf">
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> mail </span>
-                    <input type="text" placeholder="Digite seu email">
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> call </span>
-                    <input type="text" placeholder="Digite seu telefone" data-mask="(00) 0000-0000"
-                        data-mask-selectonfocus="true">
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> lock </span>
-                    <input type="date" placeholder="Digite sua data de nascimento">
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> male </span>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="" disabled selected>Selecione seu gênero</option>
-                        <option value="1">Feminino</option>
-                        <option value="2">Masculino</option>
-                        <option value="3">Outro</option>
-                    </select>
-                </div>
-                <div class="logos">
-                    <span class="material-symbols-outlined"> lock </span>
-                    <input type="password" placeholder="Digite sua senha" id="senha">
-                </div>
-                <div class="logos">
-                    <a href="#"> Registrar </a>
-                </div>
+            <!-- Formulário de registro -->
+            <div class="cardRegistrar card" id="register">
                 <div>
-                    <h6>Já possui conta? <label for="flip" class="link"> Logar.</label></h6>
+                    <h4>Registrar</h4>
+                    <form method="POST" action="/registro">
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> person </span>
+                            <input type="text" name="nome" placeholder="Digite seu nome">
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> clarify </span>
+                            <input type="text" name="cpf" placeholder="Digite seu cpf">
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> mail </span>
+                            <input type="text" name="email" placeholder="Digite seu email">
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> call </span>
+                            <input type="text" name="telefone" placeholder="Digite seu telefone"
+                                data-mask="(00) 0000-0000" data-mask-selectonfocus="true">
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> call </span>
+                            <input type="date" name="data_nasc" placeholder="Digite sua data de nascimento">
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> male </span>
+                            <select class="form-select" name="sexo" aria-label="Default select example">
+                                <option value="" disabled selected>Selecione seu gênero</option>
+                                <option value="1">Feminino</option>
+                                <option value="2">Masculino</option>
+                                <option value="3">Outro</option>
+                            </select>
+                        </div>
+                        <div class="logos">
+                            <span class="material-symbols-outlined"> lock </span>
+                            <input type="password" name="senha" placeholder="Digite sua senha" id="senha">
+                        </div>
+                        <div class="logos">
+                            <input type="submit" name="" id="" value="Registrar">
+                        </div>
+                        <div>
+                            <h6>Já possui conta? <label for="flip" class="link"> Logar.</label></h6>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-</main>
+        </div>
+    </main>
 </body>
 
 </html>
