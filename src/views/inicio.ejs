@@ -56,27 +56,27 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <label for="exampleInputEmail1" class="form-label" >Nome</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" value="user.Genero">
                             <option selected value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
@@ -93,7 +93,7 @@
 
     <main>
         <!-- Titulo principal -->
-        <h4>Seja bem-vindo há nossa biblioteca digital, <strong>Fulano!</strong></h4>
+        <h4>Seja bem-vindo há nossa biblioteca digital, <strong><%=user.Nome%>!</strong></h4>
 
         <!-- Carrosel de livros  -->
         <h5>Confira nossos destaques da semana! </h5>

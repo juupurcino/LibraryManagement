@@ -7,25 +7,52 @@ const Genero = require("../model/genero");
 const db = require("../config/db");
 
 module.exports = {
-    async pagIndexGet(req, res){
-        res.render('../views/index');
-    },
-
     async pagInicialGet(req, res){
-        res.render('../views/inicio');
+        if(req.session.IDUsuario){
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true 
+            });
+
+            return res.render("../views/inicio", {user : user});
+        }
+        res.render("../views/index");
     },
     
     async pagLivrosGet(req, res){
-
-        res.render('../views/livros');
+        if(req.session.IDUsuario){
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true 
+            });
+            
+            return res.render("../views/livros", {user : user});
+        }
+        res.render("../views/index");
     },
 
     async pagFavoritosGet(req, res){
-        res.render('../views/favoritos');
+        if(req.session.IDUsuario){
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true 
+            });
+            
+            return res.render("../views/favoritos", {user : user});
+        }
+        res.render("../views/index");
     },
     
     async pagEmprestimosGet(req, res){
-        res.render('../views/emprestimos');
+        if(req.session.IDUsuario){
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true 
+            });
+            
+            return res.render("../views/emprestimos", {user : user});
+        }
+        res.render("../views/index");
     },
 
     async pagUsuariosADMGet(req, res){

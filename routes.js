@@ -9,11 +9,11 @@ const cadastrar = require('./src/controllers/cadastrar');
 
 
 // Iniciando as rotas
-route.get('/', cadastrar.usuario);
 route.post('/login', cadastrar.verificarUser);
 route.post('/registro', cadastrar.createUser);
 route.get('/logout', cadastrar.logout);
 
+route.get('/', home.pagInicialGet);
 route.get('/inicio', home.pagInicialGet);
 route.get('/livros', home.pagLivrosGet);
 route.get('/favoritos', home.pagFavoritosGet);

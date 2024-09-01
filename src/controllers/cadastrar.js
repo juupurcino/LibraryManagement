@@ -8,13 +8,6 @@ const Genero = require("../model/genero");
 const db = require("../config/db");
 
 module.exports = {
-    async usuario(req, res){
-        if(req.session.IDUsuario){
-            const id = req.session.IDUsuario;
-            res.render("../views/inicio", {id});
-        }
-        res.render("../views/index");
-    },
 
     async createUser(req, res){
         const dados = req.body;
