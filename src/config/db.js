@@ -1,8 +1,8 @@
 const sequelize = require('sequelize');
  
-const database = new sequelize('PlotPit', 'Biblioteca', 'senha123',
+const database = new sequelize('PlotPit', 'PlotPit', 'etsps2024401',
 {
-    dialect: 'mssql', host:'localhost', port: 49978
+    dialect: 'mssql', host:'localhost', port: 1434
 });
  
 database.sync()

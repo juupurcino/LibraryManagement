@@ -4,11 +4,15 @@
 }
 
 .logo img{
-
     width: 6%;
-
 }
 
+#log{
+    background-color: #7C573E;
+    color: white;
+    border: 1px solid #6b4c38;
+    border-radius: 5px;
+}
 
 .cardLogin{
 
