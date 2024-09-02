@@ -81,14 +81,16 @@
                             <div id="generoContainer">
                                 <label for="genero" class="form-label">Gênero</label>
                                 <div id="generoFields">
+                                    <% for (let i=0; i<=cont; i++) { %>
                                     <select class="form-select genero" aria-label="Select gênero" id="genero" name="genero">
                                         <option value="" disabled selected>Selecione o gênero</option>
                                         <% for (let i=0; i<genero.length; i++) { %>
                                             <option value="<%= genero[i].IDGenero %>"> <%= genero[i].Tipo %> </option>
                                         <% } %>
                                     </select>
+                                    <% } %>
                                 </div>
-                                <button type="button" class="btn btn-secondary mt-2" id="addGenero">Adicionar mais gênero</button>
+                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar mais gênero</button>
                             </div>
                         </form>
                     </div>
@@ -211,6 +213,12 @@
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>
     </footer>
 
+    <script>
+        let cont = 1;
+        function adcgenero(){
+            cont += 1;
+        }
+    </script>
     <script src="/js/cadastroLivro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

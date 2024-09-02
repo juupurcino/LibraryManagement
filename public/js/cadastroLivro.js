@@ -40,8 +40,8 @@ document.getElementById('addGenero').addEventListener('click', function() {
     
     for (let i = 0; i < genero.length; i++) {
         let option = document.createElement('option');
-        option.value = 'genero[i].IDGenero';
-        option.textContent = 'genero[i].Tipo';
+        option.value = genero[i].IDGenero;
+        option.textContent = genero[i].Tipo;
         novoSelect.appendChild(option);
     };
     

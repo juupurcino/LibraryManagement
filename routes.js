@@ -6,7 +6,7 @@ const route = express.Router();
 const home = require('./src/controllers/home');
 const usuario = require('./src/controllers/usuario');
 const livro = require('./src/controllers/livros');
-const genero = require('./src/controllers/genero');
+// const generoLivro = require('./src/controllers/generoLivro');
 // const isAdmin = require('./s');
 
 
@@ -14,7 +14,7 @@ const genero = require('./src/controllers/genero');
 route.post('/livrosADM', livro.createLivro)
 route.post('/login', usuario.verificarUser);
 route.post('/registro', usuario.createUser);
-route.post('/livrosADM', genero.createGeneroLivro);
+// route.post('/livrosADM', );
 route.get('/logout', usuario.logout);
 
 
