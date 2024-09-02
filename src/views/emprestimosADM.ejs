@@ -131,6 +131,7 @@
                 // Formate a quantidade de dias restantes
                 var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
                 %>
+                
                 <div class="carde row g-0">
                     <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
                     <div class="col-md-8">
@@ -139,7 +140,7 @@
                             <h4 class="card-text">Usuário: <%= emprestimos[i].usuario.CPF %></h4>
                             <h6 class="card-text">Data de Empréstimo: <%= dataEmprestimoFormatada %></h6>
                             <h6 class="card-text">Data de Devolução: <%= dataDevolucaoFormatada %></h6>
-                            <p class="card-text"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>
+                            <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>
                             </p>
                             <div class="buttons">
                                 <button>Realizar devolução</button>
