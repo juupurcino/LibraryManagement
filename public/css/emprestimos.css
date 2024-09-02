@@ -25,14 +25,15 @@ input {
     width: 300px;
     font-size: 13px;
     border-radius: 6px;
-    padding: 4px;
+    padding: 1%;
+    
 }
 
 .icon {
     background-color: #704214;
-    width: 30px;
+    width: 40px;
     color: white;
-    height: 30px;
+    height: 40px;
     border-radius: 10px;
     margin-left: 5px;
     display: flex;
@@ -64,6 +65,7 @@ select {
     font-size: 13px;
     border-radius: 6px;
     padding: 4px;
+    padding: 2%;
     cursor: pointer;
 }
 
@@ -92,11 +94,10 @@ select {
     width: 10%;
     font-size: large;
     padding: 1%;
-    margin-top: 1%;
 }
 
 .seletores button{
-    border-radius: 10px;
+    border-radius: 7px;
     color: white;
     background-color: #704214;
     border: none;
@@ -104,7 +105,22 @@ select {
     font-size: large;
     padding-right: 2%;
     padding-left: 2%;
+    padding: 1.4%;
     margin-top: 1%;
+}
+
+
+.buttons button{
+    margin-right: 1%;
+    width: 20%;
+}
+
+.card-body h4{
+    padding: 1%;
+    background-color: #af0000;
+    color: white;
+    width: 50%;
+    border-radius: 2px;
 }
 
 .card{
@@ -134,14 +150,4 @@ select {
     width: 100%;
 }
 
-.buttons button{
-    margin-right: 1%;
-    width: 20%;
-}
 
-.card-body h4{
-    padding: 1%;
-    background-color: #a0856a;
-    color: white;
-    border-radius: 5px;
-}
