@@ -24,3 +24,26 @@ file.addEventListener('change', () => {
         photo.src = reader.result
     }
 });
+
+document.getElementById('addGenero').addEventListener('click', function() {
+    
+    let novoSelect = document.createElement('select');
+    novoSelect.className = 'form-select genero';
+    novoSelect.setAttribute('aria-label', 'Select gênero');
+    
+    let option = document.createElement('option');
+    option.value = '';
+    option.disabled = true;
+    option.selected = true;
+    option.textContent = 'Selecione o gênero';
+    novoSelect.appendChild(option);
+    
+    for (let i = 0; i < genero.length; i++) {
+        let option = document.createElement('option');
+        option.value = 'genero[i].IDGenero';
+        option.textContent = 'genero[i].Tipo';
+        novoSelect.appendChild(option);
+    };
+    
+    document.getElementById('generoFields').appendChild(novoSelect);
+});

@@ -60,11 +60,19 @@ module.exports = {
     },
 
     async pagEmprestimosADMGet(req, res){
+
         res.render('../views/emprestimosADM');
     },
 
     async pagLivrosADMGet(req, res){
-        res.render('../views/livrosADM');
+
+        const genero = await Genero.findAll({
+            attributes: ['IDGenero', 'Tipo'],
+            raw: true 
+        });
+
+        res.render('../views/livrosADM', { genero : genero});
+
     },
 
     async isAdmin(req, res, next) {

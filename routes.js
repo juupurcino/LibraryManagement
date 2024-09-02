@@ -4,14 +4,19 @@ const route = express.Router();
 
 // Importando os Controllers
 const home = require('./src/controllers/home');
-const cadastrar = require('./src/controllers/cadastrar');
+const usuario = require('./src/controllers/usuario');
+const livro = require('./src/controllers/livros');
+const genero = require('./src/controllers/genero');
 // const isAdmin = require('./s');
 
 
 // Iniciando as rotas
-route.post('/login', cadastrar.verificarUser);
-route.post('/registro', cadastrar.createUser);
-route.get('/logout', cadastrar.logout);
+route.post('/livrosADM', livro.createLivro)
+route.post('/login', usuario.verificarUser);
+route.post('/registro', usuario.createUser);
+route.post('/livrosADM', genero.createGeneroLivro);
+route.get('/logout', usuario.logout);
+
 
 route.get('/', home.pagInicialGet);
 route.get('/inicio', home.pagInicialGet);

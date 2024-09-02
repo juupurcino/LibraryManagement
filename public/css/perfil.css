@@ -63,3 +63,12 @@ h1{
 
     background-color: rgb(165, 27, 27);
 }
+
+#addGenero {
+
+    background-color: #46220F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

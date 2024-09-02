@@ -44,47 +44,62 @@
     </header>
 
     <!-- Modal de adicionar livro  -->
-    <div class="modal fade" id="modalAddLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar livro</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3 livro">
-                            <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
-                            <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
-                        </div>
-                        <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="" disabled selected>Selecione o gênero</option>
-                            <option value="1">Romance</option>
-                            <option value="2">Suspense</option>
-                            <option value="3">Outro</option>
-                        </select>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Adicionar</button>
+    <form method="POST" action="/livrosADM">
+        <div class="modal fade" id="modalAddLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar livro</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formAddLivro">
+                            <div class="mb-3 livro">
+                                <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
+                                <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="titulo" aria-describedby="tituloHelp" name="titulo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="isbn" class="form-label">ISBN</label>
+                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp" name="isbn">
+                            </div>
+                            <div class="mb-3">
+                                <label for="isbn" class="form-label">Ano</label>
+                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp" name="ano">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp" name="descricao">
+                            </div>
+                            <div class="mb-3">
+                                <label for="autor" class="form-label">Autor</label>
+                                <input type="text" class="form-control" id="autor" aria-describedby="autorHelp" name="autor">
+                            </div>
+                            <div id="generoContainer">
+                                <label for="genero" class="form-label">Gênero</label>
+                                <div id="generoFields">
+                                    <select class="form-select genero" aria-label="Select gênero" id="genero" name="genero">
+                                        <option value="" disabled selected>Selecione o gênero</option>
+                                        <% for (let i=0; i<genero.length; i++) { %>
+                                            <option value="<%= genero[i].IDGenero %>"> <%= genero[i].Tipo %> </option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" id="addGenero">Adicionar mais gênero</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Modal de editar livro  -->
     <div class="modal fade" id="modalEdtLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
