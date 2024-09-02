@@ -10,6 +10,11 @@ const livro = database.define('Livro', {
         primaryKey: true
     },
 
+    ISBN: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+
     Titulo: {
         type: Sequelize.STRING(255),
         allowNull: false

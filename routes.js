@@ -4,14 +4,19 @@ const route = express.Router();
 
 // Importando os Controllers
 const home = require('./src/controllers/home');
-const cadastrar = require('./src/controllers/cadastrar');
+const usuario = require('./src/controllers/usuario');
+const emprestimo = require('./src/controllers/emprestimo');
 // const isAdmin = require('./s');
 
 
-// Iniciando as rotas
-route.post('/login', cadastrar.verificarUser);
-route.post('/registro', cadastrar.createUser);
-route.get('/logout', cadastrar.logout);
+// Rotas do usuario
+route.post('/login', usuario.verificarUser);
+route.post('/registro', usuario.createUser);
+route.get('/logout', usuario.logout);
+
+// Rotas do Emprestimo ADM
+route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
+route.post('/emprestimo', emprestimo.createEmprestimo);
 
 route.get('/', home.pagInicialGet);
 route.get('/inicio', home.pagInicialGet);
@@ -20,7 +25,6 @@ route.get('/favoritos', home.pagFavoritosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);
 route.get('/livrosADM', home.isAdmin, home.pagLivrosADMGet);
 route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
-route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
 
 module.exports = route;
 

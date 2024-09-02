@@ -7,75 +7,109 @@ const Genero = require("../model/genero");
 const db = require("../config/db");
 
 module.exports = {
-    async pagInicialGet(req, res){
-        if(req.session.IDUsuario){
+    async pagInicialGet(req, res) {
+        if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
-                raw: true 
+                raw: true
             });
 
-            return res.render("../views/inicio", {user : user});
-        }
-        res.render("../views/index");
-    },
-    
-    async pagLivrosGet(req, res){
-        if(req.session.IDUsuario){
-            const user = await Usuario.findOne({
-                where: { IDUsuario: req.session.IDUsuario },
-                raw: true 
-            });
-            
-            return res.render("../views/livros", {user : user});
+            return res.render("../views/inicio", { user: user });
         }
         res.render("../views/index");
     },
 
-    async pagFavoritosGet(req, res){
-        if(req.session.IDUsuario){
+    async pagLivrosGet(req, res) {
+        if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
-                raw: true 
+                raw: true
             });
-            
-            return res.render("../views/favoritos", {user : user});
-        }
-        res.render("../views/index");
-    },
-    
-    async pagEmprestimosGet(req, res){
-        if(req.session.IDUsuario){
-            const user = await Usuario.findOne({
-                where: { IDUsuario: req.session.IDUsuario },
-                raw: true 
-            });
-            
-            return res.render("../views/emprestimos", {user : user});
+
+            return res.render("../views/livros", { user: user });
         }
         res.render("../views/index");
     },
 
-    async pagUsuariosADMGet(req, res){
+    async pagFavoritosGet(req, res) {
+        if (req.session.IDUsuario) {
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/favoritos", { user: user });
+        }
+        res.render("../views/index");
+    },
+
+    async pagEmprestimosGet(req, res) {
+        if (req.session.IDUsuario) {
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/emprestimos", { user: user });
+        }
+        res.render("../views/index");
+    },
+
+    async pagUsuariosADMGet(req, res) {
         res.render('../views/usuariosADM');
     },
 
-    async pagEmprestimosADMGet(req, res){
-        res.render('../views/emprestimosADM');
+    async pagEmprestimosADMGet(req, res) {
+        const emprestimos = await Emprestimo.findAll({
+            attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+            raw: true
+        });
+    
+        const livroIds = emprestimos.map(emp => emp.IDLivro);
+        const usuarioIds = emprestimos.map(emp => emp.IDUsuario);
+    
+        const livros = await Livro.findAll({
+            where: {
+                IDLivro: livroIds
+            },
+            attributes: ['IDLivro', 'Titulo', 'Foto'],
+            raw: true
+        });
+    
+        const usuarios = await Usuario.findAll({
+            where: {
+                IDUsuario: usuarioIds 
+            },
+            attributes: ['IDUsuario', 'Nome', 'CPF'],
+            raw: true
+        });
+    
+        const livrosMap = new Map(livros.map(livro => [livro.IDLivro, livro]));
+        const usuariosMap = new Map(usuarios.map(usuario => [usuario.IDUsuario, usuario]));
+    
+        const emprestimosComDados = emprestimos.map(emp => ({
+            ...emp,
+            livro: livrosMap.get(emp.IDLivro),
+            usuario: usuariosMap.get(emp.IDUsuario)
+        }));
+    
+        res.render('../views/emprestimosADM', { emprestimos: emprestimosComDados });
     },
+    
 
-    async pagLivrosADMGet(req, res){
+    async pagLivrosADMGet(req, res) {
         res.render('../views/livrosADM');
     },
 
     async isAdmin(req, res, next) {
-        if (req.session.isLoggedIn && req.session.Admin === 1) {
-            next();
-        } else {
-            if(req.session.isLoggedIn){
-                return res.redirect("/inicio");
-            }
-            res.redirect("/");
+    if (req.session.isLoggedIn && req.session.Admin === 1) {
+        next();
+    } else {
+        if (req.session.isLoggedIn) {
+            return res.redirect("/inicio");
         }
+        res.redirect("/");
     }
+}
 }
 
