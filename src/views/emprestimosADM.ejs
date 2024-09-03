@@ -52,7 +52,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/emprestimo" method="POST">
+                    <form action="/emprestimo"  enctype="multipart/form-data" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">ISBN</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp" name="isbn" placeholder="Cógigo do livro...">
@@ -133,7 +133,7 @@
                 %>
                 
                 <div class="carde row g-0">
-                    <img src="/img/<%= emprestimos[i].Livro.Foto %>" class="img-fluid rounded-start" alt="...">
+                    <img src="/img/<%=emprestimos[i].Livro.Foto%>" class="img-fluid rounded-start" alt="...">
                     <div class="col-md-8">
                         <div class="card-body">
                             <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>

@@ -70,7 +70,7 @@ module.exports = {
                 },
                 {
                     model: Livro,
-                    attributes: ['Titulo']
+                    attributes: ['Titulo', 'Foto']
                 }
             ]
         });
