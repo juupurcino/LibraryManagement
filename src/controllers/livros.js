@@ -5,12 +5,13 @@ const Generolivro = require("../model/generoLivro");
 
 module.exports = {
 
-    async createLivro(req, res){
+    // Criando livro
+    async createLivro(req, res) {
         const dados = req.body;
-        
+
         let foto = 'livro.png';
         console.log(dados);
-        
+
         // Verificando se foi enviada alguma foto
         if (req.file) {
             // Pegar novo nome da foto
@@ -24,7 +25,6 @@ module.exports = {
             Ano: dados.ano,
             Descricao: dados.descricao,
             Foto: foto,
-            Senha: dados.senha,
             Disponibilidade: 1,
             Qts_emprestimo: 0
         });
@@ -33,12 +33,13 @@ module.exports = {
         for (let i = 0; i < dados.genero.length; i++) {
 
             await Generolivro.create({
-            IDGenero: dados.genero[i],
-            IDLivro: livro.IDLivro 
-        
-        });
-        
+                IDGenero: dados.genero[i],
+                IDLivro: livro.IDLivro
+
+            });
+
         }
         res.redirect('/livrosADM');
     }
+
 }

@@ -119,32 +119,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/livros" method="post" enctype="multipart/form-data">
+                    <form action="/livros" method="post" enctype="multipart/form-data" id="Updatelivro">
                         <div class="mb-3">
                             <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
                             <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <label for="titulo" class="form-label">Titulo</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="tituloHelp" value="<%= livro.Titulo %>">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <label for="descricao" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="descricao" name="descricao" aria-describedby="descricaoHelp" value="<%= livro.Descricao %>">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <label for="autor" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="autor" name="autor" aria-describedby="autorHelp" value="<%= livro.Autor %>">
                         </div>
+                        <button type="submit" class="btn btn-primary">Editar</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Editar</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Modal de excluir livro  -->
     <div class="modal fade" id="modalDelLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -206,7 +207,7 @@
                             <% } %>
                         </h6>
                         <div class="botao">
-                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
+                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro" onclick="UpdateLivro()">Editar</button>
                             <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
                         </div>
                     </div>
