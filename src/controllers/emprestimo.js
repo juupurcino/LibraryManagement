@@ -8,7 +8,6 @@ module.exports = {
     async createEmprestimo(req, res){
         const dados = req.body;
 
-
         const usuario = await Usuario.findOne({
             raw: true,
             attributes: ['IDUsuario'],

@@ -23,3 +23,19 @@ function verSenha2() {
         span.innerHTML = "visibility";
     }
 }
+
+function favoritar(id) {
+    let img = document.getElementById("img"+id);
+    var form = document.getElementById('favoritosForm');
+    form.querySelector('input[name="id_livro"]').value = idLivro;
+    // Envia o formulário
+    
+    console.log(img.src);
+    
+    if(img.src == "http://localhost:3000/img/starv.png"){
+        img.src = "/img/star.png";
+    }else{
+        img.src = "/img/starv.png";
+    }
+    form.submit();
+}

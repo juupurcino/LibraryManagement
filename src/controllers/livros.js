@@ -33,10 +33,9 @@ module.exports = {
         for (let i = 0; i < dados.genero.length; i++) {
 
             await Generolivro.create({
-            IDGenero: dados.genero[i],
-            IDLivro: livro.IDLivro 
-        
-        });
+                IDGenero: dados.genero[i],
+                IDLivro: livro.IDLivro 
+            });
         
         }
         res.redirect('/livrosADM');

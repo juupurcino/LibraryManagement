@@ -26,8 +26,14 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/livros", { user: user });
+            const livros = await Livro.findAll({
+                attributes: ['IDLivro', 'Foto'],
+                raw: true
+            });
+
+            return res.render("../views/livros", { user: user, livros: livros });
         }
+
         res.render("../views/index");
     },
 
@@ -38,7 +44,12 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/favoritos", { user: user });
+            const favoritos = await Favorito.findAll({
+                where: { IDUsuario : user.IDUsuario },
+                raw: true
+            })
+
+            return res.render("../views/favoritos", { user: user, favoritos });
         }
         res.render("../views/index");
     },

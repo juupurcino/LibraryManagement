@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -53,24 +54,29 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label" >Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
+                            <label for="exampleInputEmail1" class="form-label">Nome</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.Nome %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
+                            <input type="text" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.CPF %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp"
+                                value="<%= user.Telefone %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
+                            <input type="email" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.Email %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
+                            <input type="date" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.DataNascimento %>">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
                         <select class="form-select" aria-label="Default select example" value="user.Genero">
@@ -125,15 +131,23 @@
 
         <!-- Card de livro  -->
         <div class="livros row row-cols-1 row-cols-md-2 row-cols-lg-5 g-15">
-            <div class="col">
-                <div class="card">
-                    <img src="/img/comeca.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <button>Detalhes</button>
-                        <img src="/img/starv.png" alt="">
+            <% for(let i=0; i < livros.length; i++){ %>
+                <div class="col">
+                    <div class="card">
+                        <img src="/img/capas/<%=livros[i].Foto%>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <button>Detalhes</button>
+                            <form action="/favoritos" method="post" id="favoritosForm">
+                                <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"
+                                    style="display: none;">
+                                <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
+                                    style="display: none;">
+                                <img id="img<%=livros[i].IDLivro%>" type="submit" onclick="favoritar(<%=livros[i].IDLivro%>)" src="/img/starv.png" alt="">
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <% } %>
         </div>
     </main>
 
