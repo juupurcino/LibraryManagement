@@ -65,6 +65,7 @@ h1{
     background-color: rgb(165, 27, 27);
 }
 
+<<<<<<< HEAD
 .modal-footer input{
     background-color: #46220F;
     border: 2px solid #46220F;
@@ -75,3 +76,13 @@ h1{
     border: 2px solid #46220F;
     background-color: #643c26;
 }
+=======
+#addGenero {
+
+    background-color: #46220F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+>>>>>>> origin/Juliana

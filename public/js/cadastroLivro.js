@@ -24,3 +24,21 @@ file.addEventListener('change', () => {
         photo.src = reader.result
     }
 });
+
+var count = 1;
+
+    function adcgenero() {
+        count += 1;
+
+        const generoFields = document.getElementById('generoFields');
+        const copy = document.getElementById('genero').innerHTML;
+        const select = document.createElement('select');
+        select.className = 'form-select genero';
+        select.name = 'genero';
+        // select.className = 'form-select genero';
+        // select.setAttribute('aria-label', 'Select gênero');
+        // select.name = 'genero';
+        select.innerHTML = copy;
+
+        generoFields.appendChild(select);
+    }

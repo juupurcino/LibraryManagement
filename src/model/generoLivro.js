@@ -18,7 +18,7 @@ generoLivro.belongsTo(genero, {
     foreignKey: 'IDGenero'
 });
 
-livro.belongsTo(livro, {
+generoLivro.belongsTo(livro, {
     constraint: true, 
     foreignKey: 'IDLivro'
 });
