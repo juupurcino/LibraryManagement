@@ -2,17 +2,24 @@
 const express = require('express');
 const route = express.Router();
 
+// Iniciando e importando Multer
+const multer = require("multer");
+const config = require('./src/config/multer');
+
 // Importando os Controllers
 const home = require('./src/controllers/home');
 const usuario = require('./src/controllers/usuario');
 const livro = require('./src/controllers/livros');
 const emprestimo = require('./src/controllers/emprestimo');
-// const isAdmin = require('./s');
+
 
 // Rotas do usuario
 route.post('/login', usuario.verificarUser);
 route.post('/registro', usuario.createUser);
 route.get('/logout', usuario.logout);
+
+// Rotas do livrosADM
+route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
 route.post('/livrosADM', livro.createLivro)
 
 // Rotas do Emprestimo ADM

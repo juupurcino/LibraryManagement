@@ -7,8 +7,10 @@ module.exports = {
 
     async createLivro(req, res){
         const dados = req.body;
+        
         let foto = 'livro.png';
         console.log(dados);
+        
         // Verificando se foi enviada alguma foto
         if (req.file) {
             // Pegar novo nome da foto
