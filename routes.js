@@ -19,13 +19,12 @@ route.post('/registro', usuario.createUser);
 route.get('/logout', usuario.logout);
 
 // Rotas do livrosADM
+route.get('/livrosADM', home.isAdmin, home.pagLivrosADMGet);
 route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
-route.post('/livrosADM', livro.createLivro)
 
 // Rotas do Emprestimo ADM
 route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
-route.post('/emprestimo', emprestimo.createEmprestimo);
-
+route.post('/emprestimo', multer(config).single('foto'), emprestimo.createEmprestimo);
 
 route.get('/', home.pagInicialGet);
 route.get('/inicio', home.pagInicialGet);
