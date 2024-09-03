@@ -43,6 +43,5 @@ INSERT INTO generos (tipo, createdAt, updatedAt) VALUES
 ('Quadrinhos e Graphic Novels', '2024-09-02 11:55:07.0930000 +00:00', '2024-09-02 11:57:07.0930000 +00:00'),
 ('Infantil', '2024-09-02 11:55:07.0930000 +00:00', '2024-09-02 11:57:07.0930000 +00:00');
 
-npm init -y
-npm install express mssql sequelize nodemon ejs
+
 

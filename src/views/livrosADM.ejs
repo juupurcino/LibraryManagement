@@ -200,11 +200,12 @@
                         </h6>
                         <h6 class="card-text">Autor: <%=livro[i].Autor%>
                         </h6>
-                        <h6 class="card-text">Gênero:  
-                            <% for (let j=0; j < genero_livro.length; j++) {
-                                if(livro[i].IDLivro == genero_livro[j].IDLivro){ %>
-                                    <h6 class="card-text">Genero: <%=genero_livro[j].IDGenero%></h6>
-                            <% } } %>
+                        <h6 class="card-text">Gênero: 
+                            <% for (let j = 0; j < genero_livro.length; j++) { %>
+                                <% if (livro[i].IDLivro == genero_livro[j].IDLivro) { %>
+                                    <%= genero_livro[j].IDGenero %>
+                                <% } %>
+                            <% } %>
                         </h6>
                         <div class="botao">
                             <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
