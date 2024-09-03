@@ -133,11 +133,11 @@
                 %>
                 
                 <div class="carde row g-0">
-                    <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
+                    <img src="/img/<%= emprestimos[i].Livro.Foto %>" class="img-fluid rounded-start" alt="...">
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h3 class="card-title"><%= emprestimos[i].livro.Titulo %></h3>
-                            <h4 class="card-text">Usuário: <%= emprestimos[i].usuario.CPF %></h4>
+                            <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
+                            <h4 class="card-text">Usuário: <%= emprestimos[i].Usuario.CPF %></h4>
                             <h6 class="card-text">Data de Empréstimo: <%= dataEmprestimoFormatada %></h6>
                             <h6 class="card-text">Data de Devolução: <%= dataDevolucaoFormatada %></h6>
                             <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>

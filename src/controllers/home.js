@@ -60,40 +60,23 @@ module.exports = {
     },
 
     async pagEmprestimosADMGet(req, res) {
-        const emprestimos = await Emprestimo.findAll({
+
+       const emprestimos = await Emprestimo.findAll({
             attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
-            raw: true
+            include: [
+                {
+                    model: Usuario,
+                    attributes: ['CPF']
+                },
+                {
+                    model: Livro,
+                    attributes: ['Titulo']
+                }
+            ]
         });
-    
-        const livroIds = emprestimos.map(emp => emp.IDLivro);
-        const usuarioIds = emprestimos.map(emp => emp.IDUsuario);
-    
-        const livros = await Livro.findAll({
-            where: {
-                IDLivro: livroIds
-            },
-            attributes: ['IDLivro', 'Titulo', 'Foto'],
-            raw: true
-        });
-    
-        const usuarios = await Usuario.findAll({
-            where: {
-                IDUsuario: usuarioIds 
-            },
-            attributes: ['IDUsuario', 'Nome', 'CPF'],
-            raw: true
-        });
-    
-        const livrosMap = new Map(livros.map(livro => [livro.IDLivro, livro]));
-        const usuariosMap = new Map(usuarios.map(usuario => [usuario.IDUsuario, usuario]));
-    
-        const emprestimosComDados = emprestimos.map(emp => ({
-            ...emp,
-            livro: livrosMap.get(emp.IDLivro),
-            usuario: usuariosMap.get(emp.IDUsuario)
-        }));
-    
-        res.render('../views/emprestimosADM', { emprestimos: emprestimosComDados });
+        
+        res.render('../views/emprestimosADM', { emprestimos: emprestimos });
+        
     },
     
     async pagLivrosADMGet(req, res){
@@ -110,7 +93,10 @@ module.exports = {
 
         const genero_livro = await GeneroLivro.findAll({
             attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
-            raw: true 
+            include: [{
+                model: Genero,
+                attributes: ['Tipo']
+            }]
         });
 
         res.render('../views/livrosADM', { genero : genero, livro : livro, genero_livro : genero_livro});

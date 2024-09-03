@@ -203,7 +203,7 @@
                         <h6 class="card-text">Gênero: 
                             <% for (let j = 0; j < genero_livro.length; j++) { %>
                                 <% if (livro[i].IDLivro == genero_livro[j].IDLivro) { %>
-                                    <%= genero_livro[j].IDGenero %>
+                                    <%= genero_livro[j].Genero.Tipo%>  | 
                                 <% } %>
                             <% } %>
                         </h6>
