@@ -59,7 +59,6 @@ module.exports = {
         res.render('../views/usuariosADM');
     },
 
-<<<<<<< HEAD
     async pagEmprestimosADMGet(req, res) {
         const emprestimos = await Emprestimo.findAll({
             attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
@@ -95,18 +94,8 @@ module.exports = {
         }));
     
         res.render('../views/emprestimosADM', { emprestimos: emprestimosComDados });
-=======
-    async pagEmprestimosADMGet(req, res){
-
-        res.render('../views/emprestimosADM');
->>>>>>> origin/Juliana
     },
     
-
-<<<<<<< HEAD
-    async pagLivrosADMGet(req, res) {
-        res.render('../views/livrosADM');
-=======
     async pagLivrosADMGet(req, res){
 
         const livro = await Livro.findAll({
@@ -126,7 +115,6 @@ module.exports = {
 
         res.render('../views/livrosADM', { genero : genero, livro : livro, genero_livro : genero_livro});
 
->>>>>>> origin/Juliana
     },
 
     async isAdmin(req, res, next) {

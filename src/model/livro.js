@@ -11,11 +11,7 @@ const livro = database.define('Livro', {
     },
 
     ISBN: {
-<<<<<<< HEAD
-        type: Sequelize.INTEGER,
-=======
         type: Sequelize.STRING(13),
->>>>>>> origin/Juliana
         allowNull: false
     },
 
