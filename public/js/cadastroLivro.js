@@ -25,25 +25,20 @@ file.addEventListener('change', () => {
     }
 });
 
-document.getElementById('addGenero').addEventListener('click', function() {
-    
-    let novoSelect = document.createElement('select');
-    novoSelect.className = 'form-select genero';
-    novoSelect.setAttribute('aria-label', 'Select gênero');
-    
-    let option = document.createElement('option');
-    option.value = '';
-    option.disabled = true;
-    option.selected = true;
-    option.textContent = 'Selecione o gênero';
-    novoSelect.appendChild(option);
-    
-    for (let i = 0; i < genero.length; i++) {
-        let option = document.createElement('option');
-        option.value = genero[i].IDGenero;
-        option.textContent = genero[i].Tipo;
-        novoSelect.appendChild(option);
-    };
-    
-    document.getElementById('generoFields').appendChild(novoSelect);
-});
+var count = 1;
+
+    function adcgenero() {
+        count += 1;
+
+        const generoFields = document.getElementById('generoFields');
+        const copy = document.getElementById('genero').innerHTML;
+        const select = document.createElement('select');
+        select.className = 'form-select genero';
+        select.name = 'genero';
+        // select.className = 'form-select genero';
+        // select.setAttribute('aria-label', 'Select gênero');
+        // select.name = 'genero';
+        select.innerHTML = copy;
+
+        generoFields.appendChild(select);
+    }

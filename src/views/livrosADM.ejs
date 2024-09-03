@@ -60,37 +60,44 @@
                             </div>
                             <div class="mb-3">
                                 <label for="titulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="titulo" aria-describedby="tituloHelp" name="titulo">
+                                <input type="text" class="form-control" id="titulo" aria-describedby="tituloHelp"
+                                    name="titulo">
                             </div>
                             <div class="mb-3">
                                 <label for="isbn" class="form-label">ISBN</label>
-                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp" name="isbn">
+                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp"
+                                    name="isbn">
                             </div>
                             <div class="mb-3">
                                 <label for="isbn" class="form-label">Ano</label>
-                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp" name="ano">
+                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp"
+                                    name="ano">
                             </div>
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>
-                                <input type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp" name="descricao">
+                                <input type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp"
+                                    name="descricao">
                             </div>
                             <div class="mb-3">
                                 <label for="autor" class="form-label">Autor</label>
-                                <input type="text" class="form-control" id="autor" aria-describedby="autorHelp" name="autor">
+                                <input type="text" class="form-control" id="autor" aria-describedby="autorHelp"
+                                    name="autor">
                             </div>
                             <div id="generoContainer">
                                 <label for="genero" class="form-label">Gênero</label>
                                 <div id="generoFields">
-                                    <% for (let i=0; i<=cont; i++) { %>
-                                    <select class="form-select genero" aria-label="Select gênero" id="genero" name="genero">
+                                    <select class="form-select genero" aria-label="Select gênero" id="genero"
+                                        name="genero">
                                         <option value="" disabled selected>Selecione o gênero</option>
                                         <% for (let i=0; i<genero.length; i++) { %>
-                                            <option value="<%= genero[i].IDGenero %>"> <%= genero[i].Tipo %> </option>
-                                        <% } %>
+                                            <option value="<%= genero[i].IDGenero %>">
+                                                <%= genero[i].Tipo %>
+                                            </option>
+                                            <% } %>
                                     </select>
-                                    <% } %>
                                 </div>
-                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar mais gênero</button>
+                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar
+                                    mais gênero</button>
                             </div>
                         </form>
                     </div>
@@ -181,23 +188,34 @@
         </div>
 
         <!-- Cards de livro  -->
-        <div class="carde row g-0">
-            <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title">É ASSIM QUE COMEÇA</h3>
-                    <h6 class="card-text">Descrição: : Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</h6>
-                    <h6 class="card-text">Autor: Collen Hover</h6>
-                    <div class="botao">
-                        <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
-                        <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
+        <% for (let i=0; i < livro.length; i++) { %>
+            <div class="carde row g-0">
+                <img src="/img/<%=livro[i].Foto%>" class="img-fluid rounded-start" alt="Capa do livro">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <%=livro[i].titulo%>
+                        </h3>
+                        <h6 class="card-text">Descrição: <%=livro[i].Descricao%>
+                        </h6>
+                        <h6 class="card-text">Autor: <%=livro[i].Autor%>
+                        </h6>
+                        <h6 class="card-text">Gênero:  
+                            <% for (let j=0; j < genero_livro.length; j++) {
+                                if(livro[i].IDLivro == genero_livro[j].IDLivro){ %>
+                                    <h6 class="card-text">Genero: <%=genero_livro[j].IDGenero%></h6>
+                            <% } } %>
+                        </h6>
+                        <div class="botao">
+                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
+                            <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        </div>
+            <hr>
+            </div>
+        <% } %>
 
     </main>
 
@@ -213,12 +231,6 @@
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>
     </footer>
 
-    <script>
-        let cont = 1;
-        function adcgenero(){
-            cont += 1;
-        }
-    </script>
     <script src="/js/cadastroLivro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

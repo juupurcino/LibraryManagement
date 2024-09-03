@@ -2,8 +2,8 @@ const Usuario = require("../model/usuario");
 const Livro = require("../model/livro");
 const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
-const Generolivro = require("../model/generolivro");
 const Genero = require("../model/genero");
+const GeneroLivro = require("../model/generoLivro");
 const db = require("../config/db");
 
 module.exports = {
@@ -66,12 +66,22 @@ module.exports = {
 
     async pagLivrosADMGet(req, res){
 
+        const livro = await Livro.findAll({
+            attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+            raw: true 
+        });
+
         const genero = await Genero.findAll({
             attributes: ['IDGenero', 'Tipo'],
             raw: true 
         });
 
-        res.render('../views/livrosADM', { genero : genero});
+        const genero_livro = await GeneroLivro.findAll({
+            attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
+            raw: true 
+        });
+
+        res.render('../views/livrosADM', { genero : genero, livro : livro, genero_livro : genero_livro});
 
     },
 

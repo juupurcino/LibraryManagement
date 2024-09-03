@@ -3,7 +3,6 @@ const Usuario = require("../model/usuario");
 const Livro = require("../model/livro");
 const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
-const Generolivro = require("../model/generolivro");
 const Genero = require("../model/genero");
 const db = require("../config/db");
 
