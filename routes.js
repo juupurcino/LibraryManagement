@@ -17,13 +17,10 @@ const emprestimo = require('./src/controllers/emprestimo');
 route.post('/login', usuario.verificarUser);
 route.post('/registro', usuario.createUser);
 route.get('/logout', usuario.logout);
-<<<<<<< HEAD
-=======
 
 // Rotas do livrosADM
 route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
 route.post('/livrosADM', livro.createLivro)
->>>>>>> 947f75bbb12df7764c408d36e56d4ccb0d954e9c
 
 // Rotas do Emprestimo ADM
 route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
