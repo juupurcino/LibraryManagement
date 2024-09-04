@@ -12,6 +12,7 @@ const usuario = require('./src/controllers/usuario');
 const livro = require('./src/controllers/livros');
 const emprestimo = require('./src/controllers/emprestimo');
 const favorito = require('./src/controllers/favoritos');
+const pesquisa = require('./src/controllers/pesquisa');
 
 // Rotas de livro
 route.post('/UpdateLivro/:id', livro.updateLivro);
@@ -41,6 +42,9 @@ route.post('/favoritos', favorito.createFavoritos);
 // Rotas de CRUD Usuario (ADM)
 route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
 route.post('/registroADM', home.isAdmin, usuario.createUser);
+
+// PESQUISA
+route.get('/pesquisarLivro', pesquisa.pesquisarLivro);
 
 route.get('/livros', home.pagLivrosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);

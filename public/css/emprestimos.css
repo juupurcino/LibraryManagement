@@ -102,7 +102,7 @@ select {
     font-size: large;
     padding-right: 2%;
     padding-left: 2%;
-    padding: 1.4%;
+    padding: 0.7%;
     margin-top: 1%;
 }
 
@@ -158,4 +158,8 @@ select {
 .divh6 h6{
     color: #7a7a7a;
     font-size: 1.5em;
+}
+
+.seletores{
+    width: 23%;
 }

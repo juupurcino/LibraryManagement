@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -97,8 +98,7 @@
                                             <% } %>
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar
-                                    mais gênero</button>
+                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar mais gênero</button>
                             </div>
                             <label for="">Destaque
                                 <div class="check">
@@ -197,16 +197,17 @@
 
 
     <main>
-
         <!-- Barra de pesquisa  -->
         <div class="pesquisas">
             <div class="pesquisar">
                 <h6>Pesquise</h6>
                 <div class="p">
-                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
-                    <div class="icon">
-                        <span class="material-symbols-outlined"> search </span>
-                    </div>
+                    <form action="/pesquisarLivro" method="GET" id="pesquisarForm">
+                        <input type="text" name="itemPesquisado" placeholder="Pesquise por livro, autor, gênero...." />
+                        <div class="icon">
+                            <span class="material-symbols-outlined" onclick="pesquisar()" > search </span>
+                        </div>
+                    </form>
                 </div>
             </div>
 

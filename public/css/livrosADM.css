@@ -139,7 +139,8 @@ select {
 }
 
 .carde img{
-    width: 200px;
+    max-width: 250px;
+    object-fit: cover;
 }
 
 .card-body h3{
@@ -163,8 +164,7 @@ select {
 }
 
 .livro img {
-
-    width: 150px;
+    width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 2%;
