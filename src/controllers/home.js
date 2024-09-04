@@ -4,7 +4,6 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
-const db = require("../config/db");
 
 module.exports = {
     async pagInicialGet(req, res) {
@@ -14,7 +13,12 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user });
+            const livrosDestaque = await Livro.findAll({
+                where: { Destaque: 1 },
+                raw: true
+            });
+
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque });
         }
         res.render("../views/index");
     },
@@ -31,7 +35,13 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/livros", { user: user, livros: livros });
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/livros", { user: user, livros: livros, favoritos : favoritos });
         }
 
         res.render("../views/index");
@@ -43,6 +53,11 @@ module.exports = {
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
+        
+            const livros = await Livro.findAll({
+                attributes: ['IDLivro', 'Foto'],
+                raw: true
+            });
 
             const favoritos = await Favorito.findAll({
                 where: { IDUsuario : user.IDUsuario },
@@ -52,7 +67,7 @@ module.exports = {
                 }]
             })
 
-            return res.render("../views/favoritos", { user: user, favoritos : favoritos });
+            return res.render("../views/favoritos", { user: user, favoritos : favoritos, livros : livros });
         }
         res.render("../views/index");
     },

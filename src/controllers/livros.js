@@ -1,5 +1,4 @@
 const sequelize = require("sequelize");
-const db = require("../config/db");
 const Livro = require("../model/livro");
 const Generolivro = require("../model/generoLivro");
 

@@ -1,4 +1,3 @@
-const db = require("../config/db");
 const Emprestimo = require("../model/emprestimo");
 const Usuario = require("../model/usuario");
 const Livro = require("../model/livro");

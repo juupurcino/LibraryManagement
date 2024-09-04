@@ -170,6 +170,8 @@ select {
     border-radius: 2%;
 }
 
-
+.check{
+    display: flex;
+}
 
 

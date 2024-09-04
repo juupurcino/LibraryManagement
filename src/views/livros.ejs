@@ -128,21 +128,22 @@
             <% for(let i=0; i < livros.length; i++){ %>
                 <div class="col">
                     <div class="card">
-                        <img src="/img/capas/<%=livros[i].Foto%>" class="card-img-top" alt="...">
+                        <img src="/img/<%=livros[i].Foto%>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <button>Detalhes</button>
-                            <form action="/favoritos" method="post" id="favoritosForm">
-                                <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"
-                                    style="display: none;">
-                                <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
-                                    style="display: none;">
-                                <!-- <img id="img<%=livros[i].IDLivro%>" type="submit" onclick="favoritar(<%=livros[i].IDLivro%>)" src="/img/starv.png" alt=""> -->
-                                 <input type="submit" name="" id="">
+                            <form action="/favoritos" method="post" id="favoritosForm<%=livros[i].IDLivro%>">
+                                <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"style="display: none;">
+                                <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"style="display: none;">
+                                <% 
+                                let isFavorited = favoritos.some(favorito => favorito.IDLivro === livros[i].IDLivro); 
+                                %>
+                                <img id="img<%=livros[i].IDLivro%>" type="submit" onclick="favoritar(<%=livros[i].IDLivro%>)" 
+                                src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
                             </form>
                         </div>
                     </div>
                 </div>
-                <% } %>
+            <% } %>
         </div>
     </main>
 

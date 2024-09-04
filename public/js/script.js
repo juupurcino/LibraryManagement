@@ -26,9 +26,6 @@ function verSenha2() {
 
 function favoritar(id) {
     let img = document.getElementById("img"+id);
-    var form = document.getElementById('favoritosForm');
-    form.querySelector('input[name="id_livro"]').value = idLivro;
-
     
     console.log(img.src);
     
@@ -37,5 +34,7 @@ function favoritar(id) {
     }else{
         img.src = "/img/starv.png";
     }
+    
+    var form = document.getElementById('favoritosForm' + id);
     form.submit();
 }

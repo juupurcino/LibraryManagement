@@ -1,5 +1,3 @@
-const Usuario = require("../model/usuario");
-const Livro = require("../model/livro");
 const Favorito = require("../model/favorito");
 const sequelize = require("sequelize");
 
@@ -7,11 +5,23 @@ module.exports = {
     async createFavoritos(req, res){
         const dados = req.body;
 
+        const favoritoExistente = await Favorito.findOne({
+            where: {
+                IDUsuario: dados.id_user,
+                IDLivro: dados.id_livro
+            }
+        })
+
+        if( favoritoExistente ){
+            await Favorito.destroy({where: {IDFavorito : favoritoExistente.IDFavorito}});
+            return res.redirect('/livros');
+        }
+
         await Favorito.create({
-            IDUsuario: dados.IDUsuario,
-            IDLivro: dados.IDLivro
+            IDUsuario: dados.id_user,
+            IDLivro: dados.id_livro
         });
 
-        res.redirect('/');
+        res.redirect('/livros');
     }
 }
