@@ -14,7 +14,7 @@ module.exports = {
 
         if( favoritoExistente ){
             await Favorito.destroy({where: {IDFavorito : favoritoExistente.IDFavorito}});
-            return res.redirect('/livros');
+            return
         }
 
         await Favorito.create({
@@ -22,6 +22,5 @@ module.exports = {
             IDLivro: dados.id_livro
         });
 
-        res.redirect('/livros');
     }
 }

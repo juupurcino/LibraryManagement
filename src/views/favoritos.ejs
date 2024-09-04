@@ -20,13 +20,14 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -126,6 +127,7 @@
         </div>
 
         <!-- Card de livro  -->
+        <% if(favoritos.length >= 1){ %>
         <div class="livros row row-cols-1 row-cols-md-2 row-cols-lg-5 g-15">
             <% for(let i = 0; i < favoritos.length; i++){  %>
             <div class="col">
@@ -133,12 +135,22 @@
                     <img src="/img/<%=favoritos[i].Livro.Foto%>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <button>Detalhes</button>
-                        <img src="/img/star.png" alt="">
+                        <form action="/favoritos" method="post" id="favoritosForm<%=favoritos[i].IDLivro%>">
+                            <input type="text" name="id_livro" id="" value="<%=favoritos[i].IDLivro%>" style="display: none;">
+                            <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>" style="display: none;">
+                            <img id="img<%=favoritos[i].IDLivro%>" type="submit" onclick="favoritar(<%=favoritos[i].IDLivro%>)" src="/img/star.png" alt="">
+                        </form>
                     </div>
                 </div>
             </div>
             <% } %>
+            
         </div>
+        <% } else { %>
+            <div class="divh6">
+                <h6 class="h6">Não há nenhum livro favoritado...</h6>
+            </div>
+            <% } %>
     </main>
 
     <footer>
@@ -146,7 +158,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/instagram.png" alt="">@plotpit</p>
                 <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

@@ -25,7 +25,8 @@ module.exports = {
             Foto: foto,
             Senha: dados.senha,
             Disponibilidade: 1,
-            Qts_emprestimo: 0
+            Qts_emprestimo: 0,
+            Destaque: dados.destaque
         });
 
 

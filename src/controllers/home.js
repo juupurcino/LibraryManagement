@@ -14,11 +14,17 @@ module.exports = {
             });
 
             const livrosDestaque = await Livro.findAll({
-                where: { Destaque: 1 },
+                where: { Destaque: "1" },
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque });
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro', 'IDUsuario'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos : favoritos });
         }
         res.render("../views/index");
     },

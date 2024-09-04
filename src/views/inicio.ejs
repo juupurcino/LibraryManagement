@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet" />
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet" />
     <link rel="stylesheet" href="/css/inicio.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/perfil.css" />
@@ -23,13 +23,14 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -127,8 +128,8 @@
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
@@ -139,24 +140,33 @@
         </div>
 
         <!-- Card de sugestões  -->
+        <% if(livrosDestaque.length >= 1){ %>
         <h5>Sugestões para ler hoje:</h5>
         <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
+                <% for(let i = 0; i < livrosDestaque.length; i++) { %>
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-header">
-                            <span class="material-symbols-outlined">star</span>
+                            <form action="/favoritos" method="post" id="favoritosForm<%=livrosDestaque[i].IDLivro%>">
+                                <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livrosDestaque[i].IDLivro); %>
+                                <input type="text" name="id_livro" id="" value="<%=livrosDestaque[i].IDLivro%>" style="display: none;">
+                                <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>" style="display: none;">
+                                <img id="img<%=livrosDestaque[i].IDLivro%>" type="submit" onclick="favoritar(<%=livrosDestaque[i].IDLivro%>)" src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
+                            </form>
                         </div>
-                        <img src="https://m.media-amazon.com/images/I/91r5G8RxqfL._AC_UL320_.jpg" class="card-img-top"
+                        <img src="/img/<%=livrosDestaque[i].Foto%>" class="card-img-top"
                             alt="...">
                         <div class="card-body">
                             <a class="vermais" href="#">ver mais</a>
                         </div>
                     </div>
                 </div>
+                <% } %>
             </div>
         </div>
         </div>
+        <% } %>
     </main>
 
     <footer>
@@ -164,7 +174,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/instagram.png" alt="">@plotpit</p>
                 <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

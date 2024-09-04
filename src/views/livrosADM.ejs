@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/livrosADM">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -103,15 +103,15 @@
                             <label for="">Destaque
                                 <div class="check">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" name="destaque"
-                                            id="flexRadioDefault1" checked>
+                                        <input class="form-check-input" type="radio" name="destaque"
+                                            id="flexRadioDefault1" value="0" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Não
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" name="destaque"
-                                            id="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" name="destaque"
+                                            id="flexRadioDefault2" value="1">
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Sim
                                         </label>
@@ -237,7 +237,9 @@
                 </div>
                 <% } %>
                     <% } else { %>
-                        <h6 class="card-text">Não há livros a serem exibidos</h6>
+                        <div class="divh6">
+                            <h6 class="h6">Não há livros a serem exibidos...</h6>
+                        </div>
                         <% } %>
 
     </main>
@@ -247,7 +249,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/Logo branca.png" alt="">@plotplit</p>
+                <p><img src="/img/Logo branca.png" alt="">@plotpit</p>
                 <p><img src="/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

@@ -70,9 +70,10 @@ main h5{
     border: none;
 }
 
-.card-header span{
+.card-header img{
     color: #ffae00;
-    font-size: 2.3em;
+    width: 33px;
+    height: 33px;
     cursor: pointer;
 }
 

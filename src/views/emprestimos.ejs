@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -117,6 +117,7 @@
         <!-- Card de livro  -->
         
         <div class="card mb-3">
+            <% if(emprestimos.length >= 1){ %>
             <% for(let i = 0; i < emprestimos.length; i++){ 
                 var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
                 var dataEmprestimo = new Date(emprestimos[i].DataEmprestimo);
@@ -148,6 +149,11 @@
                 </div>
                 <hr>
             <% } %>
+            <% } else { %>
+                <div class="divh6">
+                    <h6 class="h6">Você não possui nenhum empréstimo no momento...</h6>
+                </div>
+                <% } %>
         </div>
         
     </main>
@@ -157,7 +163,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/instagram.png" alt="">@plotpit</p>
                 <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

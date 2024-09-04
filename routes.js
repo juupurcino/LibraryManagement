@@ -13,7 +13,6 @@ const livro = require('./src/controllers/livros');
 const emprestimo = require('./src/controllers/emprestimo');
 const favorito = require('./src/controllers/favoritos');
 
-
 route.get('/', home.pagInicialGet);
 
 // Rotas do usuario (user)
