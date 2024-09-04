@@ -6,6 +6,7 @@ const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
 const db = require("../config/db");
 
+
 module.exports = {
     async pagInicialGet(req, res) {
         if (req.session.IDUsuario) {

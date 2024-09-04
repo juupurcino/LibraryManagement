@@ -119,35 +119,45 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/livros" method="post" enctype="multipart/form-data">
+                    <form action="/livros" method="post" id="Updatelivro">
                         <div class="mb-3">
-                            <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
-                            <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                            <label for="titulo" class="form-label">Titulo</label>
+                            <input type="text" class="form-control" name="titulo" aria-describedby="tituloHelp"
+                                id="updateTitulo">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <label for="isbn" class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="UpdateIsbn" aria-describedby="isbnHelp"
+                                name="isbn">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <label for="isbn" class="form-label">Ano</label>
+                            <input type="text" class="form-control" id="updateAno" aria-describedby="isbnHelp"
+                                name="ano">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <label for="descricao" class="form-label">Descrição</label>
+                            <input id="updateDesc" type="text" class="form-control" name="descricao"
+                                aria-describedby="descricaoHelp">
                         </div>
+                        <div class="mb-3">
+                            <label for="autor" class="form-label">Autor</label>
+                            <input id="updateAutor" type="text" class="form-control" name="autor"
+                                aria-describedby="autorHelp">
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Editar</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Editar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal de excluir livro  -->
-    <div class="modal fade" id="modalDelLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDelLivro" tabindex="-1" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,8 +169,8 @@
                     </h1>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="delUser">Excluir</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a type="button" id="delLivro" class="btn btn-primary" href="">Excluir</a>
                 </div>
             </div>
         </div>
@@ -190,33 +200,40 @@
 
         <% for (let i=0; i < livro.length; i++) { %>
             <div class="carde row g-0">
-                <img src="/img/<%=livro[i].Foto%>" class="img-fluid rounded-start" alt="Capa do livro">
+                <img src="/img/<%= livro[i].Foto %>" class="img-fluid rounded-start" alt="Capa do livro">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h3 class="card-title"><%=livro[i].Titulo%></h3>
-                        <h6 class="card-text">Descrição: <%=livro[i].Descricao%>
+                        <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>">
+                            <%= livro[i].Titulo %>
+                        </h3>
+                        <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %>
                         </h6>
-                        <h6 class="card-text">Autor: <%=livro[i].Autor%>
+                        <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %>
                         </h6>
-                        <h6 class="card-text">Gênero: 
-                            <% for (let j = 0; j < genero_livro.length; j++) { %>
-                                <% if (livro[i].IDLivro == genero_livro[j].IDLivro) { %>
-                                    <%= genero_livro[j].Genero.Tipo%>  | 
-                                <% } %>
-                            <% } %>
+                        <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %>
+                        </h6>
+                        <h6 class="card-text" id="livroAno<%= livro[i].IDLivro %>">Ano: <%= livro[i].Ano %>
+                        </h6>
+                        <h6 class="card-text" id="livroQtd<%= livro[i].IDLivro %>">Quantidade de Empréstimos: <%= livro[i].Qtd_emprestimo %>
+                        </h6>
+                        <h6 class="card-text">Gênero:
+                            <% for (let j=0; j < genero_livro.length; j++) { %>
+                                <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>
+                                    <%= genero_livro[j].Genero.Tipo %> |
+                                        <% } %>
+                                            <% } %>
                         </h6>
                         <div class="botao">
-                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro">Editar</button>
-                            <button data-bs-toggle="modal" data-bs-target="#modalDelLivro">Excluir</button>
+                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro"
+                                onclick="ClickUpdateLivro('<%= livro[i].IDLivro %>')">Editar</button>
+                            <button data-bs-toggle="modal" data-bs-target="#modalDelLivro"
+                                onclick="ClickDeleteLivro('<%= livro[i].IDLivro %>')">Excluir</button>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-            </div>
-        <% } %>
-
-    </main>
+            <% } %>
 
     <footer>
         <div class="footer1">
@@ -230,7 +247,7 @@
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>
     </footer>
 
-    <script src="/js/cadastroLivro.js"></script>
+    <script src="/js/livro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

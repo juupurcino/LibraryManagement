@@ -26,6 +26,10 @@ route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
 route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
 route.post('/emprestimo', multer(config).single('foto'), emprestimo.createEmprestimo);
 
+// Rotas de livro
+route.post('/UpdateLivro/:id', livro.updateLivro);
+route.get('/DeleteLivro/:id', livro.deleteLivro);
+
 route.get('/', home.pagInicialGet);
 route.get('/inicio', home.pagInicialGet);
 route.get('/livros', home.pagLivrosGet);
