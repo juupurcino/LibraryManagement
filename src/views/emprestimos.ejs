@@ -42,8 +42,8 @@
         </nav>
     </header>
 
-    <!-- Modal Perfil-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <!-- Modal Perfil-->
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -51,39 +51,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/updateUser" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label" >Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
+                            <input type="text" name="nome" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
+                            <input type="text" name="cpf" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
+                            <input type="text" name="telefone" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
+                            <input type="date" name="data_nasc" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" value="user.Genero">
+                        <select class="form-select" name="sexo" aria-label="Default select example" value="user.Genero">
                             <option selected value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Atualizar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Atualizar">
+                        <input type="submit" value="Fechar">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -114,21 +114,40 @@
         </div>
 
         <!-- Cards de livros  -->
+        <!-- Card de livro  -->
+        
         <div class="card mb-3">
-            <div class="carde row g-0">
-                <img src="/img/comeca.jpg" class="img-fluid rounded-start" alt="...">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h3 class="card-title">É ASSIM QUE COMEÇA</h3>
-                        <h6 class="card-text">Data de empréstimo: 28/05/2024</h6>
-                        <h6 class="card-text">Data de devolução: 05/06/2024</h6>
-                        <p class="card-text"><small class="text-body-secondary">Quantidade de dias restantes: 06</small>
-                        </p>
-                        <button>Ver mais</button>
+            <% for(let i = 0; i < emprestimos.length; i++){ 
+                var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
+                var dataEmprestimo = new Date(emprestimos[i].DataEmprestimo);
+                var dataAtual = new Date();
+
+                // Formate as datas para o formato desejado
+                var dataEmprestimoFormatada = ('0' + dataEmprestimo.getDate()).slice(-2) + '/' +('0' + (dataEmprestimo.getMonth() + 1)).slice(-2) + '/' + dataEmprestimo.getFullYear();
+                var dataDevolucaoFormatada = ('0' + dataDevolucao.getDate()).slice(-2) + '/' +('0' + (dataDevolucao.getMonth() + 1)).slice(-2) + '/' + dataDevolucao.getFullYear();
+                
+                // Calcule a diferença em dias
+                var diferencaEmMs = dataDevolucao - dataAtual;
+                var diasRestantes = Math.ceil(diferencaEmMs / (1000 * 60 * 60 * 24)); // Converte milissegundos para dias
+
+                // Formate a quantidade de dias restantes
+                var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
+                %>
+                
+                <div class="carde row g-0">
+                    <img src="/img/<%=emprestimos[i].Livro.Foto%>" class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
+                            <h6 class="card-text">Data de Empréstimo: <%= dataEmprestimoFormatada %></h6>
+                            <h6 class="card-text">Data de Devolução: <%= dataDevolucaoFormatada %></h6>
+                            <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
+                <hr>
+            <% } %>
         </div>
         
     </main>

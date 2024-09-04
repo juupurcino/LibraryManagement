@@ -46,10 +46,13 @@ module.exports = {
 
             const favoritos = await Favorito.findAll({
                 where: { IDUsuario : user.IDUsuario },
-                raw: true
+                include: [{
+                    model: Livro,
+                    attributes: ['Foto']
+                }]
             })
 
-            return res.render("../views/favoritos", { user: user, favoritos });
+            return res.render("../views/favoritos", { user: user, favoritos : favoritos });
         }
         res.render("../views/index");
     },
@@ -61,7 +64,16 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/emprestimos", { user: user });
+            const emprestimo = await Emprestimo.findAll({
+                attributes: ['IDLivro', 'DataEmprestimo', 'DataDevolucao'],
+                where: { IDUsuario: req.session.IDUsuario },
+                include: [{
+                        model: Livro,
+                        attributes: ['Titulo', 'Foto']
+                    }]
+            });
+
+            return res.render("../views/emprestimos", { user: user, emprestimos : emprestimo });
         }
         res.render("../views/index");
     },

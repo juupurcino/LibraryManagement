@@ -20,6 +20,7 @@ route.get('/', home.pagInicialGet);
 route.post('/login', usuario.verificarUser);
 route.post('/registro', usuario.createUser);
 route.get('/logout', usuario.logout);
+route.post('/updateUser', usuario.updateUser);
 
 // Rotas do livros (ADM)
 route.get('/livrosADM', home.isAdmin, home.pagLivrosADMGet);

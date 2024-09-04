@@ -28,7 +28,7 @@ function favoritar(id) {
     let img = document.getElementById("img"+id);
     var form = document.getElementById('favoritosForm');
     form.querySelector('input[name="id_livro"]').value = idLivro;
-    // Envia o formulário
+
     
     console.log(img.src);
     

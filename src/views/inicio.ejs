@@ -54,39 +54,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/updateUser" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label" >Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
+                            <input type="text" name="nome" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
+                            <input type="text" name="cpf" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
+                            <input type="text" name="telefone" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
+                            <input type="date" name="data_nasc" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" value="user.Genero">
+                        <select class="form-select" name="sexo" aria-label="Default select example" value="user.Genero">
                             <option selected value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Atualizar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Atualizar">
+                        <input type="submit" value="Fechar">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
