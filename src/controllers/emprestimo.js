@@ -1,4 +1,3 @@
-const db = require("../config/db");
 const Emprestimo = require("../model/emprestimo");
 const Usuario = require("../model/usuario");
 const Livro = require("../model/livro");
@@ -7,7 +6,6 @@ const sequelize = require("sequelize");
 module.exports = {
     async createEmprestimo(req, res){
         const dados = req.body;
-
 
         const usuario = await Usuario.findOne({
             raw: true,

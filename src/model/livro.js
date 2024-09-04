@@ -48,6 +48,11 @@ const livro = database.define('Livro', {
     Qtd_emprestimo: {
         type: Sequelize.INTEGER,
         allowNull: true
+    },
+    
+    Destaque: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 })
 

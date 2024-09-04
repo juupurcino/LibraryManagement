@@ -23,3 +23,18 @@ function verSenha2() {
         span.innerHTML = "visibility";
     }
 }
+
+function favoritar(id) {
+    let img = document.getElementById("img"+id);
+    
+    console.log(img.src);
+    
+    if(img.src == "http://localhost:3000/img/starv.png"){
+        img.src = "/img/star.png";
+    }else{
+        img.src = "/img/starv.png";
+    }
+    
+    var form = document.getElementById('favoritosForm' + id);
+    form.submit();
+}

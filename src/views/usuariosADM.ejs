@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/livrosADM">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -52,40 +52,59 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/registroADM" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp"
+                                name="telefone">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="sexo">
                             <option value="" disabled selected>Selecione o gênero</option>
                             <option value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
-                    </form>
+                        <label for="">Administrador
+                            <div class="check">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault1"
+                                        value="0" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Não
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2"
+                                        value="1">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Sim
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Adicionar</button>
+                    <input class="btn btn-secondary" data-bs-dismiss="modal" value="Fechar">
+                    <input class="btn btn-primary" type="submit" value="Adicionar">
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -102,31 +121,50 @@
                     <form>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp"
+                                name="telefone">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="sexo">
                             <option value="" disabled selected>Selecione o gênero</option>
                             <option value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
+                        <label for="">Administrador
+                            <div class="check">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault1"
+                                        value="0" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Não
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2"
+                                        value="1">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Sim
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -178,37 +216,41 @@
 
         <!-- Cards de usuário  -->
         <div class="usuarios">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Nome:<small class="text-body-secondary"> Juliana</small></h5>
-                            <h5 class="card-title">CPF:<small class="text-body-secondary"> 562.834.784-32 </small></h5>
-                            <h5 class="card-title">Telefone:<small class="text-body-secondary"> (41) 98850-3023</small>
-                            </h5>
+            <% for(let i = 0; i < usuarios.length; i++) { %>
+                <%if(usuarios[i].Admin == 1){ %>
+                    <h5 class="admin">ADMINISTRADOR</h5>
+                    <% } %> 
+                    <div class="user">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="nomeUser" class="card-title">Nome: <small class="text-body-secondary"><%= usuarios[i].Nome %></small></h5>
+                                <h5 class="card-title">CPF: <small class="text-body-secondary"><%= usuarios[i].CPF %></small></h5>
+                                <h5 class="card-title">Telefone: <small class="text-body-secondary"><%= usuarios[i].Telefone %></small></h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Email:<small class="text-body-secondary">
-                                    jdiaspurcino@gmail.com</small></h5>
-                            <h5 class="card-title">Gênero:<small class="text-body-secondary"> Feminino </small></h5>
-                            <h5 class="card-title">Data ne nascimento:<small class="text-body-secondary">
-                                    01/07/2003</small></h5>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Email: <small class="text-body-secondary"><%= usuarios[i].Email %></small></h5>
+                                <h5 class="card-title">Gênero: <small class="text-body-secondary"><%= usuarios[i].Genero %></small></h5>
+                                <h5 class="card-title">Data ne nascimento: <small class="text-body-secondary"><%= usuarios[i].DataNascimento %></small></h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="botao">
-                <button data-bs-toggle="modal" data-bs-target="#modalEdtUser">Editar</button>
-                <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
+                <div class="botao">
+                    <button data-bs-toggle="modal" data-bs-target="#modalEdtUser">Editar</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
+                </div>
             </div>
         </div>
         <hr>
+        <% } %> 
 
     </main>
 
@@ -217,7 +259,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/Logo branca.png" alt="">@plotplit</p>
+                <p><img src="/img/Logo branca.png" alt="">@plotpit</p>
                 <p><img src="/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

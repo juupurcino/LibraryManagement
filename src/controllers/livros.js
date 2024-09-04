@@ -24,7 +24,8 @@ module.exports = {
             Descricao: dados.descricao,
             Foto: foto,
             Disponibilidade: 1,
-            Qtd_emprestimo: 0
+            Qts_emprestimo: 0,
+            Destaque: dados.destaque
         });
 
 
@@ -32,10 +33,9 @@ module.exports = {
 
             await Generolivro.create({
                 IDGenero: dados.genero[i],
-                IDLivro: livro.IDLivro
-
+                IDLivro: livro.IDLivro 
             });
-
+        
         }
         res.redirect('/livrosADM');
     },

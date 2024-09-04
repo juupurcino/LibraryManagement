@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/livrosADM">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -52,7 +52,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/emprestimo"  enctype="multipart/form-data" method="POST">
+                    <form action="/emprestimoADM"  enctype="multipart/form-data" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">ISBN</label>
                             <input type="text" class="form-control" aria-describedby="emailHelp" name="isbn" placeholder="Cógigo do livro...">
@@ -115,6 +115,7 @@
         <!-- Card de livro  -->
         
         <div class="card mb-3">
+            <%if (emprestimos.length >= 1){%>
             <% for(let i = 0; i < emprestimos.length; i++){ 
                 var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
                 var dataEmprestimo = new Date(emprestimos[i].DataEmprestimo);
@@ -150,6 +151,11 @@
                 </div>
                 <hr>
             <% } %>
+            <% } else { %>
+                <div class="divh6">
+                    <h6 class="h6">Não há empréstimos a serem exibidos...</h6>
+                </div>
+                <% } %>
         </div>
 
     </main>
@@ -159,7 +165,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/instagram.png" alt="">@plotpit</p>
                 <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

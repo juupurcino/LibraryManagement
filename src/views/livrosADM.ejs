@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/livrosADM">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -55,7 +55,8 @@
                     <div class="modal-body">
                         <form id="formAddLivro">
                             <div class="mb-3 livro">
-                                <img id="imgFoto" src="/img/livro.png" alt="Upload Image" style="cursor: pointer;">
+                                <img id="imgFoto" src="/img/capas/livro.png" alt="Upload Image"
+                                    style="cursor: pointer;">
                                 <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
                             </div>
                             <div class="mb-3">
@@ -99,6 +100,24 @@
                                 <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar
                                     mais gênero</button>
                             </div>
+                            <label for="">Destaque
+                                <div class="check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="destaque"
+                                            id="flexRadioDefault1" value="0" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Não
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="destaque"
+                                            id="flexRadioDefault2" value="1">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Sim
+                                        </label>
+                                    </div>
+                                </div>
+                            </label>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -197,50 +216,57 @@
             </div>
         </div>
 
-
-        <% for (let i=0; i < livro.length; i++) { %>
-            <div class="carde row g-0">
-                <img src="/img/<%= livro[i].Foto %>" class="img-fluid rounded-start" alt="Capa do livro">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>">
-                            <%= livro[i].Titulo %>
-                        </h3>
-                        <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %>
-                        </h6>
-                        <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %>
-                        </h6>
-                        <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %>
-                        </h6>
-                        <h6 class="card-text" id="livroAno<%= livro[i].IDLivro %>">Ano: <%= livro[i].Ano %>
-                        </h6>
-                        <h6 class="card-text" id="livroQtd<%= livro[i].IDLivro %>">Quantidade de Empréstimos: <%= livro[i].Qtd_emprestimo %>
-                        </h6>
-                        <h6 class="card-text">Gênero:
-                            <% for (let j=0; j < genero_livro.length; j++) { %>
-                                <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>
-                                    <%= genero_livro[j].Genero.Tipo %> |
-                                        <% } %>
+        <% if ( livro.length>=1 ) { %>
+            <% for (let i=0; i < livro.length; i++) { %>
+                <div class="carde row g-0">
+                    <img src="/img/<%= livro[i].Foto %>" class="img-fluid rounded-start" alt="Capa do livro">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>">
+                                <%= livro[i].Titulo %>
+                            </h3>
+                            <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %>
+                            </h6>
+                            <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %>
+                            </h6>
+                            <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %>
+                            </h6>
+                            <h6 class="card-text" id="livroAno<%= livro[i].IDLivro %>">Ano: <%= livro[i].Ano %>
+                            </h6>
+                            <h6 class="card-text" id="livroQtd<%= livro[i].IDLivro %>">Quantidade de Empréstimos: <%= livro[i].Qtd_emprestimo %>
+                            </h6>
+                            <h6 class="card-text">Gênero:
+                                <% for (let j=0; j < genero_livro.length; j++) { %>
+                                    <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>
+                                        <%= genero_livro[j].Genero.Tipo %> |
                                             <% } %>
-                        </h6>
-                        <div class="botao">
-                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro"
-                                onclick="ClickUpdateLivro('<%= livro[i].IDLivro %>')">Editar</button>
-                            <button data-bs-toggle="modal" data-bs-target="#modalDelLivro"
-                                onclick="ClickDeleteLivro('<%= livro[i].IDLivro %>')">Excluir</button>
+                                                <% } %>
+                            </h6>
+                            <div class="botao">
+                                <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro"
+                                    onclick="ClickUpdateLivro('<%= livro[i].IDLivro %>')">Editar</button>
+                                <button data-bs-toggle="modal" data-bs-target="#modalDelLivro"
+                                    onclick="ClickDeleteLivro('<%= livro[i].IDLivro %>')">Excluir</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <% } %>
+                <hr>
+                <% } %>
+                <% } else { %>
+                    <div class="divh6">
+                        <h6 class="h6">Não há livros a serem exibidos...</h6>
+                    </div>
+                    <% } %>
+
+    </main>
 
     <footer>
         <div class="footer1">
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/Logo branca.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/Logo branca.png" alt="">@plotplit</p>
+                <p><img src="/img/Logo branca.png" alt="">@plotpit</p>
                 <p><img src="/img/Logo branca.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

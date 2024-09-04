@@ -20,13 +20,14 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img src="/img/Logo branca.png" alt="Logo" width="50" height="50"
                         class="d-inline-block align-text-top">
-                    PlotPlit Library
+                    PlotPit Library
                 </a>
                 <div id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -51,39 +52,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/updateUser" method="post">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label" >Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.Nome %>">
+                            <label for="exampleInputEmail1" class="form-label">Nome</label>
+                            <input type="text" name="nome" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.Nome %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" value="<%= user.CPF %>">
+                            <input type="text" name="cpf" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.CPF %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" value="<%= user.Telefone %>">
+                            <input type="text" name="telefone" class="form-control" id="telefone"
+                                aria-describedby="emailHelp" value="<%= user.Telefone %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" value="<%= user.Email %>">
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.Email %>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" value="<%= user.DataNascimento %>">
+                            <input type="date" name="data_nasc" class="form-control" aria-describedby="emailHelp"
+                                value="<%= user.DataNascimento %>">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" value="user.Genero">
+                        <select class="form-select" name="sexo" aria-label="Default select example" value="user.Genero">
                             <option selected value="1">Feminino</option>
                             <option value="2">Masculino</option>
                             <option value="3">Outro</option>
                         </select>
-                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Atualizar</button>
+                    <input type="submit" value="Atualizar">
+                    <input type="submit" value="Fechar">
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -124,17 +130,36 @@
         </div>
 
         <!-- Card de livro  -->
+        <% if(livros.length>=1){ %>
         <div class="livros row row-cols-1 row-cols-md-2 row-cols-lg-5 g-15">
-            <div class="col">
-                <div class="card">
-                    <img src="/img/comeca.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <button>Detalhes</button>
-                        <img src="/img/starv.png" alt="">
+                <% for(let i=0; i < livros.length; i++){ %>
+                    <div class="col">
+                        <div class="card">
+                            <img src="/img/<%=livros[i].Foto%>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <button>Detalhes</button>
+                                <form action="/favoritos" method="post" id="favoritosForm<%=livros[i].IDLivro%>">
+                                    <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"
+                                        style="display: none;">
+                                    <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
+                                        style="display: none;">
+                                    <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro ===
+                                        livros[i].IDLivro);
+                                        %>
+                                        <img id="img<%=livros[i].IDLivro%>" type="submit"
+                                            onclick="favoritar(<%=livros[i].IDLivro%>)"
+                                            src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                <% } %>
+    </div>
+            <% } else { %>
+                <div class="divh6">
+                    <h6 class="h6">Não há livros a serem exibidos...</h6>
                 </div>
-            </div>
-        </div>
+                <% } %>
     </main>
 
     <footer>
@@ -142,7 +167,7 @@
             <img src="/img/Logo branca.png" alt="">
             <div class="imgzinha">
                 <p><img src="/img/whatsapp.png" alt="">(41) 9 9750-4019</p>
-                <p><img src="/img/instagram.png" alt="">@plotplit</p>
+                <p><img src="/img/instagram.png" alt="">@plotpit</p>
                 <p><img src="/img/mail.png" alt="">biblio@bibliotecsd.com.br</p>
             </div>
         </div>

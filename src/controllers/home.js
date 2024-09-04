@@ -4,7 +4,6 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
-const db = require("../config/db");
 
 
 module.exports = {
@@ -15,7 +14,18 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user });
+            const livrosDestaque = await Livro.findAll({
+                where: { Destaque: "1" },
+                raw: true
+            });
+
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro', 'IDUsuario'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos : favoritos });
         }
         res.render("../views/index");
     },
@@ -27,8 +37,20 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/livros", { user: user });
+            const livros = await Livro.findAll({
+                attributes: ['IDLivro', 'Foto'],
+                raw: true
+            });
+
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render("../views/livros", { user: user, livros: livros, favoritos : favoritos });
         }
+
         res.render("../views/index");
     },
 
@@ -38,8 +60,21 @@ module.exports = {
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
+        
+            const livros = await Livro.findAll({
+                attributes: ['IDLivro', 'Foto'],
+                raw: true
+            });
 
-            return res.render("../views/favoritos", { user: user });
+            const favoritos = await Favorito.findAll({
+                where: { IDUsuario : user.IDUsuario },
+                include: [{
+                    model: Livro,
+                    attributes: ['Foto']
+                }]
+            })
+
+            return res.render("../views/favoritos", { user: user, favoritos : favoritos, livros : livros });
         }
         res.render("../views/index");
     },
@@ -51,13 +86,27 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/emprestimos", { user: user });
+            const emprestimo = await Emprestimo.findAll({
+                attributes: ['IDLivro', 'DataEmprestimo', 'DataDevolucao'],
+                where: { IDUsuario: req.session.IDUsuario },
+                include: [{
+                        model: Livro,
+                        attributes: ['Titulo', 'Foto']
+                    }]
+            });
+
+            return res.render("../views/emprestimos", { user: user, emprestimos : emprestimo });
         }
         res.render("../views/index");
     },
 
     async pagUsuariosADMGet(req, res) {
-        res.render('../views/usuariosADM');
+        const usuarios = await Usuario.findAll({
+            attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+            raw: true
+        })
+
+        res.render('../views/usuariosADM', { usuarios : usuarios });
     },
 
     async pagEmprestimosADMGet(req, res) {
