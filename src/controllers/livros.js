@@ -40,6 +40,38 @@ module.exports = {
 
         }
         res.redirect('/livrosADM');
+    },
+    
+    async deleteLivro(req, res) {
+        let id_livro = req.params.id; 
+        
+        await Livro.destroy({where:{IDLivro:id_livro}
+        });
+
+        res.redirect('/LivrosADM');
+    },
+
+    async updateLivro(req, res) {
+        const dados = req.body;
+        let id_livro = req.params.id; 
+
+        console.log(dados)
+        console.log(id_livro)
+
+        await Livro.update({
+            ISBN: dados.isbn,
+            Titulo: dados.titulo,
+            Autor: dados.autor,
+            Ano: dados.ano,
+            Descricao: dados.descricao,
+            // Foto: foto,
+            Disponibilidade: dados.disponibilidade,
+            Qts_emprestimo: dados.qts_emprestimo
+        },{
+            where:{IDLivro:id_livro}
+        });
+
+        res.redirect('/LivrosADM');
     }
 
 }
