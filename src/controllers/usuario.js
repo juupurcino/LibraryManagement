@@ -6,6 +6,22 @@ module.exports = {
     async createUser(req, res){
         const dados = req.body;
         
+        if(dados.admin){
+            await Usuario.create({
+                Nome: dados.nome,
+                CPF: dados.cpf,
+                DataNascimento: dados.data_nasc,
+                Telefone: dados.telefone,
+                Email: dados.email,
+                Genero: dados.sexo,
+                Senha: "123456",
+                Ativo: 1,
+                Admin: dados.admin
+            });
+
+            return
+        }
+
         await Usuario.create({
             Nome: dados.nome,
             CPF: dados.cpf,
@@ -19,6 +35,7 @@ module.exports = {
         });
         
         res.redirect('/');
+        
     },
     
     async verificarUser(req, res){

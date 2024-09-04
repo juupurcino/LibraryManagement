@@ -14,6 +14,7 @@ const emprestimo = require('./src/controllers/emprestimo');
 const favorito = require('./src/controllers/favoritos');
 
 route.get('/', home.pagInicialGet);
+route.get('/inicio', home.pagInicialGet);
 
 // Rotas do usuario (user)
 route.post('/login', usuario.verificarUser);
@@ -27,16 +28,18 @@ route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
 
 // Rotas do Emprestimo (ADM)
 route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
-route.post('/emprestimo', multer(config).single('foto'), emprestimo.createEmprestimo);
+route.post('/emprestimoADM', multer(config).single('foto'), emprestimo.createEmprestimo);
 
 // Rotas de Favoritos (user)
 route.get('/favoritos', home.pagFavoritosGet);
 route.post('/favoritos', favorito.createFavoritos);
 
-route.get('/inicio', home.pagInicialGet);
+// Rotas de CRUD Usuario (ADM)
+route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
+route.post('/registroADM', home.isAdmin, usuario.createUser);
+
 route.get('/livros', home.pagLivrosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);
-route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
 
 module.exports = route;
 

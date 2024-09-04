@@ -170,4 +170,22 @@ select {
     font-size: 1.5em;
 }
 
+.user{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.admin{
+    color: white;
+    padding: 0.3%;
+    margin-left: 3.5%;
+    background-color: rgb(172, 0, 0);
+    width: 10%;
+}
+
+.nomeUser{
+    background-color: #bbbbbb;
+    padding: 0.3%;
+}
 

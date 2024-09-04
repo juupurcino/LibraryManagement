@@ -100,7 +100,12 @@ module.exports = {
     },
 
     async pagUsuariosADMGet(req, res) {
-        res.render('../views/usuariosADM');
+        const usuarios = await Usuario.findAll({
+            attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+            raw: true
+        })
+
+        res.render('../views/usuariosADM', { usuarios : usuarios });
     },
 
     async pagEmprestimosADMGet(req, res) {
