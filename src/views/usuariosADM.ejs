@@ -189,7 +189,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="delUser">Excluir</button>
+                    <a type="button" id="delUser" class="btn btn-primary" href="">Excluir</a>
                 </div>
             </div>
         </div>
@@ -245,7 +245,7 @@
                 </div>
                 <div class="botao">
                     <button data-bs-toggle="modal" data-bs-target="#modalEdtUser">Editar</button>
-                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser" onclick="ClickDeleteUser('<%= usuarios[i].IDUsuario %>')">Excluir</button>
                 </div>
             </div>
         </div>

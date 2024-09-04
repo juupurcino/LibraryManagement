@@ -89,6 +89,18 @@ module.exports = {
         res.redirect('/');
     },
 
+    async deleteUser(req, res) {
+        let id_user = req.params.id; 
+
+        console.log(id_user)
+        
+        await Usuario.destroy({where:{IDUsuario:id_user}
+        
+        });
+
+        res.redirect('/');
+    },
+
     async logout(req, res) {
         req.session.destroy();
         res.redirect('/');      
