@@ -1,5 +1,3 @@
-const sequelize = require("sequelize");
-const db = require("../config/db");
 const Livro = require("../model/livro");
 const Generolivro = require("../model/generoLivro");
 
@@ -26,7 +24,7 @@ module.exports = {
             Descricao: dados.descricao,
             Foto: foto,
             Disponibilidade: 1,
-            Qts_emprestimo: 0
+            Qtd_emprestimo: 0
         });
 
 
@@ -55,20 +53,28 @@ module.exports = {
         const dados = req.body;
         let id_livro = req.params.id; 
 
-        console.log(dados)
-        console.log(id_livro)
-
         await Livro.update({
             ISBN: dados.isbn,
             Titulo: dados.titulo,
             Autor: dados.autor,
             Ano: dados.ano,
             Descricao: dados.descricao,
-            // Foto: foto,
             Disponibilidade: dados.disponibilidade,
-            Qts_emprestimo: dados.qts_emprestimo
+            Qtd_emprestimo: dados.qtd_emprestimo
         },{
             where:{IDLivro:id_livro}
+        });
+
+        res.redirect('/LivrosADM');
+    },
+    
+    async deleteLivro(req, res) {
+        let id_livro = req.params.id; 
+
+        console.log(id_livro)
+        
+        await Livro.destroy({where:{IDLivro:id_livro}
+        
         });
 
         res.redirect('/LivrosADM');
