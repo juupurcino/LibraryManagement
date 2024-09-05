@@ -4,7 +4,8 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
-
+const { Op, fn, col } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 module.exports = {
     async pagInicialGet(req, res) {
@@ -30,52 +31,168 @@ module.exports = {
         res.render("../views/index");
     },
 
-    async pagLivrosGet(req, res) {
+    async pagLivrosGet(req, res) { 
         if (req.session.IDUsuario) {
+
+            const dados = req.query;
+            const item = dados.pesquisa;
+            
+            let livroPesquisado;
+
+            if (item) {
+                console.log("Item:", item); // Adicione um log para verificar o valor de item
+                
+                livroPesquisado = await GeneroLivro.findAll({
+                    attributes: [
+                        [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                        [col('Livro.ISBN'), 'ISBN'],
+                        [col('Livro.Titulo'), 'Titulo'],
+                        [col('Livro.Autor'), 'Autor'],
+                        [col('Livro.Ano'), 'Ano'],
+                        [col('Livro.Descricao'), 'Descricao'],
+                        [col('Livro.Foto'), 'Foto'],
+                        [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                        [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+                    ],
+                    raw: true,
+                    include: [
+                        {
+                            model: Genero,
+                            attributes: [],
+                        },
+                        {
+                            model: Livro,
+                        }
+                    ],
+                    where: {
+                        [Op.or]: [
+                            {'$Livro.Autor$': { [Op.like]: `%${item}%` }},
+                            {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                            {'$Genero.Tipo$': { [Op.like]: `%${item}%` }}
+                        ]
+                    },
+                });
+                
+                console.log("Resultado da pesquisa:", livroPesquisado);
+            } else {
+                livroPesquisado = await Livro.findAll({
+                    attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                    raw: true
+                });
+            }
+            
+            const genero = await Genero.findAll({
+                attributes: ['IDGenero', 'Tipo'],
+                raw: true
+            });
+            
+            const genero_livro = await GeneroLivro.findAll({
+                attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
+                include: [{
+                    model: Genero,
+                    attributes: ['Tipo']
+                }]
+            });
+            
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-
-            const livros = await Livro.findAll({
-                attributes: ['IDLivro', 'Foto'],
-                raw: true
-            });
-
+            
             const favoritos = await Favorito.findAll({
                 attributes: ['IDLivro'],
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-
-            return res.render("../views/livros", { user: user, livros: livros, favoritos : favoritos });
+            
+            return res.render('../views/livros', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos });
         }
-
+        
         res.render("../views/index");
     },
 
     async pagFavoritosGet(req, res) {
         if (req.session.IDUsuario) {
+
+            const dados = req.query;
+            const item = dados.pesquisa;
+            
+            let livroPesquisado;
+
+            if (item) {
+                console.log("Item:", item); // Adicione um log para verificar o valor de item
+                
+                livroPesquisado = await GeneroLivro.findAll({
+                    attributes: [
+                        [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                        [col('Livro.ISBN'), 'ISBN'],
+                        [col('Livro.Titulo'), 'Titulo'],
+                        [col('Livro.Autor'), 'Autor'],
+                        [col('Livro.Ano'), 'Ano'],
+                        [col('Livro.Descricao'), 'Descricao'],
+                        [col('Livro.Foto'), 'Foto'],
+                        [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                        [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+                    ],
+                    raw: true,
+                    include: [
+                        {
+                            model: Genero,
+                            attributes: [],
+                        },
+                        {
+                            model: Livro,
+                        }
+                    ],
+                    where: {
+                        [Op.or]: [
+                            {'$Livro.Autor$': { [Op.like]: `%${item}%` }},
+                            {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                            {'$Genero.Tipo$': { [Op.like]: `%${item}%` }}
+                        ]
+                    },
+                });
+                
+                console.log("Resultado da pesquisa:", livroPesquisado);
+            } else {
+                livroPesquisado = await Livro.findAll({
+                    attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                    raw: true
+                });
+            }
+            
+            const genero = await Genero.findAll({
+                attributes: ['IDGenero', 'Tipo'],
+                raw: true
+            });
+            
+            const genero_livro = await GeneroLivro.findAll({
+                attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
+                include: [{
+                    model: Genero,
+                    attributes: ['Tipo']
+                }]
+            });
+            
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-        
-            const livros = await Livro.findAll({
-                attributes: ['IDLivro', 'Foto'],
-                raw: true
-            });
-
+            
             const favoritos = await Favorito.findAll({
-                where: { IDUsuario : user.IDUsuario },
-                include: [{
-                    model: Livro,
-                    attributes: ['Foto']
-                }]
-            })
-
-            return res.render("../views/favoritos", { user: user, favoritos : favoritos, livros : livros });
+                attributes: ['IDLivro'],
+                where: { IDUsuario: req.session.IDUsuario },
+                include: [
+                    {
+                        model: Livro,
+                        attributes: ['Titulo', 'Foto']
+                    }
+                ]
+            });
+            
+            return res.render('../views/favoritos', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos });
         }
+        
         res.render("../views/index");
     },
 
@@ -130,17 +247,57 @@ module.exports = {
     },
     
     async pagLivrosADMGet(req, res){
+        const dados = req.query;
+        const item = dados.pesquisa;
+    
+        let livroPesquisado;
+        if (item) {
+            console.log("Item:", item); // Adicione um log para verificar o valor de item
 
-        const livro = await Livro.findAll({
-            attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
-            raw: true 
-        });
-
+            livroPesquisado = await GeneroLivro.findAll({
+                attributes: [
+                    [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                    [col('Livro.ISBN'), 'ISBN'],
+                    [col('Livro.Titulo'), 'Titulo'],
+                    [col('Livro.Autor'), 'Autor'],
+                    [col('Livro.Ano'), 'Ano'],
+                    [col('Livro.Descricao'), 'Descricao'],
+                    [col('Livro.Foto'), 'Foto'],
+                    [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                    [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+                ],
+                raw: true,
+                include: [
+                    {
+                        model: Genero,
+                        attributes: [],
+                    },
+                    {
+                        model: Livro,
+                    }
+                ],
+                where: {
+                    [Op.or]: [
+                        {'$Livro.Autor$': { [Op.like]: `%${item}%` }},
+                        {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                        {'$Genero.Tipo$': { [Op.like]: `%${item}%` }}
+                    ]
+                },
+            });
+            
+            console.log("Resultado da pesquisa:", livroPesquisado);
+        } else {
+            livroPesquisado = await Livro.findAll({
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                raw: true
+            });
+        }
+    
         const genero = await Genero.findAll({
             attributes: ['IDGenero', 'Tipo'],
-            raw: true 
+            raw: true
         });
-
+    
         const genero_livro = await GeneroLivro.findAll({
             attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
             include: [{
@@ -148,9 +305,8 @@ module.exports = {
                 attributes: ['Tipo']
             }]
         });
-
-        res.render('../views/livrosADM', { genero : genero, livro : livro, genero_livro : genero_livro});
-
+        
+        return res.render('../views/livrosADM', { genero: genero, livro: livroPesquisado, genero_livro: genero_livro });
     },
 
     async isAdmin(req, res, next) {
