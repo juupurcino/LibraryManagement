@@ -25,6 +25,11 @@ const emprestimo = database.define('Emprestimo', {
     Multa: {
         type: Sequelize.FLOAT,
         allowNull: false
+    },
+
+    Devolvido: {
+        type: Sequelize.INTEGER,
+        allowNull: false
     }
 });
 

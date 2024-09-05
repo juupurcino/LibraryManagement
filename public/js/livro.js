@@ -68,3 +68,4 @@ function ClickDeleteLivro(id_Delete){
     
     button.href = `/DeleteLivro/${id_Delete}`;
 }
+
