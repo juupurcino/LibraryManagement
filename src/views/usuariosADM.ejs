@@ -77,9 +77,9 @@
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
                         <select class="form-select" aria-label="Default select example" name="sexo">
                             <option value="" disabled selected>Selecione o gênero</option>
-                            <option value="1">Feminino</option>
-                            <option value="2">Masculino</option>
-                            <option value="3">Outro</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Outro">Outro</option>
                         </select>
                         <label for="">Administrador
                             <div class="check">
@@ -118,59 +118,52 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
+                    <form action="/usuariosADM" method="post" id="UpdateUserADM">
+                        <div class="mb-3" >
                             <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome" id="updateNome">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" id="updateCpf">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp"
-                                name="telefone">
+                            <input type="text" class="form-control" aria-describedby="emailHelp"name="telefone" id="updateTel">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" id="updateEmail">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc" id="updateData">
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" name="sexo">
+                        <select class="form-select" aria-label="Default select example" name="sexo" id="updateGenero">
                             <option value="" disabled selected>Selecione o gênero</option>
-                            <option value="1">Feminino</option>
-                            <option value="2">Masculino</option>
-                            <option value="3">Outro</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Outro">Outro</option>
                         </select>
-                        <label for="">Administrador
+                        <label>Administrador
                             <div class="check">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault1"
-                                        value="0" checked>
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Não
-                                    </label>
+                                    <input class="form-check-input" type="radio" name="admin" id="nao" value="0">
+                                    <label class="form-check-label" for="nao">Não</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2"
-                                        value="1">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Sim
-                                    </label>
+                                    <input class="form-check-input" type="radio" name="admin" id="sim" value="1">
+                                    <label class="form-check-label" for="sim">Sim</label>
                                 </div>
                             </div>
-                        </label>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Editar</button>
-                </div>
+                        </label>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -218,16 +211,17 @@
         <div class="usuarios">
             <% for(let i = 0; i < usuarios.length; i++) { %>
                 <%if(usuarios[i].Admin == 1){ %>
-                    <h5 class="admin">ADMINISTRADOR</h5>
+                    <h5 class="admin" >ADMINISTRADOR</h5>
+                    <h5 id="userAdmin<%= usuarios[i].IDUsuario %>" style="display: none"><%= usuarios[i].Admin%></h5>
                     <% } %> 
                     <div class="user">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="nomeUser" class="card-title">Nome: <small class="text-body-secondary"><%= usuarios[i].Nome %></small></h5>
-                                <h5 class="card-title">CPF: <small class="text-body-secondary"><%= usuarios[i].CPF %></small></h5>
-                                <h5 class="card-title">Telefone: <small class="text-body-secondary"><%= usuarios[i].Telefone %></small></h5>
+                                <h5 class="nomeUser" class="card-title">Nome: <small class="text-body-secondary" id="userNome<%= usuarios[i].IDUsuario %>"><%= usuarios[i].Nome %></small></h5>
+                                <h5 class="card-title">CPF: <small class="text-body-secondary" id="userCpf<%= usuarios[i].IDUsuario %>"><%= usuarios[i].CPF %></small></h5>
+                                <h5 class="card-title">Telefone: <small class="text-body-secondary" id="userTel<%= usuarios[i].IDUsuario %>"><%= usuarios[i].Telefone %></small></h5>
                             </div>
                         </div>
                     </div>
@@ -236,16 +230,16 @@
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Email: <small class="text-body-secondary"><%= usuarios[i].Email %></small></h5>
-                                <h5 class="card-title">Gênero: <small class="text-body-secondary"><%= usuarios[i].Genero %></small></h5>
-                                <h5 class="card-title">Data ne nascimento: <small class="text-body-secondary"><%= usuarios[i].DataNascimento %></small></h5>
+                                <h5 class="card-title">Email: <small class="text-body-secondary" id="userEmail<%= usuarios[i].IDUsuario %>"><%= usuarios[i].Email %></small></h5>
+                                <h5 class="card-title">Gênero: <small class="text-body-secondary" id="userGenero<%= usuarios[i].IDUsuario %>"><%= usuarios[i].Genero %></small></h5>
+                                <h5 class="card-title">Data ne nascimento: <small class="text-body-secondary" id="userData<%= usuarios[i].IDUsuario %>"><%= usuarios[i].DataNascimento %></small></h5>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="botao">
-                    <button data-bs-toggle="modal" data-bs-target="#modalEdtUser">Editar</button>
-                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser" onclick="ClickDeleteUser('<%= usuarios[i].IDUsuario %>')">Excluir</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalEdtUser" onclick="ClickUpdateUser('<%= usuarios[i].IDUsuario %>')">Editar</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
                 </div>
             </div>
         </div>
@@ -266,6 +260,7 @@
         <p>Todos os direitos reservados a Plot Pit Livrarias.</p>
     </footer>
 
+    <script src="/js/user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

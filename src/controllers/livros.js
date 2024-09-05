@@ -70,8 +70,6 @@ module.exports = {
     
     async deleteLivro(req, res) {
         let id_livro = req.params.id; 
-
-        console.log(id_livro)
         
         await Livro.destroy({where:{IDLivro:id_livro}
         

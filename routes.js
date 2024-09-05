@@ -39,7 +39,8 @@ route.post('/favoritos', favorito.createFavoritos);
 // Rotas de CRUD Usuario (ADM)
 route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
 route.post('/registroADM', home.isAdmin, usuario.createUser);
-route.get('/DeleteUser/:id', usuario.deleteUser);
+route.post('/updateUsuarioADM/:id', usuario.updateUserADM);
+
 
 route.get('/livros', home.pagLivrosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);

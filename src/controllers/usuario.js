@@ -89,16 +89,26 @@ module.exports = {
         res.redirect('/');
     },
 
-    async deleteUser(req, res) {
-        let id_user = req.params.id; 
+    async updateUserADM(req, res){
+        const dados = req.body;
+        let id_user = req.params.id;
 
-        console.log(id_user)
+        console.log("editar");
         
-        await Usuario.destroy({where:{IDUsuario:id_user}
-        
+        await Usuario.update({
+            Nome: dados.nome,
+            CPF: dados.cpf,
+            DataNascimento: dados.data_nasc,
+            Telefone: dados.telefone,
+            Email: dados.email,
+            Genero: dados.sexo,
+            Ativo: 1,
+            Admin: dados.admin
+        },{
+            where: { IDUsuario: id_user }
         });
-
-        res.redirect('/');
+     
+        res.redirect('/usuariosADM');
     },
 
     async logout(req, res) {
