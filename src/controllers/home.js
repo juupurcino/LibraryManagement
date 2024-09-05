@@ -102,7 +102,7 @@ module.exports = {
 
     async pagUsuariosADMGet(req, res) {
         const usuarios = await Usuario.findAll({
-            attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+            attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
             raw: true
         })
 

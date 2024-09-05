@@ -40,7 +40,7 @@ route.post('/favoritos', favorito.createFavoritos);
 route.get('/usuariosADM', home.isAdmin, home.pagUsuariosADMGet);
 route.post('/registroADM', home.isAdmin, usuario.createUser);
 route.post('/updateUsuarioADM/:id', usuario.updateUserADM);
-
+route.get('/DeleteUser/:id', usuario.deleteUser);
 
 route.get('/livros', home.pagLivrosGet);
 route.get('/emprestimos', home.pagEmprestimosGet);

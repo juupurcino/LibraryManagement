@@ -209,9 +209,11 @@
 
         <!-- Cards de usuário  -->
         <div class="usuarios">
+            
             <% for(let i = 0; i < usuarios.length; i++) { %>
-                <%if(usuarios[i].Admin == 1){ %>
-                    <h5 class="admin" >ADMINISTRADOR</h5>
+                <%if(usuarios[i].Ativo == 1){ %>
+                    <%if(usuarios[i].Admin == 1){ %>
+                <h5 class="admin" >ADMINISTRADOR</h5>
                     <h5 id="userAdmin<%= usuarios[i].IDUsuario %>" style="display: none"><%= usuarios[i].Admin%></h5>
                     <% } %> 
                     <div class="user">
@@ -239,13 +241,13 @@
                 </div>
                 <div class="botao">
                     <button data-bs-toggle="modal" data-bs-target="#modalEdtUser" onclick="ClickUpdateUser('<%= usuarios[i].IDUsuario %>')">Editar</button>
-                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser">Excluir</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modalDelUser" onclick="ClickDeleteUser('<%= usuarios[i].IDUsuario %>')">Excluir</button>
                 </div>
             </div>
         </div>
         <hr>
         <% } %> 
-
+        <% } %> 
     </main>
 
     <footer>

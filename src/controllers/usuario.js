@@ -111,6 +111,18 @@ module.exports = {
         res.redirect('/usuariosADM');
     },
 
+    async deleteUser(req, res) {
+        let id_user= req.params.id; 
+        
+        await Usuario.update({
+            At0
+        },{
+            where: { IDUsuario: id_user }
+        });
+
+        res.redirect('/usuariosADM');
+    },
+
     async logout(req, res) {
         req.session.destroy();
         res.redirect('/');      
