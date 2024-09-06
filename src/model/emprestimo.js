@@ -13,12 +13,12 @@ const emprestimo = database.define('Emprestimo', {
     },
 
     DataEmprestimo: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
 
     DataDevolucao: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
 
@@ -29,7 +29,7 @@ const emprestimo = database.define('Emprestimo', {
 
     Devolvido: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     }
 });
 

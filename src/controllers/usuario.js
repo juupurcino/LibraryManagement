@@ -115,7 +115,7 @@ module.exports = {
         let id_user= req.params.id; 
         
         await Usuario.update({
-            At0
+            Ativo: 0
         },{
             where: { IDUsuario: id_user }
         });

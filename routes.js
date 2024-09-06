@@ -30,7 +30,9 @@ route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
 
 // Rotas do Emprestimo (ADM)
 route.get('/emprestimosADM', home.isAdmin, home.pagEmprestimosADMGet);
-route.post('/emprestimoADM', multer(config).single('foto'), emprestimo.createEmprestimo);
+route.post('/emprestimoADM', emprestimo.createEmprestimo);
+route.get('/Devolucao/:id', emprestimo.devolucao);
+route.post('/UpdateEmprestimo/:id', emprestimo.updateEmprestimo);
 
 // Rotas de Favoritos (user)
 route.get('/favoritos', home.pagFavoritosGet);

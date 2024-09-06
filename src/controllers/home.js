@@ -112,7 +112,7 @@ module.exports = {
     async pagEmprestimosADMGet(req, res) {
 
        const emprestimos = await Emprestimo.findAll({
-            attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+            attributes: ['IDEmprestimo', 'IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
             include: [
                 {
                     model: Usuario,
@@ -120,7 +120,7 @@ module.exports = {
                 },
                 {
                     model: Livro,
-                    attributes: ['Titulo', 'Foto']
+                    attributes: ['Titulo', 'Foto', 'ISBN']
                 }
             ]
         });
