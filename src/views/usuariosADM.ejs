@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/perfil.css" />
     <link rel="stylesheet" href="/css/headerADM.css" />
+    <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Livros ADM</title>
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -200,16 +202,24 @@
         <div class="pesquisas">
             <div class="pesquisar">
                 <h6>Pesquise</h6>
-                <div class="p">
-                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
-                    <div class="icon">
-                        <span class="material-symbols-outlined"> search </span>
+                    <form action="/usuariosADM" method="GET" id="pesquisarForm">
+                    <div class="p">
+                        <input type="text" name="pesquisa" placeholder="Pesquise por Nome, CPF, Email..." />
+                        <span class="material-symbols-outlined" onclick="pesquisar()" > search </span>
                     </div>
-                </div>
             </div>
+                
+            <div class="seletor">
+                <div class="select">
+                    <h6>Administrador</h6>
+                    <select onchange="this.form.submit()" name="adm">
+                        <option value="" selected>Todos</option>
+                        <option value="sim" <%= adm == 'sim' ? 'selected' : ''%>>Sim</option>
+                        <option value="nao" <%= adm == 'nao' ? 'selected' : ''%>>Não</option>
+                    </select>
+                </div>
+                </form>
 
-            <!-- Opção deletar usuário  -->
-            <div class="seletores-container">
                 <button data-bs-toggle="modal" data-bs-target="#modalAddUser">Adicionar Usuário</button>
             </div>
         </div>

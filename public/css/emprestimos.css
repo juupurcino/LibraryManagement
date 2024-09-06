@@ -13,72 +13,7 @@ main{
     flex-direction: column;
 }
 
-h6 {
-    font-size: 1.5em;
-    font-weight: 500;
-}
 
-input {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 300px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 0.5%;
-    
-}
-
-.icon {
-    background-color: #704214;
-    width: 33px;
-    color: white;
-    height: 33px;
-    border-radius: 10px;
-    margin-left: 5px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-}
-
-.pesquisar {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-}
-
-.pesquisas {
-    margin-left: 2%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 6%;
-    justify-content: space-between;
-    margin-right: 2%;
-}
-
-select {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 200px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 4px;
-    cursor: pointer;
-}
-
-
-.p {
-    display: flex;
-    flex-direction: row;
-}
-
-.seletores-container {
-    display: flex;
-    flex-direction: row;
-    gap: 2%; 
-}
 
 .card-body button{
     display: flex;
@@ -91,19 +26,6 @@ select {
     width: 10%;
     font-size: large;
     padding: 1%;
-}
-
-.seletores button{
-    border-radius: 7px;
-    color: white;
-    background-color: #704214;
-    border: none;
-    cursor: pointer;
-    font-size: large;
-    padding-right: 2%;
-    padding-left: 2%;
-    padding: 0.7%;
-    margin-top: 1%;
 }
 
 

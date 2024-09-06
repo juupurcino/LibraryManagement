@@ -4,7 +4,7 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
-const { Op, fn, col } = require('sequelize');
+const { Op, fn, col, where } = require('sequelize');
 const { Sequelize } = require('sequelize');
 
 module.exports = {
@@ -218,42 +218,265 @@ module.exports = {
     },
 
     async pagUsuariosADMGet(req, res) {
-        const usuarios = await Usuario.findAll({
-            attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
-            raw: true
-        })
+        const dados = req.query;
+        
+        const pesquisa = dados.pesquisa;
+        const adm = dados.adm;
 
-        res.render('../views/usuariosADM', { usuarios : usuarios });
+        let usuarios;
+
+        if(pesquisa && adm){
+            if(adm == 'sim'){
+                usuarios = await Usuario.findAll({
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    raw: true,
+                    where:
+                        {[Op.or] : [
+                            {'Nome' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Email' : {[Op.like]: `%${pesquisa}%`}},
+                            {'CPF' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Genero' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Telefone' : {[Op.like]: `%${pesquisa}%`}}
+                        ], 'Admin': 1}
+                });
+            } else {
+                usuarios = await Usuario.findAll({
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    raw: true,
+                    where:
+                        {[Op.or] : [
+                            {'Nome' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Email' : {[Op.like]: `%${pesquisa}%`}},
+                            {'CPF' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Genero' : {[Op.like]: `%${pesquisa}%`}},
+                            {'Telefone' : {[Op.like]: `%${pesquisa}%`}}
+                        ], 'Admin': 0}
+                });
+            }
+        } else if(pesquisa){
+            usuarios = await Usuario.findAll({
+                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                raw: true,
+                where:
+                    {[Op.or] : [
+                        {'Nome' : {[Op.like]: `%${pesquisa}%`}},
+                        {'Email' : {[Op.like]: `%${pesquisa}%`}},
+                        {'CPF' : {[Op.like]: `%${pesquisa}%`}},
+                        {'Genero' : {[Op.like]: `%${pesquisa}%`}},
+                        {'Telefone' : {[Op.like]: `%${pesquisa}%`}}
+                    ]}
+            });
+        } else if(adm){
+            if(adm == 'sim'){
+                usuarios = await Usuario.findAll({
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    raw: true,
+                    where: {'Admin': 1}
+                });
+            } else {
+                usuarios = await Usuario.findAll({
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    raw: true,
+                    where: {'Admin': 0}
+                });
+            }
+        } else {
+            usuarios = await Usuario.findAll({
+                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                raw: true
+            });
+        }
+
+
+        res.render('../views/usuariosADM', { usuarios : usuarios, adm : adm });
     },
 
     async pagEmprestimosADMGet(req, res) {
+        const dados = req.query;
 
-       const emprestimos = await Emprestimo.findAll({
-            attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
-            include: [
-                {
-                    model: Usuario,
-                    attributes: ['CPF']
+        const item = dados.pesquisa;
+        const classificacao = dados.classificacao;
+
+        let emprestimos;
+
+        if(item && classificacao){
+            if(classificacao == 'antigos'){
+                emprestimos = await Emprestimo.findAll({
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    include: [
+                        {
+                            model: Usuario,
+                            attributes: ['CPF']
+                        },
+                        {
+                            model: Livro,
+                            attributes: ['Titulo', 'Foto']
+                        }
+                    ],
+                    where: {
+                        [Op.or]: [
+                            {'$Usuario.CPF$': { [Op.like]: `%${item}%` }},
+                            {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                            {'IDEmprestimo': { [Op.like]: `%${item}%` }}
+                        ]
+                    },
+                    order: [
+                        ['DataEmprestimo', 'ASC']
+                    ]
+                });
+            }else{
+                emprestimos = await Emprestimo.findAll({
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    include: [
+                        {
+                            model: Usuario,
+                            attributes: ['CPF']
+                        },
+                        {
+                            model: Livro,
+                            attributes: ['Titulo', 'Foto']
+                        }
+                    ],
+                    where: {
+                        [Op.or]: [
+                            {'$Usuario.CPF$': { [Op.like]: `%${item}%` }},
+                            {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                            {'IDEmprestimo': { [Op.like]: `%${item}%` }}
+                        ]
+                    },
+                    order: [
+                        ['DataEmprestimo', 'DESC']
+                    ]
+                });
+            }
+        }else if(item){
+            emprestimos = await Emprestimo.findAll({
+                attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['CPF']
+                    },
+                    {
+                        model: Livro,
+                        attributes: ['Titulo', 'Foto']
+                    }
+                ],
+                where: {
+                    [Op.or]: [
+                        {'$Usuario.CPF$': { [Op.like]: `%${item}%` }},
+                        {'$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                        {'IDEmprestimo': { [Op.like]: `%${item}%` }}
+                    ]
                 },
-                {
-                    model: Livro,
-                    attributes: ['Titulo', 'Foto']
-                }
-            ]
-        });
+            });
+        }else if(classificacao){
+            if(classificacao == 'antigos'){
+                emprestimos = await Emprestimo.findAll({
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    include: [
+                        {
+                            model: Usuario,
+                            attributes: ['CPF']
+                        },
+                        {
+                            model: Livro,
+                            attributes: ['Titulo', 'Foto']
+                        }
+                    ],
+                    order: [
+                        ['DataEmprestimo', 'ASC']
+                    ]
+                });
+            }else{
+                emprestimos = await Emprestimo.findAll({
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    include: [
+                        {
+                            model: Usuario,
+                            attributes: ['CPF']
+                        },
+                        {
+                            model: Livro,
+                            attributes: ['Titulo', 'Foto']
+                        }
+                    ],
+                    order: [
+                        ['DataEmprestimo', 'DESC']
+                    ]
+                });
+            }
+        } else {
+            emprestimos = await Emprestimo.findAll({
+                attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['CPF']
+                    },
+                    {
+                        model: Livro,
+                        attributes: ['Titulo', 'Foto']
+                    }
+                ]
+            });
+        }
         
-        res.render('../views/emprestimosADM', { emprestimos: emprestimos });
+        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao });
         
     },
     
     async pagLivrosADMGet(req, res){
         const dados = req.query;
         const item = dados.pesquisa;
-    
-        let livroPesquisado;
-        if (item) {
-            console.log("Item:", item); // Adicione um log para verificar o valor de item
+        
+        const disp = dados.disponibilidade;
 
+        let livroPesquisado;
+        if (item && disp) {
+            livroPesquisado = await GeneroLivro.findAll({
+                attributes: [
+                    [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                    [col('Livro.ISBN'), 'ISBN'],
+                    [col('Livro.Titulo'), 'Titulo'],
+                    [col('Livro.Autor'), 'Autor'],
+                    [col('Livro.Ano'), 'Ano'],
+                    [col('Livro.Descricao'), 'Descricao'],
+                    [col('Livro.Foto'), 'Foto'],
+                    [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                    [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+                ],
+                raw: true,
+                include: [
+                    {
+                        model: Genero,
+                        attributes: [],
+                    },
+                    {
+                        model: Livro,
+                    }
+                ],
+                where: {
+                    [Op.and]: [
+                        {
+                            [Op.or]: [
+                                { '$Livro.Autor$': { [Op.like]: `%${item}%` }},
+                                { '$Livro.Titulo$': { [Op.like]: `%${item}%` }},
+                                { '$Genero.Tipo$': { [Op.like]: `%${item}%` }}
+                            ]
+                        },
+                        disp == 'disp' ? { '$Livro.Disponibilidade$': 1 } : {}
+                    ]
+                },
+            });
+            
+        } else if (disp) {
+            livroPesquisado = await Livro.findAll({
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                raw: true,
+                where: {...(disp === 'disp' ? { 'Disponibilidade': 1 } : { 'Disponibilidade': 0 })}
+            });
+        } else if (item) {
             livroPesquisado = await GeneroLivro.findAll({
                 attributes: [
                     [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
@@ -284,9 +507,9 @@ module.exports = {
                     ]
                 },
             });
-            
-            console.log("Resultado da pesquisa:", livroPesquisado);
-        } else {
+        }
+        
+        else {
             livroPesquisado = await Livro.findAll({
                 attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
                 raw: true
@@ -306,7 +529,7 @@ module.exports = {
             }]
         });
         
-        return res.render('../views/livrosADM', { genero: genero, livro: livroPesquisado, genero_livro: genero_livro });
+        return res.render('../views/livrosADM', { genero: genero, livro: livroPesquisado, genero_livro: genero_livro, disponibilidade: disp });
     },
 
     async isAdmin(req, res, next) {
