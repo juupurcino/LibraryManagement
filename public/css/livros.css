@@ -18,6 +18,10 @@
     margin-top: 5%;
 }
 
+button:hover{
+    background-color: #704214d7;
+}
+
 .col {
     padding: 0;
     display: flex;

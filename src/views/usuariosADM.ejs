@@ -199,7 +199,7 @@
 
     <main>
         <!-- Barra de pesquisa  -->
-        <div class="pesquisas">
+        <div class="filtro">
             <div class="pesquisar">
                 <h6>Pesquise</h6>
                     <form action="/usuariosADM" method="GET" id="pesquisarForm">
@@ -217,8 +217,8 @@
                         <option value="sim" <%= adm == 'sim' ? 'selected' : ''%>>Sim</option>
                         <option value="nao" <%= adm == 'nao' ? 'selected' : ''%>>Não</option>
                     </select>
+                    </form>
                 </div>
-                </form>
 
                 <button data-bs-toggle="modal" data-bs-target="#modalAddUser">Adicionar Usuário</button>
             </div>

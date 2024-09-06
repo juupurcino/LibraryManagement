@@ -20,9 +20,10 @@
 
 }
 
-.material-symbols-outlined{
-    color: white;
+button:hover{
+    background-color: #704214d7;
 }
+
 .adm {
 
     background-color: #8AA88A;

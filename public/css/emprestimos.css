@@ -13,7 +13,9 @@ main{
     flex-direction: column;
 }
 
-
+button:hover{
+    background-color: #704214d7;
+}
 
 .card-body button{
     display: flex;

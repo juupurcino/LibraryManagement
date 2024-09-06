@@ -465,7 +465,7 @@ module.exports = {
                                 { '$Genero.Tipo$': { [Op.like]: `%${item}%` }}
                             ]
                         },
-                        disp == 'disp' ? { '$Livro.Disponibilidade$': 1 } : {}
+                        disp == 'disp' ? { '$Livro.Disponibilidade$': 1 } : { '$Livro.Disponibilidade$': 0 }
                     ]
                 },
             });

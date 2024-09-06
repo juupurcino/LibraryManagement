@@ -101,12 +101,14 @@
 
             <!-- Barra de relevância  -->
             <div class="seletor">
-                <h6>Relevância</h6>
-                    <select onchange="this.form.submit()" name="classificacao">
-                        <option value="recentes" <%= classificacao == 'recentes' ? 'selected' : ''%>>Data: mais recentes</option>
-                        <option value="antigos" <%= classificacao == 'antigos' ? 'selected' : ''%>>Data: mais antigos</option>
-                    </select>
-                </form>
+                <div class="select">
+                    <h6>Relevância</h6>
+                        <select onchange="this.form.submit()" name="classificacao">
+                            <option value="recentes" <%= classificacao == 'recentes' ? 'selected' : ''%>>Data: mais recentes</option>
+                            <option value="antigos" <%= classificacao == 'antigos' ? 'selected' : ''%>>Data: mais antigos</option>
+                        </select>
+                    </form>
+                </div>
 
                 <!-- Botão adicionar empréstimo  -->
                 <button data-bs-toggle="modal" data-bs-target="#modalAddEmp">Adicionar empréstimo</button>

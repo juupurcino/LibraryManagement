@@ -1,82 +1,105 @@
 
-.seletores button{
-    border-radius: 7px;
-    color: white;
-    background-color: #704214;
-    border: none;
-    cursor: pointer;
-    font-size: large;
-    padding-right: 2%;
-    padding-left: 2%;
-    padding: 0.7%;
-    margin-top: 1%;
-}
-
-
-.seletores-container {
+.filtro{
     display: flex;
     flex-direction: row;
-    gap: 2%; 
-}
-
-
-h6 {
-    font-size: 1.5em;
-    font-weight: 500;
-}
-
-input {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 300px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 0.5%;
-    
-}
-
-.icon {
-    background-color: #704214;
-    width: 33px;
-    color: white;
-    height: 33px;
-    border-radius: 10px;
-    margin-left: 5px;
-    display: flex;
-    cursor: pointer;
     align-items: center;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2%;
 }
 
-.pesquisar {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
+.filtro h6{
+    font-size: 1.5em;
 }
 
-.pesquisas {
-    margin-left: 2%;
+.pesquisar{
+    width: 70%;
+}
+
+.seletor{
+    width: 30%;
     display: flex;
     flex-direction: row;
-    margin-top: 6%;
-    justify-content: space-between;
+    margin-left: 2%;
+    align-items: end;
+}
+
+.select{
+    width: 50%;
     margin-right: 2%;
 }
 
-select {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 200px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 4px;
-    cursor: pointer;
+.select select{
+    width: 100%;
+    padding: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #704214;
 }
 
+.select select:hover{
+    border-bottom: 2px solid #46220F;
+}
 
-.p {
+.select select:focus {
+    border-bottom: 3px solid #704214;
+    outline: none; 
+    box-shadow: none;
+}
+
+.seletor button{
+    width: 50%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #704214;
+    color: white;
+    margin-left: 2%;
+}
+
+.seletor button:hover{
+    background-color: #704214d7;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.p{
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.p input{
+    padding: 5px;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #704214;
+}
+
+.p input:hover{
+    border-bottom: 2px solid #46220F;
+}
+
+.p input:focus {
+    border-bottom: 3px solid #704214;
+    outline: none; 
+    box-shadow: none;
+}
+
+.p span{
+    color: #704214;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.p span:hover{
+    background-color: #70421450;
+    border-radius: 100%;
 }
