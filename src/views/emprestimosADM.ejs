@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/headerADM.css" />
     <link rel="stylesheet" href="/css/perfil.css" />
+    <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Emprestimos ADM</title>
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -87,25 +89,26 @@
     <main>
 
         <!-- Barra de pesquisa  -->
-        <div class="pesquisas">
+        <div class="filtro">
             <div class="pesquisar">
                 <h6>Pesquise</h6>
-                <div class="p">
-                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
-                    <div class="icon">
-                        <span class="material-symbols-outlined"> search </span>
+                <form action="/emprestimosADM" method="GET" id="pesquisarForm">
+                    <div class="p">
+                        <input type="text" name="pesquisa" placeholder="Pesquise por livro, CPF, código do empréstimo..." />
+                        <span class="material-symbols-outlined" onclick="pesquisar()" > search </span>
                     </div>
-                </div>
             </div>
 
             <!-- Barra de relevância  -->
-            <div class="seletores">
-                <h6>Relevância</h6>
-                <select name="genero">
-                    <option value="all" selected>Todos</option>
-                    <option value="genre1">Gênero 1</option>
-                    <option value="genre2">Gênero 2</option>
-                </select>
+            <div class="seletor">
+                <div class="select">
+                    <h6>Relevância</h6>
+                        <select onchange="this.form.submit()" name="classificacao">
+                            <option value="recentes" <%= classificacao == 'recentes' ? 'selected' : ''%>>Data: mais recentes</option>
+                            <option value="antigos" <%= classificacao == 'antigos' ? 'selected' : ''%>>Data: mais antigos</option>
+                        </select>
+                    </form>
+                </div>
 
                 <!-- Botão adicionar empréstimo  -->
                 <button data-bs-toggle="modal" data-bs-target="#modalAddEmp">Adicionar empréstimo</button>

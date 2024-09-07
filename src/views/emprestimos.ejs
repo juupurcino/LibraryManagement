@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/perfil.css" />
+    <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Meus Emprestimos</title>
 </head>
 
@@ -91,25 +92,19 @@
     <main>
 
         <!-- Barra de pesquisa  -->
-        <div class="pesquisas">
-            <div class="pesquisar">
-                <h6>Pesquise</h6>
-                <div class="p">
-                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
-                    <div class="icon">
-                        <span class="material-symbols-outlined"> search </span>
-                    </div>
-                </div>
-            </div>
+        <div class="filtro">
+            <div class="pesquisar"></div>
 
             <!-- Barra de relevância  -->
-            <div class="seletores">
+            <div class="seletor">
+                <div class="select">
                 <h6>Relevância</h6>
-                <select name="genero">
-                    <option value="all" selected>Todos</option>
-                    <option value="genre1">Gênero 1</option>
-                    <option value="genre2">Gênero 2</option>
-                </select>
+                    <select name="genero">
+                        <option value="all" selected>Todos</option>
+                        <option value="genre1">Gênero 1</option>
+                        <option value="genre2">Gênero 2</option>
+                    </select>
+                </div>
             </div>
         </div>
 

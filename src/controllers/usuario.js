@@ -43,11 +43,11 @@ module.exports = {
         
         const usuarios = await Usuario.findOne({
             raw: true,
-            attributes: ['IDUsuario', 'Email', 'Senha', 'Admin'],
+            attributes: ['IDUsuario', 'Email', 'Senha', 'Admin', 'Ativo'],
             where: { Email : dados.email_login  }
         });
         
-        if (usuarios) {
+        if (usuarios && usuarios.Ativo == 1) {
             if (dados.senha_login == usuarios.Senha) {
                 
                 req.session.IDUsuario = usuarios.IDUsuario;
