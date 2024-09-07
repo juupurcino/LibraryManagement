@@ -4,17 +4,21 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
+const { Op } = require("sequelize");
 
 
 module.exports = {
     async pesquisarLivro(req, res){
-        const dados = req.body;
+        const dados = req.query;
         const item = dados.itemPesquisado;
 
         if(item){
             const livroPesquisado = await Livro.findAll({
-                attributes: ['Titulo', 'Autor', 'Genero'],
-                where: ({ Titulo : item, Autor : item, Genero : item })
+                attributes: ['Titulo', 'Autor'],
+                [Op.or]: [
+                    { Titulo: { [Op.like]: `%${item}%` } },
+                    { Autor: { [Op.like]: `%${item}%` } }
+                ]
             });
 
             const genero = await Genero.findAll({
