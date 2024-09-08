@@ -217,6 +217,15 @@ module.exports = {
         res.render("../views/index");
     },
 
+    // async pagUsuariosADMGet(req, res) {
+    //     const usuarios = await Usuario.findAll({
+    //         attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
+    //         raw: true
+    //     })
+
+    //     res.render('../views/usuariosADM', { usuarios : usuarios, adm : true });
+    // },
+
     async pagUsuariosADMGet(req, res) {
         const dados = req.query;
         
@@ -228,7 +237,7 @@ module.exports = {
         if(pesquisa && adm){
             if(adm == 'sim'){
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where:
                         {[Op.or] : [
@@ -241,7 +250,7 @@ module.exports = {
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where:
                         {[Op.or] : [
@@ -255,7 +264,7 @@ module.exports = {
             }
         } else if(pesquisa){
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true,
                 where:
                     {[Op.or] : [
@@ -269,20 +278,20 @@ module.exports = {
         } else if(adm){
             if(adm == 'sim'){
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: {'Admin': 1}
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: {'Admin': 0}
                 });
             }
         } else {
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true
             });
         }
