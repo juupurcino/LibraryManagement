@@ -218,17 +218,10 @@ module.exports = {
     },
 
     async pagUsuariosADMGet(req, res) {
-<<<<<<< HEAD
-        const usuarios = await Usuario.findAll({
-            attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
-            raw: true
-        })
-=======
         const dados = req.query;
         
         const pesquisa = dados.pesquisa;
         const adm = dados.adm;
->>>>>>> mari-ana
 
         let usuarios;
 
@@ -301,21 +294,6 @@ module.exports = {
     async pagEmprestimosADMGet(req, res) {
         const dados = req.query;
 
-<<<<<<< HEAD
-       const emprestimos = await Emprestimo.findAll({
-            attributes: ['IDEmprestimo', 'IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
-            include: [
-                {
-                    model: Usuario,
-                    attributes: ['CPF']
-                },
-                {
-                    model: Livro,
-                    attributes: ['Titulo', 'Foto', 'ISBN']
-                }
-            ]
-        });
-=======
         const item = dados.pesquisa;
         const classificacao = dados.classificacao;
 
@@ -443,7 +421,6 @@ module.exports = {
                 ]
             });
         }
->>>>>>> mari-ana
         
         res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao });
         
