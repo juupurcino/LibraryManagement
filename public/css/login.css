@@ -14,6 +14,10 @@
     border-radius: 5px;
 }
 
+button:hover{
+    background-color: #704214d7;
+}
+
 .cardLogin{
 
     display: flex;

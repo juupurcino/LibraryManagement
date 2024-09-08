@@ -38,3 +38,8 @@ function favoritar(id) {
     var form = document.getElementById('favoritosForm' + id);
     form.submit();
 }
+
+function pesquisar() {
+    var form = document.getElementById('pesquisarForm');
+    form.submit();
+}

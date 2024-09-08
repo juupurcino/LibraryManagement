@@ -61,6 +61,10 @@ main h5{
     margin-top: 3%;
 }
 
+button:hover{
+    background-color: #704214d7;
+}
+
 .card-header{
     display: flex;
     align-items: flex-end;

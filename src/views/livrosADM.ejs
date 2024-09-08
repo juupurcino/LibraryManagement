@@ -9,17 +9,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link
+        <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="../../css/livrosADM.css" />
-    <link rel="stylesheet" href="../../css/footer.css" />
-    <link rel="stylesheet" href="../../css/headerADM.css" />
-    <link rel="stylesheet" href="../../css/perfil.css" />
+        <link rel="stylesheet" href="../../css/livrosADM.css" />
+        <link rel="stylesheet" href="../../css/footer.css" />
+        <link rel="stylesheet" href="../../css/headerADM.css" />
+        <link rel="stylesheet" href="../../css/perfil.css" />
+        <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Livros ADM</title>
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -97,8 +99,7 @@
                                             <% } %>
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar
-                                    mais gênero</button>
+                                <button type="button" class="btn btn-secondary mt-2" onclick="adcgenero()">Adicionar mais gênero</button>
                             </div>
                             <label for="">Destaque
                                 <div class="check">
@@ -197,21 +198,28 @@
 
 
     <main>
-
         <!-- Barra de pesquisa  -->
-        <div class="pesquisas">
+        <div class="filtro">
             <div class="pesquisar">
                 <h6>Pesquise</h6>
-                <div class="p">
-                    <input type="text" placeholder="Pesquise por livro, autor, gênero...." />
-                    <div class="icon">
-                        <span class="material-symbols-outlined"> search </span>
+                <form action="/livrosADM" method="GET" id="pesquisarForm">
+                    <div class="p">
+                        <input type="text" name="pesquisa" placeholder="Pesquise por livro, autor, gênero...." />
+                        <span class="material-symbols-outlined" onclick="pesquisar()" > search </span>
                     </div>
-                </div>
             </div>
-
-            <!-- Opção de adcionar livro  -->
-            <div class="seletores-container">
+                
+                <!-- Opção de adcionar livro  -->
+            <div class="seletor">
+                <div class="select">
+                    <h6>Status</h6>
+                        <select onchange="this.form.submit()" name="disponibilidade">
+                            <option value="" selected>Todos</option>
+                            <option value="disp" <%= disponibilidade == 'disp' ? 'selected' : ''%>>Disponível</option>
+                            <option value="indisp" <%= disponibilidade == 'indisp' ? 'selected' : ''%>>Indisponível</option>
+                        </select>
+                    </form>
+                </div>
                 <button data-bs-toggle="modal" data-bs-target="#modalAddLivro">Adicionar Livro</button>
             </div>
         </div>
