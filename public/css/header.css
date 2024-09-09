@@ -69,3 +69,21 @@
 .navbar a:hover::after {
     width: 100%; /* Expande até 100% na interação */
 }
+
+
+.modoescuro{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    padding: 1%;
+    z-index: 1000;
+}
+
+.modoescuro span{
+    background-color: #643c26;
+    color: white;
+    padding: 0.2%;
+    border-radius: 100%;
+    cursor: pointer;
+}

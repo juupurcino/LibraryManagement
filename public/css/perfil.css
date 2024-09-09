@@ -87,19 +87,3 @@ h1{
     justify-content: center;
 }
 
-
-.modoescuro{
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    position: fixed;
-    padding: 1%;
-}
-
-.modoescuro span{
-    background-color: #643c26;
-    color: white;
-    padding: 0.2%;
-    border-radius: 100%;
-    cursor: pointer;
-}
