@@ -9,6 +9,10 @@ const { Sequelize } = require('sequelize');
 
 module.exports = {
     async pagInicialGet(req, res) {
+        
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
@@ -26,12 +30,15 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos : favoritos });
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos : favoritos, successMessage: successMessage });
         }
         res.render("../views/index");
     },
 
     async pagLivrosGet(req, res) { 
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         if (req.session.IDUsuario) {
 
             const dados = req.query;
@@ -105,13 +112,16 @@ module.exports = {
                 raw: true
             });
             
-            return res.render('../views/livros', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos });
+            return res.render('../views/livros', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos, successMessage: successMessage });
         }
         
         res.render("../views/index");
     },
 
     async pagFavoritosGet(req, res) {
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         if (req.session.IDUsuario) {
 
             const dados = req.query;
@@ -190,13 +200,16 @@ module.exports = {
                 ]
             });
             
-            return res.render('../views/favoritos', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos });
+            return res.render('../views/favoritos', { user: user, genero: genero, livros: livroPesquisado, genero_livro: genero_livro, favoritos : favoritos, successMessage: successMessage });
         }
         
         res.render("../views/index");
     },
 
     async pagEmprestimosGet(req, res) {
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
@@ -212,12 +225,14 @@ module.exports = {
                     }]
             });
 
-            return res.render("../views/emprestimos", { user: user, emprestimos : emprestimo });
+            return res.render("../views/emprestimos", { user: user, emprestimos : emprestimo, successMessage: successMessage });
         }
         res.render("../views/index");
     },
 
     async pagUsuariosADMGet(req, res) {
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
 
         const dados = req.query;
         
@@ -289,10 +304,13 @@ module.exports = {
         }
 
 
-        res.render('../views/usuariosADM', { usuarios : usuarios, adm : adm });
+        res.render('../views/usuariosADM', { usuarios : usuarios, adm : adm, successMessage: successMessage});
     },
 
     async pagEmprestimosADMGet(req, res) {
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         const dados = req.query;
 
         const item = dados.pesquisa;
@@ -423,11 +441,14 @@ module.exports = {
             });
         }
         
-        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao });
+        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage });
         
     },
     
     async pagLivrosADMGet(req, res){
+        let successMessage = req.session.successMessage || null;
+        req.session.successMessage = null;
+
         const dados = req.query;
         const item = dados.pesquisa;
         
@@ -530,7 +551,7 @@ module.exports = {
             }]
         });
         
-        return res.render('../views/livrosADM', { genero: genero, livro: livroPesquisado, genero_livro: genero_livro, disponibilidade: disp });
+        return res.render('../views/livrosADM', { genero: genero, livro: livroPesquisado, genero_livro: genero_livro, disponibilidade: disp, successMessage: successMessage });
     },
 
     async isAdmin(req, res, next) {

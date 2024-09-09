@@ -14,7 +14,7 @@ function verSenha() {
 function verSenha2() {
     let input = document.getElementById("inpute2");
     let span = document.getElementById("span2");
-
+    
     if(input.type == "text"){
         input.type = "password";
         span.innerHTML = "visibility_off";
@@ -42,4 +42,14 @@ function favoritar(id) {
 function pesquisar() {
     var form = document.getElementById('pesquisarForm');
     form.submit();
+}
+
+function mudarTema() {
+    let span = document.getElementById("tema");
+
+    if(span.innerHTML == "wb_sunny"){
+        span.innerHTML = "bedtime";
+    }else{
+        span.innerHTML = "wb_sunny";
+    }
 }
