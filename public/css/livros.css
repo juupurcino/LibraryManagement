@@ -18,6 +18,18 @@
     margin-top: 5%;
 }
 
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+
 button:hover{
     background-color: #704214d7;
 }

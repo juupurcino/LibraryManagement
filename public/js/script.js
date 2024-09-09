@@ -53,3 +53,24 @@ function mudarTema() {
         span.innerHTML = "wb_sunny";
     }
 }
+
+function mudarTema() {
+    const body = document.body;
+    const temaIcon = document.getElementById('tema');
+    const isDarkMode = body.classList.toggle('dark-mode');
+
+    // Atualiza o ícone com base no tema
+    temaIcon.textContent = isDarkMode ? 'light_mode' : 'bedtime';
+
+    // Armazena a preferência no localStorage
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+// Carrega o tema armazenado quando a página é carregada
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('tema').textContent = 'light_mode';
+    }
+});
+

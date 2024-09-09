@@ -32,7 +32,7 @@ module.exports = {
 
             return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos : favoritos, successMessage: successMessage });
         }
-        res.render("../views/index");
+        res.render("../views/index", { successMessage: successMessage });
     },
 
     async pagLivrosGet(req, res) { 

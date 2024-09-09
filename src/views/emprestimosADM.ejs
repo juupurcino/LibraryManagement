@@ -180,9 +180,9 @@
         </div>
 
         <!-- Card de livro  -->
-        <div class="card mb-3">
-            <%if (emprestimos.length >= 1){%>
-            <% for(let i = 0; i < emprestimos.length; i++){ 
+        <% if (emprestimos.length >= 1) { %>
+    <div class="card mb-3">
+            <% for (let i = 0; i < emprestimos.length; i++) {
                 var dataAtual = new Date();
 
                 // Calcule a diferença em dias
@@ -191,37 +191,36 @@
 
                 // Formate a quantidade de dias restantes
                 var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
-                %>
+            %>
 
-                <%if (emprestimos[i].Devolvido != 1){ %>
-                    <div class="carde row g-0">
-                        <img src="/img/<%=emprestimos[i].Livro.Foto%>" class="img-fluid rounded-start" alt="...">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
-                                <h3 class="card-title">ISBN: <small class="text-body-secondary" id="empIsbn<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].Livro.ISBN %></small></h3>
-                                <h4 class="card-text">Usuário: <small class="text-body-primary" id="empCpf<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].Usuario.CPF %></small></h4>
-                                <h5 class="card-title">Data de Empréstimo: <small class="text-body-secondary" id="empDataE<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].DataEmprestimo%></small></h5>
-                                <h5 class="card-title">Data de Devolução: <small class="text-body-secondary" id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].DataDevolucao%></small></h5>
-                                <p class="card-text"><small id="empMulta<%= emprestimos[i].IDEmprestimo %>" class="text-body-secondary">Multa por atrasado: <%= emprestimos[i].Multa %></small>
-                                <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small></p>
-                                <div class="buttons">
-                                    <button data-bs-toggle="modal" data-bs-target="#modalDevolucao" onclick="ClickDevolucao('<%= emprestimos[i].IDEmprestimo %>')">Realizar devolução</button>
-                                    <button data-bs-toggle="modal" data-bs-target="#modalEdtEmprestimo" onclick="ClickUpdateEmprestimo('<%= emprestimos[i].IDEmprestimo %>')">Editar</button>
-                                </div>
+            <% if (emprestimos[i].Devolvido != 1) { %>
+                <div class="carde row g-0">
+                    <img src="/img/<%= emprestimos[i].Livro.Foto %>" class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
+                            <h5 class="card-title">ISBN: <small class="text-body-secondary" id="empIsbn<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].Livro.ISBN %></small></h5>
+                            <h4 class="card-text">Usuário: <small class="text-body-primary" id="empCpf<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].Usuario.CPF %></small></h4>
+                            <h5 class="card-title">Data de Empréstimo: <small class="text-body-secondary" id="empDataE<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataEmprestimo %></small></h5>
+                            <h5 class="card-title">Data de Devolução: <small class="text-body-secondary" id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataDevolucao %></small></h5>
+                            <p class="card-text"><small id="empMulta<%= emprestimos[i].IDEmprestimo %>" class="text-body-secondary">Multa por atrasado: <%= emprestimos[i].Multa %></small></p>
+                            <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados %></small></p>
+                            <div class="buttons">
+                                <button data-bs-toggle="modal" data-bs-target="#modalDevolucao" onclick="ClickDevolucao('<%= emprestimos[i].IDEmprestimo %>')">Realizar devolução</button>
+                                <button data-bs-toggle="modal" data-bs-target="#modalEdtEmprestimo" onclick="ClickUpdateEmprestimo('<%= emprestimos[i].IDEmprestimo %>')">Editar</button>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                <% } %>
-            <% } %>
-            <% } else { %>
-                <div class="divh6">
-                    <h6 class="h6">Não há empréstimos a serem exibidos...</h6>
                 </div>
-                <% } %>
-        </div>
-
+                <hr>
+            <% } %>
+            <% } %>
+    </div>
+        <% } else { %>
+            <div class="divh6">
+                <h6 class="h6">Não há empréstimos a serem exibidos...</h6>
+            </div>
+        <% } %>
     </main>
 
     <footer>

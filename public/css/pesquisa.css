@@ -103,3 +103,51 @@
     background-color: #70421450;
     border-radius: 100%;
 }
+
+/* DARK MODE */
+
+body.dark-mode input {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 2px solid white;
+}
+
+body.dark-mode select {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 2px solid white;
+}
+
+body.dark-mode select option {
+    background-color: transparent;
+    color: #000000;
+    border-bottom: 2px solid white;
+}
+
+body.dark-mode span {
+    color: #fff;
+}
+
+body.dark-mode input:hover {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid white;
+}
+
+body.dark-mode input:focus {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid white;
+}
+
+body.dark-mode select:hover {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid white;
+}
+
+body.dark-mode select:focus {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid white;
+}
