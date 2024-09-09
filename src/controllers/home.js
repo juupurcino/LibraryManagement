@@ -204,7 +204,7 @@ module.exports = {
             });
 
             const emprestimo = await Emprestimo.findAll({
-                attributes: ['IDLivro', 'DataEmprestimo', 'DataDevolucao'],
+                attributes: ['IDEmprestimo', 'IDLivro', 'DataEmprestimo', 'DataDevolucao'],
                 where: { IDUsuario: req.session.IDUsuario },
                 include: [{
                         model: Livro,
@@ -218,24 +218,18 @@ module.exports = {
     },
 
     async pagUsuariosADMGet(req, res) {
-<<<<<<< HEAD
-        const usuarios = await Usuario.findAll({
-            attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
-            raw: true
-        })
-=======
+
         const dados = req.query;
         
         const pesquisa = dados.pesquisa;
         const adm = dados.adm;
->>>>>>> mari-ana
 
         let usuarios;
 
         if(pesquisa && adm){
             if(adm == 'sim'){
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where:
                         {[Op.or] : [
@@ -248,7 +242,7 @@ module.exports = {
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where:
                         {[Op.or] : [
@@ -262,7 +256,7 @@ module.exports = {
             }
         } else if(pesquisa){
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true,
                 where:
                     {[Op.or] : [
@@ -276,20 +270,20 @@ module.exports = {
         } else if(adm){
             if(adm == 'sim'){
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: {'Admin': 1}
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: {'Admin': 0}
                 });
             }
         } else {
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true
             });
         }
@@ -301,21 +295,6 @@ module.exports = {
     async pagEmprestimosADMGet(req, res) {
         const dados = req.query;
 
-<<<<<<< HEAD
-       const emprestimos = await Emprestimo.findAll({
-            attributes: ['IDEmprestimo', 'IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
-            include: [
-                {
-                    model: Usuario,
-                    attributes: ['CPF']
-                },
-                {
-                    model: Livro,
-                    attributes: ['Titulo', 'Foto', 'ISBN']
-                }
-            ]
-        });
-=======
         const item = dados.pesquisa;
         const classificacao = dados.classificacao;
 
@@ -324,7 +303,7 @@ module.exports = {
         if(item && classificacao){
             if(classificacao == 'antigos'){
                 emprestimos = await Emprestimo.findAll({
-                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                     include: [
                         {
                             model: Usuario,
@@ -332,7 +311,7 @@ module.exports = {
                         },
                         {
                             model: Livro,
-                            attributes: ['Titulo', 'Foto']
+                            attributes: ['Titulo', 'Foto', 'ISBN']
                         }
                     ],
                     where: {
@@ -348,7 +327,7 @@ module.exports = {
                 });
             }else{
                 emprestimos = await Emprestimo.findAll({
-                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                     include: [
                         {
                             model: Usuario,
@@ -356,7 +335,7 @@ module.exports = {
                         },
                         {
                             model: Livro,
-                            attributes: ['Titulo', 'Foto']
+                            attributes: ['Titulo', 'Foto', 'ISBN']
                         }
                     ],
                     where: {
@@ -373,7 +352,7 @@ module.exports = {
             }
         }else if(item){
             emprestimos = await Emprestimo.findAll({
-                attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                 include: [
                     {
                         model: Usuario,
@@ -381,7 +360,7 @@ module.exports = {
                     },
                     {
                         model: Livro,
-                        attributes: ['Titulo', 'Foto']
+                        attributes: ['Titulo', 'Foto', 'ISBN']
                     }
                 ],
                 where: {
@@ -395,7 +374,7 @@ module.exports = {
         }else if(classificacao){
             if(classificacao == 'antigos'){
                 emprestimos = await Emprestimo.findAll({
-                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                     include: [
                         {
                             model: Usuario,
@@ -403,7 +382,7 @@ module.exports = {
                         },
                         {
                             model: Livro,
-                            attributes: ['Titulo', 'Foto']
+                            attributes: ['Titulo', 'Foto', 'ISBN']
                         }
                     ],
                     order: [
@@ -412,7 +391,7 @@ module.exports = {
                 });
             }else{
                 emprestimos = await Emprestimo.findAll({
-                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                    attributes: ['IDEmprestimo','IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                     include: [
                         {
                             model: Usuario,
@@ -420,7 +399,7 @@ module.exports = {
                         },
                         {
                             model: Livro,
-                            attributes: ['Titulo', 'Foto']
+                            attributes: ['Titulo', 'Foto', 'ISBN']
                         }
                     ],
                     order: [
@@ -430,7 +409,7 @@ module.exports = {
             }
         } else {
             emprestimos = await Emprestimo.findAll({
-                attributes: ['IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa'],
+                attributes: ['IDEmprestimo', 'IDUsuario', 'IDLivro', 'DataEmprestimo', 'DataDevolucao', 'Multa', 'Devolvido'],
                 include: [
                     {
                         model: Usuario,
@@ -438,12 +417,11 @@ module.exports = {
                     },
                     {
                         model: Livro,
-                        attributes: ['Titulo', 'Foto']
+                        attributes: ['Titulo', 'Foto', 'ISBN']
                     }
                 ]
             });
         }
->>>>>>> mari-ana
         
         res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao });
         

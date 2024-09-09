@@ -26,7 +26,8 @@ module.exports = {
                 DataDevolucao: dados.data_devolucao,
                 Multa: dados.multa,
                 IDUsuario: usuario.IDUsuario,
-                IDLivro: livro.IDLivro
+                IDLivro: livro.IDLivro,
+                Devolvido: 0
             });
 
             return res.redirect('/emprestimosADM');
