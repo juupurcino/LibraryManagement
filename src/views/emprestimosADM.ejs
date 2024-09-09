@@ -189,7 +189,7 @@
                 var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
                 %>
 
-                <%if(emprestimos[i].Devolvido != 1){ %>
+                <%if (emprestimos[i].Devolvido != 1){ %>
                     <div class="carde row g-0">
                         <img src="/img/<%=emprestimos[i].Livro.Foto%>" class="img-fluid rounded-start" alt="...">
                         <div class="col-md-8">
@@ -198,7 +198,7 @@
                                 <h3 class="card-title" id="empIsbn<%= emprestimos[i].IDEmprestimo %>">ISBN: <%= emprestimos[i].Livro.ISBN %></h3>
                                 <h4 class="card-text" id="empCpf <%= emprestimos[i].IDEmprestimo %>">Usuário: <%= emprestimos[i].Usuario.CPF %></h4>
                                 <h5 class="card-title">Data de Empréstimo: <small class="text-body-secondary" id="empDataE<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].DataEmprestimo%></small></h5>
-                                <h5 class="card-title">Data de Devolução: <small class="text-body-secondary" id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].DataEmprestimo%></small></h5>
+                                <h5 class="card-title">Data de Devolução: <small class="text-body-secondary" id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%=emprestimos[i].DataDevolucao%></small></h5>
                                 <p class="card-text"><small id="empMulta<%= emprestimos[i].IDEmprestimo %>" class="text-body-secondary">Multa por atrasado: <%= emprestimos[i].Multa %></small>
                                 <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>
                                 </p>
