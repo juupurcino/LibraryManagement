@@ -102,12 +102,13 @@
             <!-- Barra de relevância -->
             <div class="seletor">
                 <div class="select">
+                    <form action="/emprestimos" method="GET" id="pesquisarForm">
                     <h6>Relevância</h6>
-                    <select name="genero">
-                        <option value="all" selected>Todos</option>
-                        <option value="genre1">Gênero 1</option>
-                        <option value="genre2">Gênero 2</option>
-                    </select>
+                        <select onchange="this.form.submit()" name="classificacao">
+                            <option value="recentes" <%= classificacao == 'recentes' ? 'selected' : ''%>>Data: mais recentes</option>
+                            <option value="antigos" <%= classificacao == 'antigos' ? 'selected' : ''%>>Data: mais antigos</option>
+                        </select>
+                    </form>
                 </div>
             </div>
         </div>
