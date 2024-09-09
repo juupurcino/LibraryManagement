@@ -76,7 +76,7 @@ module.exports = {
                 console.log("Resultado da pesquisa:", livroPesquisado);
             } else {
                 livroPesquisado = await Livro.findAll({
-                    attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                    attributes: ['IDLivro', 'Foto', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
                     raw: true
                 });
             }
@@ -451,7 +451,7 @@ module.exports = {
                 include: [
                     {
                         model: Genero,
-                        attributes: [],
+                        attributes: ['IDGenero'],
                     },
                     {
                         model: Livro,
@@ -473,7 +473,7 @@ module.exports = {
             
         } else if (disp) {
             livroPesquisado = await Livro.findAll({
-                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo', 'Foto', 'Destaque'],
                 raw: true,
                 where: {...(disp === 'disp' ? { 'Disponibilidade': 1 } : { 'Disponibilidade': 0 })}
             });
@@ -494,7 +494,7 @@ module.exports = {
                 include: [
                     {
                         model: Genero,
-                        attributes: [],
+                        attributes: ['IDGenero'],
                     },
                     {
                         model: Livro,
@@ -512,7 +512,7 @@ module.exports = {
         
         else {
             livroPesquisado = await Livro.findAll({
-                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo', 'Destaque'],
                 raw: true
             });
         }

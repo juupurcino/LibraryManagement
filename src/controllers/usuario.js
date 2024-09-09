@@ -1,5 +1,6 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
+const Emprestimo = require("../model/emprestimo");
 
 module.exports = {
 
@@ -113,6 +114,10 @@ module.exports = {
 
     async deleteUser(req, res) {
         let id_user= req.params.id; 
+
+        await Emprestimo.destroy({
+            where : {IDUsuario : id_user}
+        });
         
         await Usuario.update({
             Ativo: 0
