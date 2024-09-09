@@ -26,11 +26,16 @@ module.exports = {
                 DataDevolucao: dados.data_devolucao,
                 Multa: dados.multa,
                 IDUsuario: usuario.IDUsuario,
-                IDLivro: livro.IDLivro
+                IDLivro: livro.IDLivro,
+                Devolvido: 0
             });
 
+            req.session.successMessage = 'Empréstimo efetuado com sucesso!';
+            
             return res.redirect('/emprestimosADM');
         }
+
+
         return res.redirect('/livrosADM');
     },
     
@@ -50,7 +55,7 @@ module.exports = {
             where: { ISBN : dados.isbn }
         });
 
-        if(livro.IDLivro && usuario.IDUsuario){
+        if(livro && usuario){
             await Emprestimo.update({
                 DataEmprestimo: dados.data_emprestimo,
                 DataDevolucao: dados.data_devolucao,
@@ -60,9 +65,10 @@ module.exports = {
             },{
                 where:{IDEmprestimo : id_emp}
             });
-
-            res.redirect('/emprestimosADM');
         }
+
+        req.session.successMessage = 'Empréstimo atualizado com sucesso!';
+
         res.redirect('/emprestimosADM');
     },
 
@@ -74,6 +80,8 @@ module.exports = {
         },{
             where: { IDEmprestimo: id_emprestimo }
         });
+
+        req.session.successMessage = 'Devolução efetuada com sucesso!';
 
         res.redirect('/emprestimosADM');
     }

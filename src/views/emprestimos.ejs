@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    <script src="/js/script.js"></script>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -41,6 +42,10 @@
                 </div>
             </div>
         </nav>
+
+        <div class="modoescuro">
+            <span class="material-symbols-outlined" id="tema" onclick="mudarTema()">bedtime</span>
+        </div>
     </header>
 
      <!-- Modal Perfil-->
@@ -90,68 +95,65 @@
     </div>
 
     <main>
-
-        <!-- Barra de pesquisa  -->
+        <!-- Barra de pesquisa -->
         <div class="filtro">
             <div class="pesquisar"></div>
-
-            <!-- Barra de relevância  -->
+    
+            <!-- Barra de relevância -->
             <div class="seletor">
                 <div class="select">
-                <h6>Relevância</h6>
-                    <select name="genero">
-                        <option value="all" selected>Todos</option>
-                        <option value="genre1">Gênero 1</option>
-                        <option value="genre2">Gênero 2</option>
-                    </select>
+                    <form action="/emprestimos" method="GET" id="pesquisarForm">
+                    <h6>Relevância</h6>
+                        <select onchange="this.form.submit()" name="classificacao">
+                            <option value="recentes" <%= classificacao == 'recentes' ? 'selected' : ''%>>Data: mais recentes</option>
+                            <option value="antigos" <%= classificacao == 'antigos' ? 'selected' : ''%>>Data: mais antigos</option>
+                        </select>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <!-- Cards de livros  -->
-        <!-- Card de livro  -->
-        
+    
+        <!-- Cards de livros -->
+        <!-- Card de livro -->
+        <% if (emprestimos.length >= 1) { %>
         <div class="card mb-3">
-            <% if(emprestimos.length >= 1){ %>
-            <% for(let i = 0; i < emprestimos.length; i++){ 
-                var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
-                var dataEmprestimo = new Date(emprestimos[i].DataEmprestimo);
-                var dataAtual = new Date();
-
-                // Formate as datas para o formato desejado
-                var dataEmprestimoFormatada = ('0' + dataEmprestimo.getDate()).slice(-2) + '/' +('0' + (dataEmprestimo.getMonth() + 1)).slice(-2) + '/' + dataEmprestimo.getFullYear();
-                var dataDevolucaoFormatada = ('0' + dataDevolucao.getDate()).slice(-2) + '/' +('0' + (dataDevolucao.getMonth() + 1)).slice(-2) + '/' + dataDevolucao.getFullYear();
-                
-                // Calcule a diferença em dias
-                var diferencaEmMs = dataDevolucao - dataAtual;
-                var diasRestantes = Math.ceil(diferencaEmMs / (1000 * 60 * 60 * 24)); // Converte milissegundos para dias
-
-                // Formate a quantidade de dias restantes
-                var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
+                <% for (let i = 0; i < emprestimos.length; i++) { 
+                    var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
+                    var dataEmprestimo = new Date(emprestimos[i].DataEmprestimo);
+                    var dataAtual = new Date();
+    
+                    // Formate as datas para o formato desejado
+                    var dataEmprestimoFormatada = ('0' + dataEmprestimo.getDate()).slice(-2) + '/' + ('0' + (dataEmprestimo.getMonth() + 1)).slice(-2) + '/' + dataEmprestimo.getFullYear();
+                    var dataDevolucaoFormatada = ('0' + dataDevolucao.getDate()).slice(-2) + '/' + ('0' + (dataDevolucao.getMonth() + 1)).slice(-2) + '/' + dataDevolucao.getFullYear();
+                    
+                    // Calcule a diferença em dias
+                    var diferencaEmMs = dataDevolucao - dataAtual;
+                    var diasRestantes = Math.ceil(diferencaEmMs / (1000 * 60 * 60 * 24)); // Converte milissegundos para dias
+    
+                    // Formate a quantidade de dias restantes
+                    var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
                 %>
-                
-                <div class="carde row g-0">
-                    <img src="/img/<%=emprestimos[i].Livro.Foto%>" class="img-fluid rounded-start" alt="...">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
-                            <h6 class="card-text">Data de Empréstimo: <%= dataEmprestimoFormatada %></h6>
-                            <h6 class="card-text">Data de Devolução: <%= dataDevolucaoFormatada %></h6>
-                            <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados%></small>
-                            </p>
+                    <div class="carde row g-0">
+                        <img src="/img/<%= emprestimos[i].Livro.Foto %>" class="img-fluid rounded-start" alt="...">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
+                                <h6 class="card-text">Data de Empréstimo: <%= dataEmprestimoFormatada %></h6>
+                                <h6 class="card-text">Data de Devolução: <%= dataDevolucaoFormatada %></h6>
+                                <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados %></small></p>
+                            </div>
                         </div>
                     </div>
+                    <hr>
+                <% } %>
                 </div>
-                <hr>
-            <% } %>
             <% } else { %>
                 <div class="divh6">
                     <h6 class="h6">Você não possui nenhum empréstimo no momento...</h6>
                 </div>
-                <% } %>
-        </div>
-        
+            <% } %>
     </main>
+    
 
     <footer>
         <div class="footer1">
@@ -166,6 +168,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

@@ -33,9 +33,10 @@ module.exports = {
             Ativo: 1,
             Admin: 0
         });
-        
-        res.redirect('/');
-        
+
+        req.session.successMessage = 'Registrado com sucesso!';
+
+        res.redirect("/");
     },
     
     async verificarUser(req, res){
@@ -85,14 +86,16 @@ module.exports = {
         },{
             where: { IDUsuario: req.session.IDUsuario }
         });
-     
+
+        req.session.successMessage = 'Informações atualizadas com sucesso!';
+        
         res.redirect('/');
     },
-
+    
     async updateUserADM(req, res){
         const dados = req.body;
         let id_user = req.params.id;
-
+        
         console.log("editar");
         
         await Usuario.update({
@@ -107,7 +110,9 @@ module.exports = {
         },{
             where: { IDUsuario: id_user }
         });
-     
+        
+        req.session.successMessage = 'Informações do usuário atualizadas com sucesso!';
+
         res.redirect('/usuariosADM');
     },
 
@@ -119,6 +124,8 @@ module.exports = {
         },{
             where: { IDUsuario: id_user }
         });
+
+        req.session.successMessage = 'Usuário deletado com sucesso!';
 
         res.redirect('/usuariosADM');
     },

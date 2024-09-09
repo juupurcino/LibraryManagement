@@ -42,6 +42,10 @@
                 </div>
             </div>
         </nav>
+
+        <div class="modoescuro">
+            <span class="material-symbols-outlined" id="tema" onclick="mudarTema()">bedtime</span>
+        </div>
     </header>
 
      <!-- Modal Perfil-->
@@ -126,13 +130,10 @@
                 </div>
             </div>
             <% } %>
-            
         </div>
         <% } else { %>
-            <div class="divh6">
-                <h6 class="h6">Não há nenhum livro favoritado...</h6>
-            </div>
-            <% } %>
+            <div class="divh6"><h6 class="h6">Não há nenhum livro favoritado...</h6></div>
+        <% } %>
     </main>
 
     <footer>
