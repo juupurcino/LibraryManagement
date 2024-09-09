@@ -26,7 +26,7 @@ module.exports = {
             Descricao: dados.descricao,
             Foto: foto,
             Disponibilidade: 1,
-            Qts_emprestimo: 0,
+            Qtd_emprestimo: 0,
             Destaque: dados.destaque
         });
 
@@ -51,6 +51,10 @@ module.exports = {
 
         await Livro.destroy({
             where:{IDLivro:id_livro}
+        });
+
+        await Generolivro.destroy({
+            where: { IDLivro: id_livro } 
         });
 
         res.redirect('/LivrosADM');
@@ -88,9 +92,23 @@ module.exports = {
             Disponibilidade: dados.disponibilidade,
             Qtd_emprestimo: dados.qtd_emprestimo,
             Destaque: dados.destaque
-        },{
+                
+        },
+        
+        {
             where:{IDLivro:id_livro}
         });
+
+        await Generolivro.destroy({ 
+            where: { IDLivro: id_livro } 
+        });
+
+        for (let i = 0; i < dados.genero.length; i++) {
+            await Generolivro.create({
+                IDGenero: dados.genero[i],
+                IDLivro: id_livro
+            });
+        }
 
         res.redirect('/LivrosADM');
     }

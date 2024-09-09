@@ -31,18 +31,33 @@ var count = 1;
 
 function adcgenero() {
     count += 1;
-    
+
     const generoFields = document.getElementById('generoFields');
     const copy = document.getElementById('genero').innerHTML;
     const select = document.createElement('select');
-    select.className = 'form-select genero';
-    select.name = 'genero';
+    select.className = 'form-select genero'; 
+    select.name = 'genero'; 
     select.innerHTML = copy;
-    
+
     generoFields.appendChild(select);
 }
 
-function ClickUpdateLivro(id_Updated, id_genero) {
+function adcgeneroUpdate() {
+    count += 1;
+
+    const generoUpdate = document.getElementById('generoUpdate');
+    const copy = document.getElementById('generoUp').innerHTML;
+    const select = document.createElement('select');
+    select.className = 'form-select generoUp'; 
+    select.name = 'genero'; 
+    select.innerHTML = copy;
+
+    generoUpdate.appendChild(select);
+}
+
+
+function ClickUpdateLivro(id_Updated) {
+    
     let form = document.getElementById('Updatelivro');
 
     let foto = document.getElementById(`livroFoto${id_Updated}`).src;
@@ -52,13 +67,25 @@ function ClickUpdateLivro(id_Updated, id_genero) {
     let ano = document.getElementById(`livroAno${id_Updated}`).innerHTML;
     let isbn = document.getElementById(`livroIsbn${id_Updated}`).innerHTML;
     let destaque = document.getElementById(`destaque${id_Updated}`).innerHTML;
+    let genero = document.getElementsByClassName(`livroGenero${id_Updated}`)
 
-    document.getElementById('Foto').src = foto;
+    document.getElementById('upFoto').src = foto;
     document.getElementById('updateTitulo').value = titulo;
-    document.getElementById('updateAno').value = ano.substring(4);
+    document.getElementById('updateAno').value = ano.substring(5);
     document.getElementById('updateAutor').value = autor.substring(7);
     document.getElementById('updateDesc').value = desc.substring(11);
-    document.getElementById('UpdateIsbn').value = isbn.substring(5);
+    document.getElementById('UpdateIsbn').value = isbn.substring(6);
+    
+    for (let i = 0; i < genero.length; i++) {
+        
+        let gen = document.getElementById(`UpdateGenero${genero[i].innerHTML}`)
+        gen.selected = true;
+
+        if (i+1 < genero.length) {
+            
+            adcgeneroUpdate();
+        }
+    }
 
     if (destaque.trim() == "0") {
         document.getElementById('nao').checked = true;
