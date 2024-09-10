@@ -1,7 +1,11 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
+=======
+const Emprestimo = require("../model/emprestimo");
+>>>>>>> Juliana
 
 module.exports = {
 
@@ -150,6 +154,10 @@ module.exports = {
 
     async deleteUser(req, res) {
         let id_user= req.params.id; 
+
+        await Emprestimo.destroy({
+            where : {IDUsuario : id_user}
+        });
         
         await Usuario.update({
             Ativo: 0

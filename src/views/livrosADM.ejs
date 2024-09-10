@@ -144,7 +144,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/livros" method="post" id="Updatelivro">
+                    <form action="/livrosADM" method="post" id="Updatelivro" enctype="multipart/form-data">
+                        <div class="mb-3 livro">
+                            <img alt="Upload Image" id="upFoto" style="cursor: pointer;">
+                            <input type="file" id="upflImage" name="foto" accept="image/*" style="display: none;">
+                        </div>
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Titulo</label>
                             <input type="text" class="form-control" name="titulo" aria-describedby="tituloHelp"
@@ -170,6 +174,42 @@
                             <input id="updateAutor" type="text" class="form-control" name="autor"
                                  required aria-describedby="autorHelp">
                         </div>
+
+                        <div id="generoContainer">
+                            <label for="genero" class="form-label">Gênero</label>
+                            <div id="generoUpdate"> 
+                                <select class="form-select generoUp" aria-label="Select gênero" id="generoUp"
+                                    name="genero">
+                                    <% for (let i=0; i<genero.length; i++) { %>
+                    
+                                        <option value="<%= genero[i].IDGenero %>" id="UpdateGenero<%= genero[i].IDGenero %>">
+                                            <%= genero[i].Tipo %>
+                                        </option>
+                                        
+                                        <% } %>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-secondary mt-2" onclick="adcgeneroUpdate()">Adicionar mais gênero</button>
+                            <span class="material-symbols-outlined">delete</span>
+                        </div>
+                        
+                        <label for="">Destaque
+                            <div class="check">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="destaque" id="nao" value="0">
+                                    <label class="form-check-label" for="nao">
+                                        Não
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="destaque" id="sim" value="1">
+                                    <label class="form-check-label" for="sim">
+                                        Sim
+                                    </label>
+                                </div>
+                            </div>
+                        </label>
+                        
                         
                     </div>
                     <div class="modal-footer">
@@ -230,13 +270,20 @@
             </div>
         </div>
 
+        <!-- Cards de livros -->
         <% if ( livro.length>=1 ) { %>
             <% for (let i=0; i < livro.length; i++) { %>
                 <div class="carde row g-0">
-                    <img src="/img/<%= livro[i].Foto %>" class="img-fluid rounded-start" alt="Capa do livro">
+                    <img src="/img/<%= livro[i].Foto %>" id="livroFoto<%= livro[i].IDLivro %>" class="img-fluid rounded-start" alt="Capa do livro">
                     <div class="col-md-8">
                         <div class="card-body">
+<<<<<<< HEAD
                             <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>"><%= livro[i].Titulo %></h3>
+=======
+                            <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>"><%= livro[i].Titulo %>
+                            </h3>
+                            <h5 id="destaque<%= livro[i].IDLivro %>" style="display: none"><%= livro[i].Destaque%></h5>
+>>>>>>> Juliana
                             <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %></h6>
                             <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %></h6>
                             <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %></h6>
@@ -246,19 +293,26 @@
                                 <% for (let j=0; j < genero_livro.length; j++) { %>
                                     <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>
                                         <%= genero_livro[j].Genero.Tipo %> |
-                                            <% } %>
-                                                <% } %>
-                            </h6>
-                            <div class="botao">
-                                <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro"
-                                    onclick="ClickUpdateLivro('<%= livro[i].IDLivro %>')">Editar</button>
-                                <button data-bs-toggle="modal" data-bs-target="#modalDelLivro"
-                                    onclick="ClickDeleteLivro('<%= livro[i].IDLivro %>')">Excluir</button>
+                                    <% } %>
+                                <% } %>
+
+                                <!-- Escondido -->
+                                <% for (let j=0; j < genero_livro.length; j++) { %>
+                                    <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>
+                                        <h6 class="card-text livroGenero<%= livro[i].IDLivro %>" id="livroGenero<%= livro[i].IDLivro %>" style="display: none;"><%= genero_livro[j].IDGenero %></h6>
+                                    <% } %>
+                                <% } %>
+                                        </h6>
+                                        <div class="botao">
+                                            <button data-bs-toggle="modal" data-bs-target="#modalEdtLivro"
+                                            onclick="ClickUpdateLivro('<%= livro[i].IDLivro %>')">Editar</button>
+                                            <button data-bs-toggle="modal" data-bs-target="#modalDelLivro"
+                                            onclick="ClickDeleteLivro('<%= livro[i].IDLivro %>')">Excluir</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
+                            <hr>
                 <% } %>
                 <% } else { %>
                     <div class="divh6">

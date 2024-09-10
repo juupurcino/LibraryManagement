@@ -5,15 +5,18 @@ const sequelize = require("sequelize");
 
 module.exports = {
     
-    async createEmprestimo(req, res){
+    async createEmprestimo(req, res) {
         const dados = req.body;
+    
 
-        const usuario = await Usuario.findOne({
-            raw: true,
-            attributes: ['IDUsuario'],
-            where: { CPF : dados.cpf }
-        });
+            const usuario = await Usuario.findOne({
+                raw: true,
+                attributes: ['IDUsuario'],
+                where: { CPF: dados.cpf }
+            });
+    
 
+<<<<<<< HEAD
         const livro = await Livro.findOne({
             raw: true,
             attributes: ['IDLivro', 'Disponibilidade'],
@@ -49,8 +52,36 @@ module.exports = {
 
         return res.redirect('emprestimosADM');
 
+=======
+            const livro = await Livro.findOne({
+                raw: true,
+                attributes: ['IDLivro'],
+                where: { ISBN: dados.isbn }
+            });
+
+            if (livro && usuario) {
+                await Emprestimo.create({
+                    DataEmprestimo: dados.data_emprestimo,
+                    DataDevolucao: dados.data_devolucao,
+                    Multa: dados.multa,
+                    IDUsuario: usuario.IDUsuario,
+                    IDLivro: livro.IDLivro,
+                    Devolvido: 0
+                });
+    
+                await Livro.increment('Qtd_emprestimo', {
+                    by: 1,
+                    where: { IDLivro: livro.IDLivro }
+                });
+    
+                return res.redirect('/emprestimosADM');
+            }
+            
+            return res.redirect('/livrosADM');
+>>>>>>> Juliana
 
     },
+    
     
     async updateEmprestimo(req, res) {
         const dados = req.body;

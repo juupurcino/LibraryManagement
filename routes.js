@@ -23,7 +23,7 @@ route.get('/logout', usuario.logout);
 route.post('/updateUser', usuario.updateUser);
 
 // Rotas do livros (ADM)
-route.post('/UpdateLivro/:id', livro.updateLivro);
+route.post('/UpdateLivro/:id', multer(config).single('foto'), livro.updateLivro);
 route.get('/DeleteLivro/:id', livro.deleteLivro);
 route.get('/livrosADM', home.isAdmin, home.pagLivrosADMGet);
 route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
