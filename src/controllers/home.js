@@ -307,7 +307,7 @@ module.exports = {
             }
         } else if (pesquisa) {
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true,
                 where:
                 {
@@ -323,20 +323,20 @@ module.exports = {
         } else if (adm) {
             if (adm == 'sim') {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: { 'Admin': 1 }
                 });
             } else {
                 usuarios = await Usuario.findAll({
-                    attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                    attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                     raw: true,
                     where: { 'Admin': 0 }
                 });
             }
         } else {
             usuarios = await Usuario.findAll({
-                attributes: ['Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin'],
+                attributes: ['IDUsuario', 'Nome', 'CPF', 'Telefone', 'Email', 'Genero', 'DataNascimento', 'Admin', 'Ativo'],
                 raw: true
             });
         }

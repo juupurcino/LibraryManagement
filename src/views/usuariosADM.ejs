@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/perfil.css" />
     <link rel="stylesheet" href="/css/headerADM.css" />
     <link rel="stylesheet" href="/css/pesquisa.css" />
+    <link rel="icon" href="/public/img/Logo branca.png" type="image/x-icon">
     <title>Livros ADM</title>
 </head>
 
@@ -61,27 +62,27 @@
                     <form action="/registroADM" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp"
+                            <input type="text" class="form-control" id="telefone" aria-describedby="emailHelp" required
                                 name="telefone">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc" required>
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" name="sexo">
+                        <select class="form-select" aria-label="Default select example" name="sexo" required>
                             <option value="" disabled selected>Selecione o gênero</option>
                             <option value="Feminino">Feminino</option>
                             <option value="Masculino">Masculino</option>
@@ -91,7 +92,7 @@
                             <div class="check">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault1"
-                                        value="0" checked>
+                                        value="0" checked required>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Não
                                     </label>
@@ -127,26 +128,26 @@
                     <form action="/usuariosADM" method="post" id="UpdateUserADM">
                         <div class="mb-3" >
                             <label for="exampleInputEmail1" class="form-label">Nome</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome" id="updateNome">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="nome" id="updateNome" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" id="updateCpf">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" id="updateCpf" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp"name="telefone" id="updateTel">
+                            <input type="text" class="form-control" aria-describedby="emailHelp"name="telefone" id="updateTel" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" id="updateEmail">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" name="email" id="updateEmail" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc" id="updateData">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_nasc" id="updateData" required>
                         </div>
                         <label for="exampleInputEmail1" class="form-label">Gênero</label>
-                        <select class="form-select" aria-label="Default select example" name="sexo" id="updateGenero">
+                        <select class="form-select" aria-label="Default select example" name="sexo" id="updateGenero" required>
                             <option value="" disabled selected>Selecione o gênero</option>
                             <option value="Feminino">Feminino</option>
                             <option value="Masculino">Masculino</option>
@@ -155,7 +156,7 @@
                         <label>Administrador
                             <div class="check">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="admin" id="nao" value="0">
+                                    <input class="form-check-input" type="radio" name="admin" id="nao" value="0" required>
                                     <label class="form-check-label" for="nao">Não</label>
                                 </div>
                                 <div class="form-check">
@@ -185,6 +186,7 @@
                 <div>
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir esse usuário?
                     </h1>
+                    <p style="color: red;"><strong>**Essa ação removerá todos os empréstimos relacionados</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

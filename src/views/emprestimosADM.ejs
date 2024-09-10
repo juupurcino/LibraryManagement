@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/headerADM.css" />
     <link rel="stylesheet" href="/css/perfil.css" />
+    <link rel="icon" href="/public/img/Logo branca.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Emprestimos ADM</title>
 </head>
@@ -60,24 +61,24 @@
                 <div class="modal-body">
                     <form action="/emprestimoADM" method="POST">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">ISBN</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="isbn" placeholder="Cógigo do livro...">
+                            <label for="exampleInputEmail1" class="form-label">ISBN do livro</label>
+                            <input type="number" class="form-control" aria-describedby="emailHelp" name="isbn" placeholder="Cógigo do livro..." required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF do usuário</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" placeholder="CPF do cliente...">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" placeholder="CPF do cliente..." required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Multa</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="multa" placeholder="Valor da multa por dia de atraso...">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="multa" placeholder="Valor da multa por dia de atraso..." required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de empréstimo</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_emprestimo">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_emprestimo" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de devolução</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_devolucao">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_devolucao" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -101,24 +102,24 @@
                 <div class="modal-body">
                     <form action="/emprestimoADM" method="post" id="UpdateEmprestimo">
                         <div class="mb-3" >
-                            <label for="exampleInputEmail1" class="form-label">ISBN do Livro:</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="isbn" id="updateISBN">
+                            <label for="exampleInputEmail1" class="form-label">ISBN do Livro</label>
+                            <input type="number" class="form-control" aria-describedby="emailHelp" name="isbn" id="updateISBN" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">CPF</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" id="updateCpf">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="cpf" id="updateCpf" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" for="telefone" class="form-label">Data de Empréstimo</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_emprestimo" id="updateDataE">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_emprestimo" id="updateDataE" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Data de Devolução</label>
-                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_devolucao" id="updateDataD">
+                            <input type="date" class="form-control" aria-describedby="emailHelp" name="data_devolucao" id="updateDataD" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Multa por dia de atraso</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" name="multa" id="updateMulta">
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="multa" id="updateMulta" required>
                         </div>                        
                     </div>
                     <div class="modal-footer">

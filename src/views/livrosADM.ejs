@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="../../css/headerADM.css" />
         <link rel="stylesheet" href="../../css/perfil.css" />
         <link rel="stylesheet" href="/css/pesquisa.css" />
-    <title>Livros ADM</title>
+        <title>Livros ADM</title>
+        <link rel="icon" href="/public/img/Logo branca.png" type="image/x-icon">
 </head>
 
 <body>
@@ -63,37 +64,37 @@
                             <div class="mb-3 livro">
                                 <img id="imgFoto" src="/img/capas/livro.png" alt="Upload Image"
                                     style="cursor: pointer;">
-                                <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                                <input required type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
                             </div>
                             <div class="mb-3">
                                 <label for="titulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="titulo" aria-describedby="tituloHelp"
+                                <input required type="text" class="form-control" id="titulo" aria-describedby="tituloHelp"
                                     name="titulo">
                             </div>
                             <div class="mb-3">
                                 <label for="isbn" class="form-label">ISBN</label>
-                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp"
+                                <input required type="number" class="form-control" id="isbn" aria-describedby="isbnHelp"
                                     name="isbn">
                             </div>
                             <div class="mb-3">
                                 <label for="isbn" class="form-label">Ano</label>
-                                <input type="text" class="form-control" id="isbn" aria-describedby="isbnHelp"
+                                <input required type="number" class="form-control" id="isbn" aria-describedby="isbnHelp"
                                     name="ano">
                             </div>
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>
-                                <input type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp"
+                                <input required type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp"
                                     name="descricao">
                             </div>
                             <div class="mb-3">
                                 <label for="autor" class="form-label">Autor</label>
-                                <input type="text" class="form-control" id="autor" aria-describedby="autorHelp"
+                                <input required type="text" class="form-control" id="autor" aria-describedby="autorHelp"
                                     name="autor">
                             </div>
                             <div id="generoContainer">
                                 <label for="genero" class="form-label">Gênero</label>
                                 <div id="generoFields">
-                                    <select class="form-select genero" aria-label="Select gênero" id="genero"
+                                    <select required class="form-select genero" aria-label="Select gênero" id="genero"
                                         name="genero">
                                         <option value="" disabled selected>Selecione o gênero</option>
                                         <% for (let i=0; i<genero.length; i++) { %>
@@ -147,27 +148,27 @@
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Titulo</label>
                             <input type="text" class="form-control" name="titulo" aria-describedby="tituloHelp"
-                                id="updateTitulo">
+                                 required id="updateTitulo">
                         </div>
                         <div class="mb-3">
                             <label for="isbn" class="form-label">ISBN</label>
                             <input type="text" class="form-control" id="UpdateIsbn" aria-describedby="isbnHelp"
-                                name="isbn">
+                                 required name="isbn">
                         </div>
                         <div class="mb-3">
                             <label for="isbn" class="form-label">Ano</label>
                             <input type="text" class="form-control" id="updateAno" aria-describedby="isbnHelp"
-                                name="ano">
+                                 required name="ano">
                         </div>
                         <div class="mb-3">
                             <label for="descricao" class="form-label">Descrição</label>
                             <input id="updateDesc" type="text" class="form-control" name="descricao"
-                                aria-describedby="descricaoHelp">
+                                 required aria-describedby="descricaoHelp">
                         </div>
                         <div class="mb-3">
                             <label for="autor" class="form-label">Autor</label>
                             <input id="updateAutor" type="text" class="form-control" name="autor"
-                                aria-describedby="autorHelp">
+                                 required aria-describedby="autorHelp">
                         </div>
                         
                     </div>
@@ -191,6 +192,7 @@
                 <div>
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir esse livro?
                     </h1>
+                    <p style="color: red;"><strong>**Essa ação removerá todos os empréstimos relacionados</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -234,19 +236,12 @@
                     <img src="/img/<%= livro[i].Foto %>" class="img-fluid rounded-start" alt="Capa do livro">
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>">
-                                <%= livro[i].Titulo %>
-                            </h3>
-                            <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %>
-                            </h6>
-                            <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %>
-                            </h6>
-                            <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %>
-                            </h6>
-                            <h6 class="card-text" id="livroAno<%= livro[i].IDLivro %>">Ano: <%= livro[i].Ano %>
-                            </h6>
-                            <h6 class="card-text" id="livroQtd<%= livro[i].IDLivro %>">Quantidade de Empréstimos: <%= livro[i].Qtd_emprestimo %>
-                            </h6>
+                            <h3 class="card-title" id="livroTitulo<%= livro[i].IDLivro %>"><%= livro[i].Titulo %></h3>
+                            <h6 class="card-text" id="livroDesc<%= livro[i].IDLivro %>">Descrição: <%= livro[i].Descricao %></h6>
+                            <h6 class="card-text" id="livroAutor<%= livro[i].IDLivro %>">Autor: <%= livro[i].Autor %></h6>
+                            <h6 class="card-text" id="livroIsbn<%= livro[i].IDLivro %>">ISBN: <%= livro[i].ISBN %></h6>
+                            <h6 class="card-text" id="livroAno<%= livro[i].IDLivro %>">Ano: <%= livro[i].Ano %></h6>
+                            <h6 class="card-text" id="livroQtd<%= livro[i].IDLivro %>">Quantidade de Empréstimos: <%= livro[i].Qtd_emprestimo %></h6>
                             <h6 class="card-text">Gênero:
                                 <% for (let j=0; j < genero_livro.length; j++) { %>
                                     <% if (livro[i].IDLivro==genero_livro[j].IDLivro) { %>

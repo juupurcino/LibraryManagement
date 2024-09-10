@@ -20,7 +20,7 @@ module.exports = {
             where: { ISBN : dados.isbn }
         });
 
-        if(livro.IDLivro && usuario.IDUsuario){
+        if(livro && usuario){
             await Emprestimo.create({
                 DataEmprestimo: dados.data_emprestimo,
                 DataDevolucao: dados.data_devolucao,
@@ -33,10 +33,17 @@ module.exports = {
             req.session.successMessage = 'Empréstimo efetuado com sucesso!';
             
             return res.redirect('/emprestimosADM');
+        }else if(livro){
+            req.session.successMessage = 'Falha ao efetuar empréstimo: CPF inválido!';
+        }else if(usuario){
+            req.session.successMessage = 'Falha ao efetuar empréstimo: ISBN inválido!';
+        }else{
+            req.session.successMessage = 'Falha ao efetuar empréstimo: ISBN e CPF inválidos!';
         }
 
+        return res.redirect('emprestimosADM');
 
-        return res.redirect('/livrosADM');
+
     },
     
     async updateEmprestimo(req, res) {
