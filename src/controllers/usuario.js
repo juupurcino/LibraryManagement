@@ -1,10 +1,30 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
+const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 module.exports = {
 
     async createUser(req, res){
         const dados = req.body;
+        console.log(dados);  // Verifica os dados recebidos
+
+        const usuarioExistente = await Usuario.findOne({
+            where: {
+                [Op.or]: [
+                    { Email: dados.email },
+                    { CPF: dados.cpf }
+                ]
+            }
+        });
+    
+        if (usuarioExistente.Email == dados.email) {
+            req.session.successMessage = 'Email já cadastrado!';
+            return res.redirect("/");
+        }else if (usuarioExistente.CPF == dados.cpf) {
+            req.session.successMessage = 'CPF já cadastrado!';
+            return res.redirect("/");
+        }
         
         if(dados.admin){
             await Usuario.create({
@@ -18,10 +38,12 @@ module.exports = {
                 Ativo: 1,
                 Admin: dados.admin
             });
-
+            
             return
         }
-
+        
+        senhaCriptografada = await bcrypt.hash(dados.senha, 10);
+        
         await Usuario.create({
             Nome: dados.nome,
             CPF: dados.cpf,
@@ -29,17 +51,19 @@ module.exports = {
             Telefone: dados.telefone,
             Email: dados.email,
             Genero: dados.sexo,
-            Senha: dados.senha,
+            Senha: senhaCriptografada,
             Ativo: 1,
             Admin: 0
         });
         
-        res.redirect('/');
+        req.session.successMessage = 'Registrado com sucesso!';
         
+        res.redirect("/");
     },
     
     async verificarUser(req, res){
         const dados = req.body;
+        console.log(dados);  // Verifica os dados recebidos
         
         const usuarios = await Usuario.findOne({
             raw: true,
@@ -48,7 +72,10 @@ module.exports = {
         });
         
         if (usuarios && usuarios.Ativo == 1) {
-            if (dados.senha_login == usuarios.Senha) {
+
+            const senhaValida = await bcrypt.compare(dados.senha_login, usuarios.Senha);
+
+            if (senhaValida) {
                 
                 req.session.IDUsuario = usuarios.IDUsuario;
                 req.session.isLoggedIn = true;
@@ -85,8 +112,48 @@ module.exports = {
         },{
             where: { IDUsuario: req.session.IDUsuario }
         });
-     
+
+        req.session.successMessage = 'Informações atualizadas com sucesso!';
+        
         res.redirect('/');
+    },
+    
+    async updateUserADM(req, res){
+        const dados = req.body;
+        let id_user = req.params.id;
+        
+        console.log("editar");
+        
+        await Usuario.update({
+            Nome: dados.nome,
+            CPF: dados.cpf,
+            DataNascimento: dados.data_nasc,
+            Telefone: dados.telefone,
+            Email: dados.email,
+            Genero: dados.sexo,
+            Ativo: 1,
+            Admin: dados.admin
+        },{
+            where: { IDUsuario: id_user }
+        });
+        
+        req.session.successMessage = 'Informações do usuário atualizadas com sucesso!';
+
+        res.redirect('/usuariosADM');
+    },
+
+    async deleteUser(req, res) {
+        let id_user= req.params.id; 
+        
+        await Usuario.update({
+            Ativo: 0
+        },{
+            where: { IDUsuario: id_user }
+        });
+
+        req.session.successMessage = 'Usuário deletado com sucesso!';
+
+        res.redirect('/usuariosADM');
     },
 
     async logout(req, res) {

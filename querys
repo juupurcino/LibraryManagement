@@ -1,7 +1,7 @@
 use plotpit;
 
 INSERT INTO usuario (nome, cpf, datanascimento, telefone, email, genero, senha, ativo, admin, createdAt, updatedAt)
-VALUES ('admin', 12345678901, '2000-01-01', 41999999999, 'admin@email.com', 'Feminino', 'admin', 1, 1, '2024-09-02 11:55:07.0930000 +00:00', '2024-09-02 11:57:07.0930000 +00:00');
+VALUES ('admin', 12345678901, '2000-01-01', 41999999999, 'admin, 'Feminino', '', 1, 1, '2024-09-02 11:55:07.0930000 +00:00', '2024-09-02 11:57:07.0930000 +00:00');
 
 INSERT INTO generos (tipo, createdAt, updatedAt) VALUES
 ('Ficção Científica', '2024-09-02 11:55:07.0930000 +00:00', '2024-09-02 11:57:07.0930000 +00:00'),

@@ -1,6 +1,7 @@
 * {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
+    margin: 0px;
 }
 
 main{
@@ -8,76 +9,29 @@ main{
     flex-direction: column;
 }
 
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.dark-mode .card{
+    background-color: #333333;
+    color: white;
+}
+
 .card-body{
     display: flex;
     flex-direction: column;
 }
 
-h6 {
-    font-size: 1.5em;
-    font-weight: 500;
-}
-
-input {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 300px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 0.5%;
-    
-}
-
-.icon {
-    background-color: #704214;
-    width: 33px;
-    color: white;
-    height: 33px;
-    border-radius: 10px;
-    margin-left: 5px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-}
-
-.pesquisar {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-}
-
-.pesquisas {
-    margin-left: 2%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 6%;
-    justify-content: space-between;
-    margin-right: 2%;
-}
-
-select {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 200px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 4px;
-    cursor: pointer;
-}
-
-
-.p {
-    display: flex;
-    flex-direction: row;
-}
-
-.seletores-container {
-    display: flex;
-    flex-direction: row;
-    gap: 2%; 
+button:hover{
+    background-color: #704214d7;
 }
 
 .card-body button{
@@ -93,22 +47,10 @@ select {
     padding: 1%;
 }
 
-.seletores button{
-    border-radius: 7px;
-    color: white;
-    background-color: #704214;
-    border: none;
-    cursor: pointer;
-    font-size: large;
-    padding-right: 2%;
-    padding-left: 2%;
-    padding: 0.7%;
-    margin-top: 1%;
-}
-
 
 .buttons button{
     margin-right: 1%;
+    margin-top: 1%;
     width: 20%;
 }
 
@@ -131,11 +73,11 @@ select {
 }
 
 .carde img{
-    width: 200px;
+    width: 250px;
 }
 
 .card-body h3{
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 .card-body{
@@ -147,15 +89,21 @@ select {
     width: 100%;
 }
 
+.card-body h4, .card-body h5, .card-body p{
+    margin-bottom: 0.5%;
+}
+
 .divh6{
-    margin-bottom: 15%;
+    margin-bottom: 25%;
     margin-left: 3%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: transparent !important;
 }
 
 .divh6 h6{
+    background-color: transparent;
     color: #7a7a7a;
     font-size: 1.5em;
 }
@@ -163,3 +111,5 @@ select {
 .seletores{
     width: 23%;
 }
+
+

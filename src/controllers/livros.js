@@ -1,5 +1,6 @@
 const Livro = require("../model/livro");
 const Generolivro = require("../model/generoLivro");
+const genero = require("../model/genero");
 
 module.exports = {
 
@@ -27,16 +28,23 @@ module.exports = {
             Qts_emprestimo: 0,
             Destaque: dados.destaque
         });
-
-
-        for (let i = 0; i < dados.genero.length; i++) {
-
+        
+        if(typeof(dados.genero) != 'string'){
+            for (let i = 0; i < dados.genero.length; i++) {
+                await Generolivro.create({
+                    IDGenero: dados.genero[i],
+                    IDLivro: livro.IDLivro 
+                });
+            }
+        }else{
             await Generolivro.create({
-                IDGenero: dados.genero[i],
+                IDGenero: dados.genero,
                 IDLivro: livro.IDLivro 
             });
-        
         }
+
+        req.session.successMessage = 'Livro adicionado com sucesso!';
+
         res.redirect('/livrosADM');
     },
     
@@ -45,6 +53,8 @@ module.exports = {
         
         await Livro.destroy({where:{IDLivro:id_livro}
         });
+
+        req.session.successMessage = 'Livro deletado com sucesso!';
 
         res.redirect('/LivrosADM');
     },
@@ -65,17 +75,7 @@ module.exports = {
             where:{IDLivro:id_livro}
         });
 
-        res.redirect('/LivrosADM');
-    },
-    
-    async deleteLivro(req, res) {
-        let id_livro = req.params.id; 
-
-        console.log(id_livro)
-        
-        await Livro.destroy({where:{IDLivro:id_livro}
-        
-        });
+        req.session.successMessage = 'Livro atualizado com sucesso!';
 
         res.redirect('/LivrosADM');
     }

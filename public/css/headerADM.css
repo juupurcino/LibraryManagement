@@ -27,18 +27,6 @@
     padding: 0 !important;
 }
 
-.navbar-nav a:hover {
-    text-decoration: underline; 
-    color: white !important;
-}
-
-.navbar a:focus,
-.navbar a:active,
-.navbar a:visited {
-    color: #ffffff; /* mesma cor do link padrão */
-    text-decoration: underline; 
-}
-
 .navbar-brand img{
     width: 100px;
     height: auto;
@@ -53,8 +41,58 @@
     justify-content: center;
     background-color: #8AA88A;
     padding: 1.5%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .adm h3{
     margin-bottom: 0;
+}
+
+/* Estilização dos links de navegação */
+.navbar a {
+    color: #ffffff; /* Cor padrão dos links */
+    text-decoration: none; /* Remove o sublinhado padrão */
+}
+
+.navbar a:hover,
+.navbar a:focus,
+.navbar a:active,
+.navbar a:visited {
+    color: #ffffff; /* Cor dos links quando hover, foco, ativo e visitado */
+}
+
+/* Estilização do efeito de sublinhado */
+.navbar a {
+    position: relative; /* Permite que o pseudo-elemento seja posicionado relativamente ao link */
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%; /* Inicia com 0% para a animação */
+    height: 2px;
+    background: white; /* Cor do sublinhado */
+    transition: width 0.3s ease; /* Transição de largura para criar a animação */
+}
+
+.navbar a:hover::after {
+    width: 100%; /* Expande até 100% na interação */
+}
+
+.modoescuro{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    padding: 1%;
+}
+
+.modoescuro span{
+    background-color: #643c26;
+    color: white;
+    padding: 0.2%;
+    border-radius: 100%;
+    cursor: pointer;
 }

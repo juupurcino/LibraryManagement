@@ -4,24 +4,7 @@
     font-optical-sizing: auto;
 }
 
-h6 {
-    font-size: 1.5em;
-    font-weight: 500;
-}
-
-
-.icon {
-    background-color: #704214;
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    margin-left: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-button{
+.user button{
     display: flex;
     justify-content: center;
     border-radius: 7px;
@@ -37,9 +20,10 @@ button{
 
 }
 
-.material-symbols-outlined{
-    color: white;
+button:hover{
+    background-color: #704214d7;
 }
+
 .adm {
 
     background-color: #8AA88A;
@@ -59,67 +43,6 @@ main{
     flex-direction: column;
 }
 
-input {
-    border: 2px solid #704214;
-    outline: none;
-    width: 300px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 1%;
-}
-
-.icon {
-    background-color: #704214;
-    width: 40px;
-    color: white;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 5px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-}
-
-.pesquisar {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-}
-
-.pesquisas {
-    margin-left: 2%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 6%;
-    justify-content: space-between;
-    margin-right: 2%;
-    align-items: center;
-    margin-bottom: 6%;
-}
-
-select {
-    border: 2px solid #704214;
-    outline: none;
-    margin-bottom: 6%;
-    width: 200px;
-    font-size: 13px;
-    border-radius: 6px;
-    padding: 4px;
-    cursor: pointer;
-}
-
-.p {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.seletores-container {
-    display: flex;
-    flex-direction: row;
-    gap: 2%; 
-    width: 20%;
-}
 
 .card{
     border: none;
@@ -150,11 +73,10 @@ select {
 }
 
 .usuarios {
-
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: flex-start;
 }
 
 .divh6{
@@ -181,11 +103,40 @@ select {
     padding: 0.3%;
     margin-left: 3.5%;
     background-color: rgb(172, 0, 0);
-    width: 10%;
+    width: 20%;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 .nomeUser{
     background-color: #bbbbbb;
     padding: 0.3%;
+}
+
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Ajustes para o modo escuro */
+body.dark-mode .card {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.dark-mode .card-title .text-body-secondary,
+body.dark-mode .card-body small {
+    color: #ffffff;
+}
+
+body.dark-mode .nomeUser, body.dark-mode .nomeUser small{
+    color: #000000;
 }
 

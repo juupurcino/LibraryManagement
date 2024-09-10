@@ -51,7 +51,6 @@ var count = 1;
     let ano = document.getElementById(`livroAno${id_Updated}`).innerHTML;
     let isbn = document.getElementById(`livroIsbn${id_Updated}`).innerHTML;
     
-    console.log(desc);
     document.getElementById('updateTitulo').value = titulo;
     document.getElementById('updateAno').value = ano.substring(4);
     document.getElementById('updateAutor').value = autor.substring(7)
@@ -68,3 +67,4 @@ function ClickDeleteLivro(id_Delete){
     
     button.href = `/DeleteLivro/${id_Delete}`;
 }
+
