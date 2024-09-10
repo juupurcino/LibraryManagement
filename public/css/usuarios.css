@@ -1,10 +1,9 @@
-
 * {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
 }
 
-.user button{
+.user button {
     display: flex;
     justify-content: center;
     border-radius: 7px;
@@ -17,69 +16,62 @@
     padding: 2%;
     margin-top: 7%;
     margin-right: 2%;
-
 }
 
-button:hover{
+button:hover {
     background-color: #704214d7;
 }
 
 .adm {
-
     background-color: #8AA88A;
     display: flex;
     justify-content: center;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 1% 0;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
 }
 
-.card-body{
+.card-body {
     display: flex;
     flex-direction: column;
 }
 
-
-.card{
+.card {
     border: none;
     margin: 2%;
     width: 95%;
 }
 
-.carde{
+.carde {
     margin: 1%;
-    
 }
 
-.carde img{
+.carde img {
     width: 200px;
 }
 
-.card-body h3{
+.card-body h3 {
     margin-bottom: 3%;
 }
 
-.card-body{
+.card-body {
     margin-left: 3%;
 }
 
-.botao{
-
+.botao {
     display: flex;
 }
 
 .usuarios {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     align-items: flex-start;
 }
 
-.divh6{
+.divh6 {
     margin-bottom: 10%;
     margin-left: 3%;
     display: flex;
@@ -87,18 +79,18 @@ main{
     align-items: center;
 }
 
-.divh6 h6{
+.divh6 h6 {
     color: #7a7a7a;
     font-size: 1.5em;
 }
 
-.user{
+.user {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.admin{
+.admin {
     color: white;
     padding: 0.3%;
     margin-left: 3.5%;
@@ -108,11 +100,10 @@ main{
     text-align: center;
 }
 
-.nomeUser{
+.nomeUser {
     background-color: #bbbbbb;
     padding: 0.3%;
 }
-
 
 body {
     background-color: #ffffff;
@@ -136,7 +127,86 @@ body.dark-mode .card-body small {
     color: #ffffff;
 }
 
-body.dark-mode .nomeUser, body.dark-mode .nomeUser small{
+body.dark-mode .nomeUser,
+body.dark-mode .nomeUser small {
     color: #000000;
+}
+
+@media (max-width: 768px) {
+    .user button {
+        width: 150px; 
+    }
+
+    .card-body {
+        margin-left: 0;
+    }
+
+    .card {
+        width: 100%;
+        margin: 1% 0;
+    }
+
+    .botao {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin {
+        width: auto; 
+
+    .imgzinha {
+        width: 30%;
+    }
+
+    .imgzinha img {
+        width: 20px;
+    }
+
+    footer {
+        padding: 2% 0;
+    }
+}
+}
+
+
+@media (max-width: 576px) {
+    .user button {
+        width: 120px; 
+        font-size: medium;
+        padding: 1%;
+    }
+
+    .card {
+        width: 100%;
+        margin: 1% 0;
+    }
+
+    .imgzinha {
+        width: 40%;
+    }
+
+    .imgzinha img {
+        width: 18px;
+    }
+
+    .admin {
+        width: auto; 
+    }
+
+    footer {
+        padding: 3% 0;
+        text-align: center;
+    }
+
+    .footer1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer1 img {
+        width: 80px;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
 }
 
