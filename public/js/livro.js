@@ -99,14 +99,10 @@ function ClickUpdateLivro(id_Updated) {
     let autor = document.getElementById(`livroAutor${id_Updated}`).innerHTML;
     let ano = document.getElementById(`livroAno${id_Updated}`).innerHTML;
     let isbn = document.getElementById(`livroIsbn${id_Updated}`).innerHTML;
-<<<<<<< HEAD
-    
-=======
     let destaque = document.getElementById(`destaque${id_Updated}`).innerHTML;
     let genero = document.getElementsByClassName(`livroGenero${id_Updated}`)
 
     document.getElementById('upFoto').src = foto;
->>>>>>> Juliana
     document.getElementById('updateTitulo').value = titulo;
     document.getElementById('updateAno').value = ano.substring(5);
     document.getElementById('updateAutor').value = autor.substring(7);

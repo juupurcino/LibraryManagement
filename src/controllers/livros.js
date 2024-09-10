@@ -1,11 +1,8 @@
 const Livro = require("../model/livro");
 const Generolivro = require("../model/generoLivro");
-<<<<<<< HEAD
 const genero = require("../model/genero");
-=======
 const Emprestimo = require("../model/emprestimo");
 const fs = require('fs');
->>>>>>> Juliana
 
 module.exports = {
 
@@ -112,13 +109,10 @@ module.exports = {
             where:{IDLivro:id_livro}
         });
 
-<<<<<<< HEAD
         req.session.successMessage = 'Livro atualizado com sucesso!';
-=======
         await Generolivro.destroy({ 
             where: { IDLivro: id_livro } 
         });
->>>>>>> Juliana
 
         for (let i = 0; i < dados.genero.length; i++) {
             await Generolivro.create({
