@@ -36,7 +36,7 @@ module.exports = {
                 by: 1,
                 where: { IDLivro: livro.IDLivro }
             });
-
+            
             await Livro.update({ Disponibilidade: 0 },{ where: { IDLivro : livro.IDLivro }})
 
             req.session.successMessage = 'Empréstimo efetuado com sucesso!';
