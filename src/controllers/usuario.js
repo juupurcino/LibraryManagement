@@ -7,7 +7,7 @@ module.exports = {
 
     async createUser(req, res){
         const dados = req.body;
-        console.log(dados);  // Verifica os dados recebidos
+        console.log(dados);
 
         const usuarioExistente = await Usuario.findOne({
             where: {
@@ -17,13 +17,15 @@ module.exports = {
                 ]
             }
         });
-    
-        if (usuarioExistente.Email == dados.email) {
-            req.session.successMessage = 'Email já cadastrado!';
-            return res.redirect("/");
-        }else if (usuarioExistente.CPF == dados.cpf) {
-            req.session.successMessage = 'CPF já cadastrado!';
-            return res.redirect("/");
+        
+        if(usuarioExistente){
+            if (usuarioExistente.Email == dados.email) {
+                req.session.successMessage = 'Email já cadastrado!';
+                return res.redirect("/");
+            }else if (usuarioExistente.CPF == dados.cpf) {
+                req.session.successMessage = 'CPF já cadastrado!';
+                return res.redirect("/");
+            }
         }
         
         if(dados.admin){
@@ -34,13 +36,17 @@ module.exports = {
                 Telefone: dados.telefone,
                 Email: dados.email,
                 Genero: dados.sexo,
-                Senha: "123456",
+                Senha: await bcrypt.hash("123456", 10),
                 Ativo: 1,
                 Admin: dados.admin
             });
+
+            req.session.firstLogin = true;
             
-            return
+            return res.redirect("/usuariosADM");
         }
+
+        req.session.firstLogin = false;
         
         senhaCriptografada = await bcrypt.hash(dados.senha, 10);
         
@@ -152,13 +158,17 @@ module.exports = {
         });
 
         req.session.successMessage = 'Usuário deletado com sucesso!';
+        
+        if(id_user == req.session.IDUsuario){
+            return res.redirect('/logout');
+        }
 
         res.redirect('/usuariosADM');
     },
 
     async logout(req, res) {
         req.session.destroy();
-        res.redirect('/');      
+        res.redirect('/');
     }
 }
 

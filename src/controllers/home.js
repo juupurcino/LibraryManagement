@@ -13,6 +13,9 @@ module.exports = {
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;
 
+        let firstLogin = req.session.firstLogin || false;
+        req.session.firstLogin = false;
+
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
@@ -30,9 +33,10 @@ module.exports = {
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage });
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage, firstLogin: firstLogin });
         }
-        res.render("../views/index", { successMessage: successMessage });
+        
+        res.render("../views/index", { successMessage: successMessage, firstLogin: firstLogin  });
     },
 
     async pagLivrosGet(req, res) {
@@ -256,7 +260,14 @@ module.exports = {
                 });
             }
 
-            return res.render('../views/emprestimos', { user: user, emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage });
+            const countNaoDevolvidos = await Emprestimo.count({
+                where: {
+                    IDUsuario: req.session.IDUsuario,
+                    Devolvido: 0
+                }
+            });
+
+            return res.render('../views/emprestimos', { user: user, emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage, countEmprestimos: countNaoDevolvidos });
         }
 
         res.render("../views/index");
@@ -479,7 +490,11 @@ module.exports = {
             });
         }
 
-        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage });
+        const countNaoDevolvidos = await Emprestimo.count({
+            where: { Devolvido: 0 }
+        });
+
+        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage, countEmprestimos: countNaoDevolvidos });
 
     },
 

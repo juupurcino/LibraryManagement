@@ -181,9 +181,9 @@
         </div>
 
         <!-- Card de livro  -->
-        <% if (emprestimos.length >= 1) { %>
+        <% if (countEmprestimos >= 1) { %>
     <div class="card mb-3">
-            <% for (let i = 0; i < emprestimos.length; i++) {
+            <% for (let i = 0; i < countEmprestimos; i++) {
                 var dataAtual = new Date();
 
                 // Calcule a diferença em dias

@@ -16,11 +16,11 @@ module.exports = {
 
         const livro = await Livro.findOne({
             raw: true,
-            attributes: ['IDLivro'],
+            attributes: ['IDLivro', 'Disponibilidade'],
             where: { ISBN : dados.isbn }
         });
 
-        if(livro && usuario){
+        if(livro && usuario && (livro.Disponibilidade == 1)){
             await Emprestimo.create({
                 DataEmprestimo: dados.data_emprestimo,
                 DataDevolucao: dados.data_devolucao,
@@ -30,16 +30,22 @@ module.exports = {
                 Devolvido: 0
             });
 
+            await Livro.update({ Disponibilidade: 0 },{ where: { IDLivro : livro.IDLivro }})
+
             req.session.successMessage = 'Empréstimo efetuado com sucesso!';
             
             return res.redirect('/emprestimosADM');
-        }else if(livro){
+
+        }else if(livro && livro.Disponibilidade == 0){
+            req.session.successMessage = 'Falha ao efetuar empréstimo: Livro indisponível!';
+        }else if(!usuario){
             req.session.successMessage = 'Falha ao efetuar empréstimo: CPF inválido!';
-        }else if(usuario){
+        }else if(!livro){
             req.session.successMessage = 'Falha ao efetuar empréstimo: ISBN inválido!';
         }else{
             req.session.successMessage = 'Falha ao efetuar empréstimo: ISBN e CPF inválidos!';
         }
+
 
         return res.redirect('emprestimosADM');
 
@@ -80,12 +86,29 @@ module.exports = {
     },
 
     async devolucao(req, res) {
-        let id_emprestimo= req.params.id; 
+        let id_emprestimo = req.params.id; 
+
+        const emprestimo = await Emprestimo.findOne({
+            raw: true,
+            attributes: ['IDLivro'],
+            where: { IDEmprestimo : id_emprestimo }
+        });
+
+        const livro = await Livro.findOne({
+            raw: true,
+            where: { IDLivro : emprestimo.IDLivro }
+        });
         
         await Emprestimo.update({
             Devolvido: 1
         },{
             where: { IDEmprestimo: id_emprestimo }
+        });
+
+        await Livro.update({ 
+            Disponibilidade: 1     
+        },{ 
+                where: { IDLivro : livro.IDLivro }
         });
 
         req.session.successMessage = 'Devolução efetuada com sucesso!';
