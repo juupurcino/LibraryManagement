@@ -1,11 +1,8 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
-<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-=======
 const Emprestimo = require("../model/emprestimo");
->>>>>>> Juliana
 
 module.exports = {
 
@@ -31,8 +28,10 @@ module.exports = {
                 return res.redirect("/");
             }
         }
+
+        console.log(dados.admin)
         
-        if(dados.admin){
+        if (dados.admin) {
             await Usuario.create({
                 Nome: dados.nome,
                 CPF: dados.cpf,
@@ -44,13 +43,10 @@ module.exports = {
                 Ativo: 1,
                 Admin: dados.admin
             });
-
-            req.session.firstLogin = true;
-            
+        
+            req.session.successMessage = 'Usuario registrado com sucesso!';
             return res.redirect("/usuariosADM");
         }
-
-        req.session.firstLogin = false;
         
         senhaCriptografada = await bcrypt.hash(dados.senha, 10);
         
@@ -67,8 +63,8 @@ module.exports = {
         });
         
         req.session.successMessage = 'Registrado com sucesso!';
-        
         res.redirect("/");
+        
     },
     
     async verificarUser(req, res){
