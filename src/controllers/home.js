@@ -12,32 +12,42 @@ module.exports = {
 
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;
-    
+
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
-                attributes: ['Senha'],
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-            
+
             const livrosDestaque = await Livro.findAll({
                 where: { Destaque: "1" },
                 raw: true
             });
-    
+
             const favoritos = await Favorito.findAll({
                 attributes: ['IDLivro', 'IDUsuario'],
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage});
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage });
         }
-        
+
         res.render("../views/index", { successMessage: successMessage });
     },
-    
 
+    async pagLivroGet(req, res) {
+        if (req.session.IDUsuario) {
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+            return res.render('../views/livro', {user: user});
+        }
+
+        res.render("../views/index");
+    },
+    
     async pagLivrosGet(req, res) {
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;

@@ -158,7 +158,7 @@
                                 <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livrosDestaque[i].IDLivro); %>
                                 <input type="text" name="id_livro" id="" value="<%=livrosDestaque[i].IDLivro%>" style="display: none;">
                                 <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>" style="display: none;">
-                                <img id="img<%=livrosDestaque[i].IDLivro%>" type="submit" onclick="favoritar(<%=livrosDestaque[i].IDLivro%>)" src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
+                                <img id="img<%=livrosDestaque[i].IDLivro%>" type="submit" onclick="favoritar('<%=livrosDestaque[i].IDLivro%>')" src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
                             </form>
                         </div>
                         <img src="/img/<%=livrosDestaque[i].Foto%>" class="card-img-top"

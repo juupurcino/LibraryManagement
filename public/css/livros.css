@@ -4,24 +4,17 @@
     font-optical-sizing: auto;
 }
 
-.card-body button{
+.card-body a{
     display: flex;
     justify-content: center;
     border-radius: 10px;
     color: white;
     background-color: #46220F;
-    border: none;
+    text-decoration: none;
     cursor: pointer;
     width: 50%;
     font-size: large;
     padding: 1%;
-    margin-top: 5%;
-}
-
-body {
-    background-color: #ffffff;
-    color: #000000;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-mode {
@@ -29,9 +22,19 @@ body.dark-mode {
     color: #ffffff;
 }
 
+body.dark-mode .card {
+    background-color: #333333;
+    color: #ffffff;
+}
 
 button:hover{
     background-color: #704214d7;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .col {
@@ -43,15 +46,21 @@ button:hover{
 .card {
     border: none;
     margin-bottom: 1.5rem; 
-    width: 70%;
+    /* width: 70%; */
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+
 }
 .card img {
-    width: 100%;
+    width: 300px;
     object-fit: cover;
+    height: 100%;
 }
+
 .card-body {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
 }
 

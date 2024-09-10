@@ -126,17 +126,15 @@
                         <div class="card">
                             <img src="/img/<%=livros[i].Foto%>" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <button>Detalhes</button>
+                                <a href="/livro">Detalhes</a>
                                 <form action="/favoritos" method="post" id="favoritosForm<%=livros[i].IDLivro%>">
                                     <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"
                                         style="display: none;">
                                     <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
                                         style="display: none;">
-                                    <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro ===
-                                        livros[i].IDLivro);
-                                        %>
+                                    <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livros[i].IDLivro); %>
                                         <img id="img<%=livros[i].IDLivro%>" type="submit"
-                                            onclick="favoritar(<%=livros[i].IDLivro%>)"
+                                            onclick="favoritar('<%=livros[i].IDLivro%>')"
                                             src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
                                 </form>
                             </div>

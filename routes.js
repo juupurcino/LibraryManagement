@@ -45,6 +45,7 @@ route.post('/updateUsuarioADM/:id', usuario.updateUserADM);
 route.get('/DeleteUser/:id', usuario.deleteUser);
 
 route.get('/livros', home.pagLivrosGet);
+route.get('/livro', home.pagLivroGet);
 route.get('/emprestimos', home.pagEmprestimosGet);
 
 module.exports = route;
