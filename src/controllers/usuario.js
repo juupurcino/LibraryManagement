@@ -1,6 +1,6 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
-const bcrypt = require('bcrypt');
+const { createHash } = require("crypto");
 const { Op } = require('sequelize');
 const Emprestimo = require("../model/emprestimo");
 
@@ -39,7 +39,7 @@ module.exports = {
                 Telefone: dados.telefone,
                 Email: dados.email,
                 Genero: dados.sexo,
-                Senha: await bcrypt.hash("123456", 10),
+                Senha: createHash('sha256').update("123456").digest('hex'),
                 Ativo: 1,
                 Admin: dados.admin
             });
@@ -48,7 +48,7 @@ module.exports = {
             return res.redirect("/usuariosADM");
         }
         
-        senhaCriptografada = await bcrypt.hash(dados.senha, 10);
+        senhaCriptografada = createHash('sha256').update(dados.senha).digest('hex')
         
         await Usuario.create({
             Nome: dados.nome,
@@ -79,9 +79,7 @@ module.exports = {
         
         if (usuarios && usuarios.Ativo == 1) {
 
-            const senhaValida = await bcrypt.compare(dados.senha_login, usuarios.Senha);
-
-            if (senhaValida) {
+            if (createHash('sha256').update(dados.senha_login).digest('hex') == usuarios.Senha) {
                 
                 req.session.IDUsuario = usuarios.IDUsuario;
                 req.session.isLoggedIn = true;

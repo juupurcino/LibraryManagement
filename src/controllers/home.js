@@ -4,7 +4,6 @@ const Favorito = require("../model/favorito");
 const Emprestimo = require("../model/emprestimo");
 const Genero = require("../model/genero");
 const GeneroLivro = require("../model/generoLivro");
-const bcrypt = require('bcrypt');
 const { Op, fn, col, where } = require('sequelize');
 const { Sequelize } = require('sequelize');
 
@@ -13,8 +12,6 @@ module.exports = {
 
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;
-    
-        let firstLogin = req.session.firstLogin || false;
     
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
@@ -33,19 +30,11 @@ module.exports = {
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-    
-            if (user.Senha == await bcrypt.hash("123456", 10)) {
-                firstLogin = true;
-                req.session.firstLogin = true;
-            } else {
-                firstLogin = false;
-                req.session.firstLogin = false;
-            }
-    
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage, firstLogin: firstLogin });
+
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage});
         }
         
-        res.render("../views/index", { successMessage: successMessage, firstLogin: firstLogin  });
+        res.render("../views/index", { successMessage: successMessage });
     },
     
 
