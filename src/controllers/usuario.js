@@ -1,11 +1,8 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
-<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
-=======
 const Emprestimo = require("../model/emprestimo");
->>>>>>> Juliana
 
 module.exports = {
 
