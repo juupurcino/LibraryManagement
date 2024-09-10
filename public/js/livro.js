@@ -1,3 +1,5 @@
+// Adicionar foto
+
 let photo = document.getElementById('imgFoto');
 let file = document.getElementById('flImage');
 
@@ -27,10 +29,41 @@ file.addEventListener('change', () => {
 });
 
 
-var count = 1;
+// Editar foto
+let photoup = document.getElementById('upFoto');
+let fileup = document.getElementById('upflImage');
+
+// Add Livro
+photoup.addEventListener('click', () => {
+    fileup.click();
+});
+
+fileup.addEventListener('change', () => {
+    // Sem essa verificação, ele irá dar erro quando o usuário clicar em cancelar
+    
+    // pois enviará uma "imagem" vazia
+    if (fileup.files.length == 0) {
+        return;
+    }
+    
+    // Inicializando a função que pega o caminho da imagem
+    let reader = new FileReader();
+    
+    // Está pegando o caminho da imagem
+    reader.readAsDataURL(fileup.files[0]);
+    
+    // Coloca o caminho da imagem no Source da tag IMG
+    reader.onload = () => {
+        photoup.src = reader.result
+    }
+});
+
+
+var countadd = 1;
+var countup = 1;
 
 function adcgenero() {
-    count += 1;
+    countadd += 1;
 
     const generoFields = document.getElementById('generoFields');
     const copy = document.getElementById('genero').innerHTML;
@@ -43,7 +76,7 @@ function adcgenero() {
 }
 
 function adcgeneroUpdate() {
-    count += 1;
+    countup += 1;
 
     const generoUpdate = document.getElementById('generoUpdate');
     const copy = document.getElementById('generoUp').innerHTML;

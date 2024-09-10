@@ -142,7 +142,7 @@
                     <form action="/livrosADM" method="post" id="Updatelivro" enctype="multipart/form-data">
                         <div class="mb-3 livro">
                             <img alt="Upload Image" id="upFoto" style="cursor: pointer;">
-                            <input type="file" id="flImage" name="foto" accept="image/*" style="display: none;">
+                            <input type="file" id="upflImage" name="foto" accept="image/*" style="display: none;">
                         </div>
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Titulo</label>
@@ -172,17 +172,20 @@
 
                         <div id="generoContainer">
                             <label for="genero" class="form-label">Gênero</label>
-                            <div id="generoUpdate">
+                            <div id="generoUpdate"> 
                                 <select class="form-select generoUp" aria-label="Select gênero" id="generoUp"
                                     name="genero">
                                     <% for (let i=0; i<genero.length; i++) { %>
+                    
                                         <option value="<%= genero[i].IDGenero %>" id="UpdateGenero<%= genero[i].IDGenero %>">
                                             <%= genero[i].Tipo %>
                                         </option>
+                                        
                                         <% } %>
                                 </select>
                             </div>
                             <button type="button" class="btn btn-secondary mt-2" onclick="adcgeneroUpdate()">Adicionar mais gênero</button>
+                            <span class="material-symbols-outlined">delete</span>
                         </div>
                         
                         <label for="">Destaque
@@ -261,6 +264,7 @@
             </div>
         </div>
 
+        <!-- Cards de livros -->
         <% if ( livro.length>=1 ) { %>
             <% for (let i=0; i < livro.length; i++) { %>
                 <div class="carde row g-0">
