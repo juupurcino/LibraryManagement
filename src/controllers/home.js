@@ -12,32 +12,31 @@ module.exports = {
 
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;
-
-        let firstLogin = req.session.firstLogin || false;
-        req.session.firstLogin = false;
-
+    
         if (req.session.IDUsuario) {
             const user = await Usuario.findOne({
+                attributes: ['Senha'],
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-
+            
             const livrosDestaque = await Livro.findAll({
                 where: { Destaque: "1" },
                 raw: true
             });
-
+    
             const favoritos = await Favorito.findAll({
                 attributes: ['IDLivro', 'IDUsuario'],
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
 
-            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage, firstLogin: firstLogin });
+            return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage});
         }
         
-        res.render("../views/index", { successMessage: successMessage, firstLogin: firstLogin  });
+        res.render("../views/index", { successMessage: successMessage });
     },
+    
 
     async pagLivrosGet(req, res) {
         let successMessage = req.session.successMessage || null;
@@ -552,36 +551,39 @@ module.exports = {
                 where: { ...(disp === 'disp' ? { 'Disponibilidade': 1 } : { 'Disponibilidade': 0 }) }
             });
         } else if (item) {
+            console.log("Item:", item); // Adicione um log para verificar o valor de item
             livroPesquisado = await GeneroLivro.findAll({
-                attributes: [
-                    [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
-                    [col('Livro.ISBN'), 'ISBN'],
-                    [col('Livro.Titulo'), 'Titulo'],
-                    [col('Livro.Autor'), 'Autor'],
-                    [col('Livro.Ano'), 'Ano'],
-                    [col('Livro.Descricao'), 'Descricao'],
-                    [col('Livro.Foto'), 'Foto'],
-                    [col('Livro.Disponibilidade'), 'Disponibilidade'],
-                    [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
-                ],
-                raw: true,
-                include: [
-                    {
-                        model: Genero,
-                        attributes: ['IDGenero'],
-                    },
-                    {
-                        model: Livro,
-                    }
-                ],
-                where: {
-                    [Op.or]: [
-                        { '$Livro.Autor$': { [Op.like]: `%${item}%` } },
-                        { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                        { '$Genero.Tipo$': { [Op.like]: `%${item}%` } }
-                    ]
+            attributes: [
+                [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                [col('Livro.ISBN'), 'ISBN'],
+                [col('Livro.Titulo'), 'Titulo'],
+                [col('Livro.Autor'), 'Autor'],
+                [col('Livro.Ano'), 'Ano'],
+                [col('Livro.Descricao'), 'Descricao'],
+                [col('Livro.Foto'), 'Foto'],
+                [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+            ],
+            raw: true,
+            include: [
+                {
+                    model: Genero,
+                    attributes: [],
                 },
+                {
+                    model: Livro,
+                }
+            ],
+            where: {
+                [Op.or]: [
+                    { '$Livro.Autor$': { [Op.like]: `%${item}%` } },
+                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                    { '$Genero.Tipo$': { [Op.like]: `%${item}%` } }
+                ]
+            },
             });
+
+            console.log("Resultado da pesquisa:", livroPesquisado);
         }
 
         else {
