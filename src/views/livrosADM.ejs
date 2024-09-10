@@ -177,19 +177,17 @@
 
                         <div id="generoContainer">
                             <label for="genero" class="form-label">Gênero</label>
-                            <div id="generoUpdate"> 
+                            <div id="generoUpdateContainer"> 
                                 <select class="form-select generoUp" aria-label="Select gênero" id="generoUp"
                                     name="genero">
                                     <% for (let i=0; i<genero.length; i++) { %>
-                    
                                         <option value="<%= genero[i].IDGenero %>" id="UpdateGenero<%= genero[i].IDGenero %>">
                                             <%= genero[i].Tipo %>
                                         </option>
-                                        
-                                        <% } %>
+                                    <% } %>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-secondary mt-2" onclick="adcgeneroUpdate()">Adicionar mais gênero</button>
+                            <span class="material-symbols-outlined add" type="button" class="btn btn-secondary mt-2" onclick="adcgeneroUpdate()"> add_circle </span>
                         </div>
                         
                         <label for="">Destaque

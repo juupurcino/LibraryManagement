@@ -115,3 +115,22 @@ body.dark-mode {
     background-color: #333333;
     color: #ffffff;
 }
+
+.apagarGender {
+    margin: 2px;
+    cursor: pointer;
+    position: absolute; 
+    right: 25px; 
+    top: 40%; 
+    transform: translateY(-50%);
+}
+
+.generoUpdate {
+
+    position: relative;
+}
+
+.form-check, .add {
+
+    margin: 5%;
+}

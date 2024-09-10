@@ -60,7 +60,7 @@ fileup.addEventListener('change', () => {
 
 
 var countadd = 1;
-var countup = 1;
+var countup = 2;
 
 function adcgenero() {
     countadd += 1;
@@ -78,16 +78,32 @@ function adcgenero() {
 function adcgeneroUpdate() {
     countup += 1;
 
-    const generoUpdate = document.getElementById('generoUpdate');
-    const copy = document.getElementById('generoUp').innerHTML;
+    const generoUpdateContainer = document.getElementById('generoUpdateContainer');
+
+    const newGeneroUpdate = document.createElement('div');
+    newGeneroUpdate.className = 'generoUpdate';
+    
     const select = document.createElement('select');
     select.className = 'form-select generoUp'; 
     select.name = 'genero'; 
-    select.innerHTML = copy;
-
-    generoUpdate.appendChild(select);
+    select.innerHTML = document.getElementById('generoUp').innerHTML;
+    
+    const deleteButton = document.createElement('span');
+    deleteButton.className = 'material-symbols-outlined apagarGender'
+    deleteButton.textContent = 'delete'
+    deleteButton.onclick = function() {
+        deleteGenero(this);
+    };
+    
+    newGeneroUpdate.appendChild(select);
+    newGeneroUpdate.appendChild(deleteButton);
+    generoUpdateContainer.appendChild(newGeneroUpdate);
 }
 
+function deleteGenero(button) {
+    const generoUpdate = button.parentElement;
+    generoUpdate.remove();
+}
 
 function ClickUpdateLivro(id_Updated) {
     

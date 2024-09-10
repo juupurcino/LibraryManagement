@@ -96,3 +96,52 @@
     border-radius: 100%;
     cursor: pointer;
 }
+
+/* Tablets e tela média */
+@media (max-width: 768px) {
+    
+    .container-fluid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .container-fluid a {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2em !important;
+    }
+    
+    #navbarNavAltMarkup {
+        width: 100%;
+    }
+
+    .navbar-brand img {
+        width: 80px; 
+    }
+
+    .modoescuro {
+        padding: 2%;
+    }
+}
+
+/* Celular */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1em !important;
+    }
+    
+    .navbar-brand img {
+        width: 60px; 
+    }
+    
+    .container-fluid a {
+        font-size: 1em;
+    }
+    
+    .modoescuro {
+        padding: 3%;
+    }
+}
