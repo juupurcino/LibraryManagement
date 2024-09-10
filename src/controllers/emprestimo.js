@@ -16,7 +16,6 @@ module.exports = {
             });
     
 
-<<<<<<< HEAD
         const livro = await Livro.findOne({
             raw: true,
             attributes: ['IDLivro', 'Disponibilidade'],
@@ -31,6 +30,11 @@ module.exports = {
                 IDUsuario: usuario.IDUsuario,
                 IDLivro: livro.IDLivro,
                 Devolvido: 0
+            });
+
+            await Livro.increment('Qtd_emprestimo', {
+                by: 1,
+                where: { IDLivro: livro.IDLivro }
             });
 
             await Livro.update({ Disponibilidade: 0 },{ where: { IDLivro : livro.IDLivro }})
@@ -52,33 +56,6 @@ module.exports = {
 
         return res.redirect('emprestimosADM');
 
-=======
-            const livro = await Livro.findOne({
-                raw: true,
-                attributes: ['IDLivro'],
-                where: { ISBN: dados.isbn }
-            });
-
-            if (livro && usuario) {
-                await Emprestimo.create({
-                    DataEmprestimo: dados.data_emprestimo,
-                    DataDevolucao: dados.data_devolucao,
-                    Multa: dados.multa,
-                    IDUsuario: usuario.IDUsuario,
-                    IDLivro: livro.IDLivro,
-                    Devolvido: 0
-                });
-    
-                await Livro.increment('Qtd_emprestimo', {
-                    by: 1,
-                    where: { IDLivro: livro.IDLivro }
-                });
-    
-                return res.redirect('/emprestimosADM');
-            }
-            
-            return res.redirect('/livrosADM');
->>>>>>> Juliana
 
     },
     
