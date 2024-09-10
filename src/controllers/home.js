@@ -38,11 +38,38 @@ module.exports = {
 
     async pagLivroGet(req, res) {
         if (req.session.IDUsuario) {
+            let id_livro = req.params.id; 
+
+            const livro = await Livro.findOne({
+                attributes: ['IDLivro', 'Foto', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                where: {IDLivro: id_livro}
+            });
+
+            const genero = await Genero.findAll({
+                attributes: ['IDGenero', 'Tipo'],
+                raw: true
+            });
+
+            const genero_livro = await GeneroLivro.findAll({
+                attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
+                include: [{
+                    model: Genero,
+                    attributes: ['Tipo']
+                }]
+            });
+
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
             const user = await Usuario.findOne({
                 where: { IDUsuario: req.session.IDUsuario },
                 raw: true
             });
-            return res.render('../views/livro', {user: user});
+
+            return res.render('../views/livro', {user: user, livro: livro, genero_livro: genero_livro, favoritos:favoritos, genero:genero});
         }
 
         res.render("../views/index");
@@ -391,10 +418,15 @@ module.exports = {
                         }
                     ],
                     where: {
-                        [Op.or]: [
-                            { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                            { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                            { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                        [Op.and]: [
+                            {
+                                [Op.or]: [
+                                    { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                    { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                                ]
+                            },
+                            { Devolvido: 0 }
                         ]
                     },
                     order: [
@@ -415,10 +447,15 @@ module.exports = {
                         }
                     ],
                     where: {
-                        [Op.or]: [
-                            { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                            { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                            { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                        [Op.and]: [
+                            {
+                                [Op.or]: [
+                                    { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                    { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                                ]
+                            },
+                            { Devolvido: 0 }
                         ]
                     },
                     order: [
@@ -440,12 +477,17 @@ module.exports = {
                     }
                 ],
                 where: {
-                    [Op.or]: [
-                        { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                        { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                        { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                    [Op.and]: [
+                        {
+                            [Op.or]: [
+                                { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                            ]
+                        },
+                        { Devolvido: 0 }
                     ]
-                },
+                }
             });
         } else if (classificacao) {
             if (classificacao == 'antigos') {
@@ -463,7 +505,8 @@ module.exports = {
                     ],
                     order: [
                         ['DataEmprestimo', 'ASC']
-                    ]
+                    ],
+                    where: { Devolvido: 0 }
                 });
             } else {
                 emprestimos = await Emprestimo.findAll({
@@ -480,7 +523,8 @@ module.exports = {
                     ],
                     order: [
                         ['DataEmprestimo', 'DESC']
-                    ]
+                    ],
+                    where: { Devolvido: 0 }
                 });
             }
         } else {
@@ -495,7 +539,8 @@ module.exports = {
                         model: Livro,
                         attributes: ['Titulo', 'Foto', 'ISBN']
                     }
-                ]
+                ],
+                where: { Devolvido: 0 }
             });
         }
 

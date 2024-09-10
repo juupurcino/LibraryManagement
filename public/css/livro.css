@@ -21,7 +21,7 @@
 }
 
 .descricao h1{
-    font-size: 5em;
+    font-size: 4em;
     margin-bottom: 5%;
 }
 
@@ -33,7 +33,21 @@
 }
 
 .descricao h5{
-    background-color: #388b00;
     color: white;
     padding: 0.3%;
+}
+
+.vermelho{
+    background-color: red;
+}
+
+.verde{
+    background-color: #388b00;
+}
+
+.tit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 100%;
 }

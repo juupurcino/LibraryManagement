@@ -103,13 +103,32 @@
 
     <main>
         <div class="livro">
-            <img src="/img/1725468556742-A hipÃ³tese do amor.jpg" alt="capa do livro">
+            <img src="/img/<%=livro.Foto%>" alt="capa do livro">
             <div class="descricao">
-                <h1>A hipótese do amor</h1>
-                <h2>Autor do Livro</h2>
-                <h4>Quando um namoro de mentira entre cientistas encontra a irresistível força da atração, todas as teorias cuidadosamente calculadas sobre o amor são postas à prova. Com personagens cativantes e diálogos afiados, este livro engraçado, sexy e inteligente se tornou uma das grandes sensações do TikTok.</h4>
-                <h4>2017</h4>
-                <h5>Disponível para empréstimo!</h5>
+                <div class="tit">
+                    <h1><%=livro.Titulo%></h1>
+                    <form action="/favoritos" method="post" id="favoritosForm<%=livro.IDLivro%>">
+                        <input type="text" name="id_livro" id="" value="<%=livro.IDLivro%>"
+                            style="display: none;">
+                        <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
+                            style="display: none;">
+                        <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livro.IDLivro); %>
+                            <img id="img<%=livro.IDLivro%>" type="submit"
+                                onclick="favoritar('<%=livro.IDLivro%>')"
+                                src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="" style="width: 30px;">
+                    </form>
+                </div>
+                <h2><%=livro.Autor%></h2>
+                <h4><%=livro.Descricao%></h4>
+                <h4><%=livro.Ano%></h4>
+                <h5 class="<%= livro.Disponibilidade == 1 ? 'verde' : 'vermelho'%>"><%= livro.Disponibilidade == 1 ? 'Disponível para empréstimo!' : 'Indisponível para empréstimo!' %></h5>
+                <h6 class="card-text">
+                    <% for (let j=0; j < genero_livro.length; j++) { %>
+                        <% if (livro.IDLivro==genero_livro[j].IDLivro) { %>
+                            <%= genero_livro[j].Genero.Tipo %> |
+                        <% } %>
+                    <% } %>
+                            </h6>
             </div>
         </div>
     </main>

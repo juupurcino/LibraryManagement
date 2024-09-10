@@ -185,27 +185,27 @@
     <div class="card mb-3">
             <% for (let i = 0; i < countEmprestimos; i++) {
                 var dataAtual = new Date();
+                var dataDevolucao = new Date(emprestimos[i].DataDevolucao);
 
                 // Calcule a diferença em dias
-                var diferencaEmMs = emprestimos[i].DataDevolucao - dataAtual;
+                var diferencaEmMs = dataDevolucao - dataAtual;
                 var diasRestantes = Math.ceil(diferencaEmMs / (1000 * 60 * 60 * 24)); // Converte milissegundos para dias
 
                 // Formate a quantidade de dias restantes
                 var diasRestantesFormatados = diasRestantes > 0 ? diasRestantes : 0; // Não mostrar números negativos
             %>
 
-            <% if (emprestimos[i].Devolvido != 1) { %>
                 <div class="carde row g-0">
                     <img src="/img/<%= emprestimos[i].Livro.Foto %>" class="img-fluid rounded-start" alt="...">
                     <div class="col-md-8">
                         <div class="card-body">
                             <h3 class="card-title"><%= emprestimos[i].Livro.Titulo %></h3>
-                            <h5 class="card-title">ISBN: <small class="text-body-secondary" id="empIsbn<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].Livro.ISBN %></small></h5>
+                            <h5 class="card-title">ISBN: <small id="empIsbn<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].Livro.ISBN %></small></h5>
                             <h4 class="card-text">Usuário: <small class="text-body-primary" id="empCpf<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].Usuario.CPF %></small></h4>
-                            <h5 class="card-title">Data de Empréstimo: <small class="text-body-secondary" id="empDataE<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataEmprestimo %></small></h5>
-                            <h5 class="card-title">Data de Devolução: <small class="text-body-secondary" id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataDevolucao %></small></h5>
-                            <p class="card-text"><small id="empMulta<%= emprestimos[i].IDEmprestimo %>" class="text-body-secondary">Multa por atrasado: <%= emprestimos[i].Multa %></small></p>
-                            <p class="card-text" id="p"><small class="text-body-secondary">Quantidade de dias restantes: <%= diasRestantesFormatados %></small></p>
+                            <h5 class="card-title">Data de Empréstimo: <small id="empDataE<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataEmprestimo %></small></h5>
+                            <h5 class="card-title">Data de Devolução: <small id="empDataD<%= emprestimos[i].IDEmprestimo %>"><%= emprestimos[i].DataDevolucao %></small></h5>
+                            <p class="card-text"><small id="empMulta<%= emprestimos[i].IDEmprestimo %>">Multa por dia de atraso: <%= emprestimos[i].Multa %></small></p>
+                            <p class="card-text" id="p"><small>Quantidade de dias restantes: <%= diasRestantesFormatados %></small></p>
                             <div class="buttons">
                                 <button data-bs-toggle="modal" data-bs-target="#modalDevolucao" onclick="ClickDevolucao('<%= emprestimos[i].IDEmprestimo %>')">Realizar devolução</button>
                                 <button data-bs-toggle="modal" data-bs-target="#modalEdtEmprestimo" onclick="ClickUpdateEmprestimo('<%= emprestimos[i].IDEmprestimo %>')">Editar</button>
@@ -214,7 +214,6 @@
                     </div>
                 </div>
                 <hr>
-            <% } %>
             <% } %>
     </div>
         <% } else { %>
