@@ -32,9 +32,49 @@ module.exports = {
 
             return res.render("../views/inicio", { user: user, livrosDestaque: livrosDestaque, favoritos: favoritos, successMessage: successMessage });
         }
+
         res.render("../views/index", { successMessage: successMessage });
     },
 
+    async pagLivroGet(req, res) {
+        if (req.session.IDUsuario) {
+            let id_livro = req.params.id; 
+
+            const livro = await Livro.findOne({
+                attributes: ['IDLivro', 'Foto', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                where: {IDLivro: id_livro}
+            });
+
+            const genero = await Genero.findAll({
+                attributes: ['IDGenero', 'Tipo'],
+                raw: true
+            });
+
+            const genero_livro = await GeneroLivro.findAll({
+                attributes: ['IDGeneroLivro', 'IDGenero', 'IDLivro'],
+                include: [{
+                    model: Genero,
+                    attributes: ['Tipo']
+                }]
+            });
+
+            const favoritos = await Favorito.findAll({
+                attributes: ['IDLivro'],
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            const user = await Usuario.findOne({
+                where: { IDUsuario: req.session.IDUsuario },
+                raw: true
+            });
+
+            return res.render('../views/livro', {user: user, livro: livro, genero_livro: genero_livro, favoritos:favoritos, genero:genero});
+        }
+
+        res.render("../views/index");
+    },
+    
     async pagLivrosGet(req, res) {
         let successMessage = req.session.successMessage || null;
         req.session.successMessage = null;
@@ -83,7 +123,7 @@ module.exports = {
                 console.log("Resultado da pesquisa:", livroPesquisado);
             } else {
                 livroPesquisado = await Livro.findAll({
-                    attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                    attributes: ['IDLivro', 'Foto', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
                     raw: true
                 });
             }
@@ -256,7 +296,14 @@ module.exports = {
                 });
             }
 
-            return res.render('../views/emprestimos', { user: user, emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage });
+            const countNaoDevolvidos = await Emprestimo.count({
+                where: {
+                    IDUsuario: req.session.IDUsuario,
+                    Devolvido: 0
+                }
+            });
+
+            return res.render('../views/emprestimos', { user: user, emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage, countEmprestimos: countNaoDevolvidos });
         }
 
         res.render("../views/index");
@@ -371,10 +418,15 @@ module.exports = {
                         }
                     ],
                     where: {
-                        [Op.or]: [
-                            { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                            { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                            { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                        [Op.and]: [
+                            {
+                                [Op.or]: [
+                                    { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                    { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                                ]
+                            },
+                            { Devolvido: 0 }
                         ]
                     },
                     order: [
@@ -395,10 +447,15 @@ module.exports = {
                         }
                     ],
                     where: {
-                        [Op.or]: [
-                            { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                            { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                            { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                        [Op.and]: [
+                            {
+                                [Op.or]: [
+                                    { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                    { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                                ]
+                            },
+                            { Devolvido: 0 }
                         ]
                     },
                     order: [
@@ -420,12 +477,17 @@ module.exports = {
                     }
                 ],
                 where: {
-                    [Op.or]: [
-                        { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
-                        { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                        { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                    [Op.and]: [
+                        {
+                            [Op.or]: [
+                                { '$Usuario.CPF$': { [Op.like]: `%${item}%` } },
+                                { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                                { 'IDEmprestimo': { [Op.like]: `%${item}%` } }
+                            ]
+                        },
+                        { Devolvido: 0 }
                     ]
-                },
+                }
             });
         } else if (classificacao) {
             if (classificacao == 'antigos') {
@@ -443,7 +505,8 @@ module.exports = {
                     ],
                     order: [
                         ['DataEmprestimo', 'ASC']
-                    ]
+                    ],
+                    where: { Devolvido: 0 }
                 });
             } else {
                 emprestimos = await Emprestimo.findAll({
@@ -460,7 +523,8 @@ module.exports = {
                     ],
                     order: [
                         ['DataEmprestimo', 'DESC']
-                    ]
+                    ],
+                    where: { Devolvido: 0 }
                 });
             }
         } else {
@@ -475,11 +539,16 @@ module.exports = {
                         model: Livro,
                         attributes: ['Titulo', 'Foto', 'ISBN']
                     }
-                ]
+                ],
+                where: { Devolvido: 0 }
             });
         }
 
-        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage });
+        const countNaoDevolvidos = await Emprestimo.count({
+            where: { Devolvido: 0 }
+        });
+
+        res.render('../views/emprestimosADM', { emprestimos: emprestimos, classificacao: classificacao, successMessage: successMessage, countEmprestimos: countNaoDevolvidos });
 
     },
 
@@ -510,7 +579,7 @@ module.exports = {
                 include: [
                     {
                         model: Genero,
-                        attributes: [],
+                        attributes: ['IDGenero'],
                     },
                     {
                         model: Livro,
@@ -532,46 +601,49 @@ module.exports = {
 
         } else if (disp) {
             livroPesquisado = await Livro.findAll({
-                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo', 'Foto', 'Destaque'],
                 raw: true,
                 where: { ...(disp === 'disp' ? { 'Disponibilidade': 1 } : { 'Disponibilidade': 0 }) }
             });
         } else if (item) {
+            console.log("Item:", item); // Adicione um log para verificar o valor de item
             livroPesquisado = await GeneroLivro.findAll({
-                attributes: [
-                    [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
-                    [col('Livro.ISBN'), 'ISBN'],
-                    [col('Livro.Titulo'), 'Titulo'],
-                    [col('Livro.Autor'), 'Autor'],
-                    [col('Livro.Ano'), 'Ano'],
-                    [col('Livro.Descricao'), 'Descricao'],
-                    [col('Livro.Foto'), 'Foto'],
-                    [col('Livro.Disponibilidade'), 'Disponibilidade'],
-                    [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
-                ],
-                raw: true,
-                include: [
-                    {
-                        model: Genero,
-                        attributes: [],
-                    },
-                    {
-                        model: Livro,
-                    }
-                ],
-                where: {
-                    [Op.or]: [
-                        { '$Livro.Autor$': { [Op.like]: `%${item}%` } },
-                        { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
-                        { '$Genero.Tipo$': { [Op.like]: `%${item}%` } }
-                    ]
+            attributes: [
+                [fn('DISTINCT', col('GeneroLivro.IDLivro')), 'IDLivro'],
+                [col('Livro.ISBN'), 'ISBN'],
+                [col('Livro.Titulo'), 'Titulo'],
+                [col('Livro.Autor'), 'Autor'],
+                [col('Livro.Ano'), 'Ano'],
+                [col('Livro.Descricao'), 'Descricao'],
+                [col('Livro.Foto'), 'Foto'],
+                [col('Livro.Disponibilidade'), 'Disponibilidade'],
+                [col('Livro.Qtd_emprestimo'), 'Qtd_emprestimo']
+            ],
+            raw: true,
+            include: [
+                {
+                    model: Genero,
+                    attributes: [],
                 },
+                {
+                    model: Livro,
+                }
+            ],
+            where: {
+                [Op.or]: [
+                    { '$Livro.Autor$': { [Op.like]: `%${item}%` } },
+                    { '$Livro.Titulo$': { [Op.like]: `%${item}%` } },
+                    { '$Genero.Tipo$': { [Op.like]: `%${item}%` } }
+                ]
+            },
             });
+
+            console.log("Resultado da pesquisa:", livroPesquisado);
         }
 
         else {
             livroPesquisado = await Livro.findAll({
-                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo'],
+                attributes: ['IDLivro', 'ISBN', 'Titulo', 'Autor', 'Ano', 'Descricao', 'Foto', 'Disponibilidade', 'Qtd_emprestimo', 'Destaque'],
                 raw: true
             });
         }

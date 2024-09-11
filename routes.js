@@ -23,7 +23,7 @@ route.get('/logout', usuario.logout);
 route.post('/updateUser', usuario.updateUser);
 
 // Rotas do livros (ADM)
-route.post('/UpdateLivro/:id', livro.updateLivro);
+route.post('/UpdateLivro/:id', multer(config).single('foto'), livro.updateLivro);
 route.get('/DeleteLivro/:id', livro.deleteLivro);
 route.get('/livrosADM', home.isAdmin, home.pagLivrosADMGet);
 route.post('/livrosADM', multer(config).single('foto'), livro.createLivro);
@@ -44,8 +44,8 @@ route.post('/registroADM', home.isAdmin, usuario.createUser);
 route.post('/updateUsuarioADM/:id', usuario.updateUserADM);
 route.get('/DeleteUser/:id', usuario.deleteUser);
 
-
 route.get('/livros', home.pagLivrosGet);
+route.get('/livro/:id', home.pagLivroGet);
 route.get('/emprestimos', home.pagEmprestimosGet);
 
 module.exports = route;

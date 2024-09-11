@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/perfil.css" />
-    
+    <link rel="stylesheet" href="/css/livro.css" />
     <link rel="stylesheet" href="/css/pesquisa.css" />
     <title>Livros</title>
 </head>
@@ -102,53 +102,35 @@
     </div>
 
     <main>
-
-        <!-- Barra de pesquisa  -->
-        <div class="filtro">
-            <div class="pesquisar">
-                <h6>Pesquise</h6>
-                <form action="/livros" method="GET" id="pesquisarForm">
-                    <div class="p">
-                        <input type="text" name="pesquisa" placeholder="Pesquise por livro, autor, gênero...." />
-                        <span class="material-symbols-outlined" onclick="pesquisar()" > search </span>
-                    </div>
-                </form>
-            </div>
-
-            <div class="seletor"></div>
-        </div>
-
-        <!-- Card de livro  -->
-        <% if(livros.length>=1){ %>
-        <div class="livros row row-cols-1 row-cols-md-2 row-cols-lg-5 g-15">
-                <% for(let i=0; i < livros.length; i++){ %>
-                    <div class="col">
-                        <div class="card">
-                            <img src="/img/<%=livros[i].Foto%>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="/livro/<%=livros[i].IDLivro%>">Detalhes</a>
-                                <form action="/favoritos" method="post" id="favoritosForm<%=livros[i].IDLivro%>">
-                                    <input type="text" name="id_livro" id="" value="<%=livros[i].IDLivro%>"
-                                        style="display: none;">
-                                    <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
-                                        style="display: none;">
-                                    <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livros[i].IDLivro); %>
-                                        <img id="img<%=livros[i].IDLivro%>" type="submit"
-                                            onclick="favoritar('<%=livros[i].IDLivro%>')"
-                                            src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-    </div>
-            <% } else { %>
-                <div class="divh6">
-                    <h6 class="h6">Não há livros a serem exibidos...</h6>
+        <div class="livro">
+            <img src="/img/<%=livro.Foto%>" alt="capa do livro">
+            <div class="descricao">
+                <div class="tit">
+                    <h1><%=livro.Titulo%></h1>
+                    <form action="/favoritos" method="post" id="favoritosForm<%=livro.IDLivro%>">
+                        <input type="text" name="id_livro" id="" value="<%=livro.IDLivro%>"
+                            style="display: none;">
+                        <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>"
+                            style="display: none;">
+                        <% let isFavorited=favoritos.some(favorito=> favorito.IDLivro === livro.IDLivro); %>
+                            <img id="img<%=livro.IDLivro%>" type="submit"
+                                onclick="favoritar('<%=livro.IDLivro%>')"
+                                src="<%= isFavorited ? '/img/star.png' : '/img/starv.png' %>" alt="" style="width: 30px;">
+                    </form>
                 </div>
-                <% } %>
-
-                
+                <h2><%=livro.Autor%></h2>
+                <h4><%=livro.Descricao%></h4>
+                <h4><%=livro.Ano%></h4>
+                <h5 class="<%= livro.Disponibilidade == 1 ? 'verde' : 'vermelho'%>"><%= livro.Disponibilidade == 1 ? 'Disponível para empréstimo!' : 'Indisponível para empréstimo!' %></h5>
+                <h6 class="card-text">
+                    <% for (let j=0; j < genero_livro.length; j++) { %>
+                        <% if (livro.IDLivro==genero_livro[j].IDLivro) { %>
+                            <%= genero_livro[j].Genero.Tipo %> |
+                        <% } %>
+                    <% } %>
+                            </h6>
+            </div>
+        </div>
     </main>
 
     <footer>

@@ -19,6 +19,11 @@ body.dark-mode .modal-footer {
     background-color: #444;
 }
 
+body.dark-mode .card {
+    background-color: #333333;
+    color: #ffffff;
+}
+
 
 main{
     display: flex;

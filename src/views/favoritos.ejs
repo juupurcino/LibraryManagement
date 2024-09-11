@@ -121,7 +121,7 @@
                 <div class="card">
                     <img src="/img/<%=favoritos[i].Livro.Foto%>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <button>Detalhes</button>
+                        <a href="/livro/<%=livros[i].IDLivro%>">Detalhes</a>
                         <form action="/favoritos" method="post" id="favoritosForm<%=favoritos[i].IDLivro%>">
                             <input type="text" name="id_livro" id="" value="<%=favoritos[i].IDLivro%>" style="display: none;">
                             <input type="text" name="id_user" id="" value="<%=user.IDUsuario%>" style="display: none;">

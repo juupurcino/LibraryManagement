@@ -1,13 +1,14 @@
 const sequelize = require("sequelize");
 const Usuario = require("../model/usuario");
-const bcrypt = require('bcrypt');
+const { createHash } = require("crypto");
 const { Op } = require('sequelize');
+const Emprestimo = require("../model/emprestimo");
 
 module.exports = {
 
     async createUser(req, res){
         const dados = req.body;
-        console.log(dados);  // Verifica os dados recebidos
+        console.log(dados);
 
         const usuarioExistente = await Usuario.findOne({
             where: {
@@ -17,16 +18,20 @@ module.exports = {
                 ]
             }
         });
-    
-        if (usuarioExistente.Email == dados.email) {
-            req.session.successMessage = 'Email já cadastrado!';
-            return res.redirect("/");
-        }else if (usuarioExistente.CPF == dados.cpf) {
-            req.session.successMessage = 'CPF já cadastrado!';
-            return res.redirect("/");
-        }
         
-        if(dados.admin){
+        if(usuarioExistente){
+            if (usuarioExistente.Email == dados.email) {
+                req.session.successMessage = 'Email já cadastrado!';
+                return res.redirect("/");
+            }else if (usuarioExistente.CPF == dados.cpf) {
+                req.session.successMessage = 'CPF já cadastrado!';
+                return res.redirect("/");
+            }
+        }
+
+        console.log(dados.admin)
+        
+        if (dados.admin) {
             await Usuario.create({
                 Nome: dados.nome,
                 CPF: dados.cpf,
@@ -34,15 +39,16 @@ module.exports = {
                 Telefone: dados.telefone,
                 Email: dados.email,
                 Genero: dados.sexo,
-                Senha: "123456",
+                Senha: createHash('sha256').update("123456").digest('hex'),
                 Ativo: 1,
                 Admin: dados.admin
             });
-            
-            return
+        
+            req.session.successMessage = 'Usuario registrado com sucesso!';
+            return res.redirect("/usuariosADM");
         }
         
-        senhaCriptografada = await bcrypt.hash(dados.senha, 10);
+        senhaCriptografada = createHash('sha256').update(dados.senha).digest('hex')
         
         await Usuario.create({
             Nome: dados.nome,
@@ -57,8 +63,8 @@ module.exports = {
         });
         
         req.session.successMessage = 'Registrado com sucesso!';
-        
         res.redirect("/");
+        
     },
     
     async verificarUser(req, res){
@@ -73,9 +79,7 @@ module.exports = {
         
         if (usuarios && usuarios.Ativo == 1) {
 
-            const senhaValida = await bcrypt.compare(dados.senha_login, usuarios.Senha);
-
-            if (senhaValida) {
+            if (createHash('sha256').update(dados.senha_login).digest('hex') == usuarios.Senha) {
                 
                 req.session.IDUsuario = usuarios.IDUsuario;
                 req.session.isLoggedIn = true;
@@ -144,6 +148,10 @@ module.exports = {
 
     async deleteUser(req, res) {
         let id_user= req.params.id; 
+
+        await Emprestimo.destroy({
+            where : {IDUsuario : id_user}
+        });
         
         await Usuario.update({
             Ativo: 0
@@ -152,13 +160,17 @@ module.exports = {
         });
 
         req.session.successMessage = 'Usuário deletado com sucesso!';
+        
+        if(id_user == req.session.IDUsuario){
+            return res.redirect('/logout');
+        }
 
         res.redirect('/usuariosADM');
     },
 
     async logout(req, res) {
         req.session.destroy();
-        res.redirect('/');      
+        res.redirect('/');
     }
 }
 
