@@ -133,4 +133,5 @@ body.dark-mode {
 .form-check, .add {
 
     margin: 5%;
+    cursor: pointer;
 }
